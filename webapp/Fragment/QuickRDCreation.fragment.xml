@@ -1,0 +1,46 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:core="sap.ui.core"
+    xmlns:common="sap.suite.ui.commons">
+	<Dialog
+		title="Hierarchy Overview"
+		verticalScrolling="false">
+		<buttons>
+			<Button
+				text="Close"
+				press="onDialogClose"
+				/>
+		</buttons>
+		<Panel headerText="">
+            <common:ProcessFlow
+                id="processflow1"
+                scrollable="false"
+                nodes="{process>/Nodes}"
+                lanes="{process>/Lanes}"
+                nodePress=".onNodePressed">
+                <common:nodes>
+                    <common:ProcessFlowNode
+                        laneId="{process>lane}"
+                        nodeId="{process>id}"
+                        title="{process>title}"
+                        titleAbbreviation="{process>titleAbbreviation}"
+                        isTitleClickable="{process>isTitleClickable}"
+                        children="{process>children}"
+                        state="{process>state}"
+                        stateText="{process>stateText}"
+                        texts="{process>texts}"
+                        highlighted="{process>highlighted}"
+                        focused="{process>focused}" />
+                </common:nodes>
+                <common:lanes>
+                    <common:ProcessFlowLaneHeader
+                        laneId="{process>id}"
+                        iconSrc="{process>icon}"
+                        text="{process>label}"
+                        position="{process>position}" />
+                </common:lanes>
+            </common:ProcessFlow>
+        </Panel>
+	</Dialog>
+</core:FragmentDefinition>

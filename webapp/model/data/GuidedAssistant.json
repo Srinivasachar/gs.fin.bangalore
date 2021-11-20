@@ -1,0 +1,154 @@
+[
+    {
+        "Header": "1. For Which Country you want to create the Rep.Def?",
+        "Completed": false,
+        "Expanded": true,
+        "Childrens": [
+            {
+                "Name":"Australia",
+                "Key": "AU",
+                "Recommendation": "Recommendation 85%"
+            },
+            {
+                "Name":"South Africa",
+                "Key": "ZA",
+                "Recommendation": "Recommendation 65%"
+            },
+            {
+                "Name": "Germany",
+                "Key": "DE",
+                "Recommendation": "Recommendation 65%"
+            }
+        ]
+    },
+    {
+        "Header": "2. Which Report functionality you want to enablement?",
+        "Completed": false,
+        "Expanded": false,
+        "Childrens": [
+            {
+                "Name":"Value Added Tax",
+                "Key": "VAT",
+                "Recommendation": "Recommendation 65%"
+            },
+            {
+                "Name":"Witholding",
+                "Key": "WHT",
+                "Recommendation": "Recommendation 55%"
+            },
+            {
+                "Name": "GST",
+                "Key": "GST",
+                "Recommendation": "Recommendation 55%"
+            }
+        ]
+    },
+    {
+        "Header": "3. Would the report be a line item report or a box level report?",
+        "Completed": false,
+        "Expanded": false,
+        "Childrens": [
+            {
+                "Name":"Line Item",
+                "Key": "LINE",
+                "Recommendation": "Recommendation 55%"
+            },
+            {
+                "Name":"Box Level",
+                "Key": "BOX",
+                "Recommendation": "Recommendation 95%"
+            }
+        ]
+    },
+    {
+        "Header": "4. Would the report have the following functionality ?",
+        "Completed": false,
+        "Expanded": false,
+        "Childrens": [
+            {
+                "Name":"TDT",
+                "Key": "LINE",
+                "Recommendation": "Recommendation 95%"
+            },
+            {
+                "Name":"RITA",
+                "Key": "BOX",
+                "Recommendation": "Recommendation 88%"
+            }
+        ]
+    },
+    {
+        "Header": "6.Audit trail should be enabled for all reports by default?",
+        "Completed": false,
+        "Expanded": false,
+        "Childrens": [
+            {
+                "Name":"Full Submission",
+                "Key": "LINE",
+                "Recommendation": "Recommendation 75%"
+            },
+            {
+                "Name":"Delta Submission",
+                "Key": "BOX",
+                "Recommendation": "Recommendation 45%"
+            }
+        ]
+    },
+    {
+        "Header": "7. What kind of file output type?",
+        "Completed": false,
+        "Expanded": false,
+        "Childrens": [
+            {
+                "Name":"PDF",
+                "Key": "LINE"
+            },
+            {
+                "Name":"XML",
+                "Key": "BOX"
+            },
+            {
+                "Name":"JSON",
+                "Key": "BOX"
+            },
+            {
+                "Name":"ALV",
+                "Key": "BOX"
+            }
+        ]
+    },
+    {
+        "Header": "8. Phase Type?",
+        "Completed": false,
+        "Expanded": false,
+        "Childrens": [
+            {
+                "Name":"Declaration",
+                "Key": "LINE"
+            },
+            {
+                "Name":"Correction",
+                "Key": "BOX"
+            },
+            {
+                "Name":"Clarification",
+                "Key": "BOX"
+            }
+        ]
+    },
+    {
+        "Header": "9. Activity Needed?",
+        "Completed": false,
+        "Expanded": false,
+        "Childrens": [
+            {
+                "Name":"Pre Activities",
+                "Key": "LINE"
+            },
+            {
+                "Name":"Post Activities",
+                "Key": "BOX"
+            }
+        ]
+    }
+]

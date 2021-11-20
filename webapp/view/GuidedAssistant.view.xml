@@ -1,0 +1,79 @@
+<mvc:View controllerName="gs.fin.bangalore.controller.GuidedAssistant" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:ce="sap.ui.codeeditor" xmlns:mc="sap.suite.ui.microchart" xmlns:core="sap.ui.core">
+        <Page id="idGuidedAssistant" title="ACR Guided Assistant" class="sapUiSizeCompact" showNavButton="true" navButtonPress="onNavBack">
+        <content>
+        <ObjectHeader
+				responsive="true"
+				title="Overview">
+				<headerContainer>
+					<HeaderContainer
+						scrollStep="200"
+						scrollTime="500"
+						showDividers="true"
+						class="sapUiSmallMargin">
+						<FlexBox
+							width="12rem"
+							height="10rem"
+							alignItems="Center"
+							justifyContent="Center"
+							direction="Column">
+							<Title
+								text="Completion Percentage"
+								class="sapUiSmallMargin"/>
+							<FlexBox width="6rem" height="6rem">
+								<mc:RadialMicroChart percentage="{GuideOverview>/Percentage}"/>
+							</FlexBox>
+						</FlexBox>
+					</HeaderContainer>
+				</headerContainer>
+			</ObjectHeader>
+            <VBox items="{Suggesstion>/}">
+                <Panel expandable="true" expand="onExpand" expanded="{Suggesstion>Expanded}">
+                    <headerToolbar>
+                        <OverflowToolbar active="true" press="onOverflowToolbarPress">
+                            <Title text="{Suggesstion>Header}" />
+                            <ToolbarSpacer />
+                            <Button text="Completed" visible="{= ${Suggesstion>Completed}}" icon="{= ${Suggesstion>Completed}? 'sap-icon://accept' : ''}" type="{= ${Suggesstion>Completed} ? 'Success' : 'Default' }"/>
+                            <Button text="Reset" visible="{= ${Suggesstion>Completed}}"/>
+                        </OverflowToolbar>
+		            </headerToolbar>
+                    <content>
+			            <OverflowToolbar content="{Suggesstion>Childrens}" >
+                            <!-- <ToggleButton text="{Suggesstion>Name}" press="onSuggesstionClick"/>
+                            <Text text="Suggession 90%"/> -->
+                                <ToggleButton text="{Suggesstion>Name}" press="onSuggesstionClick"/>
+                        </OverflowToolbar>
+                        <List mode="MultiSelect" headerText="Custom Content" items="{Suggesstion>Childrens}" >
+                            <!-- <CustomListItem>
+                                <HBox>
+                                    <core:Icon size="2rem" src="sap-icon://attachment-photo" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" />
+                                    <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+                                        <Link text="{Suggesstion>Name}" target="{ProductPicUrl}" press="handlePress"/>
+                                        <Label text="{Suggesstion>Recommendation}"/>
+                                    </VBox>
+                                </HBox>
+                            </CustomListItem> -->
+                            <StandardListItem 
+                            title="{Suggesstion>Name}"
+                            description="{Suggesstion>Recommendation}"
+                            icon="{icon}"
+                            iconInset="false"
+                            highlight="Success"
+                            info="{info}"
+                            infoState="{highlight}"
+                            infoStateInverted="true">
+                            </StandardListItem>
+	                    </List>
+		            </content>
+                </Panel>
+            </VBox>
+         </content>
+        <footer>
+            <OverflowToolbar id="OverflowToolbar">	
+                <ToolbarSpacer id="ToolbarSpacer3"/>
+                <Button press="onSummaryGraph" text="Summary"/>
+                <Button press="onActivateConfigParamPress" text="Proceed Creation" type="Emphasized"/>
+                <Button press="onCancelConfigParamPress" text="Discard"/>
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

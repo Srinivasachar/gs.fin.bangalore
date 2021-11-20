@@ -1,0 +1,21 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:core="sap.ui.core">
+	<Dialog
+		title="Loading Information"
+		contentWidth="20rem"
+		verticalScrolling="false">
+		<buttons>
+			<Button
+				visible="{/bIsExpiring}"
+				text="{i18n>ContinueWorking}"
+				press="onDialogClose"
+				type="Emphasized" />
+		</buttons>
+		<f:IllustratedMessage
+			title="{i18n>TitleExpiring}"
+			description="{i18n>DescriptionExpiringBegin}"
+			illustrationType="sapIllus-BeforeSearch"/>
+	</Dialog>
+</core:FragmentDefinition>

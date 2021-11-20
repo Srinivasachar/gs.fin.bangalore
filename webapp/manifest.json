@@ -20,7 +20,7 @@
           "localUri": "localService/metadata.xml"
         }
       }
-		}
+    }
   },
   "sap.ui": {
     "technology": "UI5",
@@ -48,7 +48,7 @@
       "id": "App"
     },
     "dependencies": {
-			"minUI5Version": "1.96.0",
+      "minUI5Version": "1.96.0",
       "libs": {
         "sap.ui.core": {},
         "sap.m": {},
@@ -67,10 +67,18 @@
           "bundleName": "gs.fin.bangalore.i18n.i18n"
         }
       },
-			"": {
-				"dataSource": "mainService",
-				"preload": true
-			}
+      "process": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/data/CdsTree.json"
+      },
+      "Guided": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/data/QuickRDCreation.json"
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true
+      }
     },
     "resources": {
       "css": [
@@ -91,18 +99,42 @@
       },
       "routes": [
         {
-          "name": "RouteApp",
-          "pattern": "RouteApp",
-          "target": ["TargetApp"]
+          "name": "Overview",
+          "pattern": "",
+          "target": ["Overview"]
+        },
+        {
+          "name": "FirstView",
+          "pattern": "FirstView",
+          "target": ["FirstView"]
+        },
+        {
+          "name": "GuidedAssistant",
+          "pattern": "GuidedAssistant",
+          "target": ["GuidedAssistant"]
         }
       ],
       "targets": {
-        "TargetApp": {
+        "Overview": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
-          "viewId": "App",
-          "viewName": "App"
+          "viewId": "Overview",
+          "viewName": "Overview"
+        },
+        "FirstView": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "FirstView",
+          "viewName": "FirstView"
+        },
+        "GuidedAssistant": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "GuidedAssistant",
+          "viewName": "GuidedAssistant"
         }
       }
     }

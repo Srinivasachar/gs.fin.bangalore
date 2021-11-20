@@ -1,16 +1,9 @@
 <mvc:View
-    controllerName="gs.fin.bangalore.controller.App"
-    xmlns:mvc="sap.ui.core.mvc"
-    displayBlock="true"
-    xmlns="sap.m"
->
-	<Shell id="shell">
-		<App id="app">
-			<pages>
-				<Page id="page" title="{i18n>title}">
-					<content />
-				</Page>
-			</pages>
-		</App>
-	</Shell>
+	xmlns:mvc="sap.ui.core.mvc"
+	controllerName="gs.fin.bangalore.controller.App"
+	displayBlock="true"
+	xmlns="sap.m">
+
+	<App id="app"
+		 busyIndicatorDelay="{appView>/delay}" defaultTransitionName="show" />
 </mvc:View>

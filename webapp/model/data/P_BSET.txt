@@ -1,0 +1,117 @@
+@AbapCatalog.sqlViewName: 'PFIBSET'
+//@EndUserText.label: 'Basic Tax Item'
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+//@Analytics: { dataCategory: #FACT, dataExtraction.enabled: false }
+@VDM.viewType: #BASIC
+@VDM.private: true
+@ClientHandling.algorithm: #SESSION_VARIABLE
+@AbapCatalog.preserveKey: true
+
+////////////////////////////////////////////////////////////////////
+// This privat view is intended to select data from bset only     //
+// For other enriched usages I_Taxitem is available               //
+////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////
+// ########## REMARK ##########################################   //
+// The sing determination of the signs on the Amoun fields,       //
+// corresponds to the behavior on SAP GUI of fb03 - tax data.     //
+//         case shkzg                                             //
+//         when 'S' then  XYZ                                     //
+//         when 'H' then -XYZ                                     //
+// ########## REMARK ##########################################   //
+////////////////////////////////////////////////////////////////////
+
+
+define view P_Bset
+  as select from bset
+
+{
+  key bukrs as CompanyCode,
+  key belnr as AccountingDocument,
+  key gjahr as FiscalYear, 
+  key cast(buzei as taxitem preserving type) as TaxItem,
+
+      mwskz as TaxCode,
+      hkont as GLAccount,
+      txgrp as TaxItemGroup,
+
+      @DefaultAggregation:#SUM
+      case shkzg
+        when 'S' then  hwbas
+        when 'H' then -hwbas   // see REMARK on top
+      end   as TaxBaseAmountInCoCodeCrcy,
+      @DefaultAggregation:#SUM
+      case shkzg
+        when 'S' then  fwbas
+        when 'H' then -fwbas   // see REMARK on top
+      end   as TaxBaseAmountInTransCrcy,
+      @DefaultAggregation:#SUM
+      case shkzg
+        when 'S' then  hwste
+        when 'H' then -hwste   // see REMARK on top
+      end   as TaxAmountInCoCodeCrcy,
+      @DefaultAggregation:#SUM
+      case shkzg
+        when 'S' then  fwste
+        when 'H' then -fwste   // see REMARK on top
+      end   as TaxAmount,
+      @DefaultAggregation:#SUM
+      case shkzg
+        when 'S' then  h2ste
+        when 'H' then -h2ste   // see REMARK on top
+      end   as TaxAmountInAdditionalCurrency1,
+      @DefaultAggregation:#SUM
+      case shkzg
+        when 'S' then  h3ste
+        when 'H' then -h3ste   // see REMARK on top
+      end   as TaxAmountInAdditionalCurrency2,
+      @DefaultAggregation:#SUM
+      case shkzg
+        when 'S' then  h2bas
+        when 'H' then -h2bas   // see REMARK on top
+      end   as TaxBaseAmtInAdditionalCrcy1,
+      @DefaultAggregation:#SUM
+      case shkzg
+        when 'S' then  h3bas
+        when 'H' then -h3bas   // see REMARK on top
+      end   as TaxBaseAmtInAdditionalCrcy2,
+
+
+      ktosl as TransactionTypeDetermination,
+      knumh as ConditionRecord,
+      stceg as VATRegistration,
+      egbld as DestinationCountry,
+      eglld as SupplyingCountry,
+      txjcd as TaxJurisdiction,
+
+      kschl as ConditionType,
+      stmdt as TaxReturnDate,
+      stmti as TaxReturnExecutionTime ,   // !!! New global field name!
+      mlddt as TaxReportingDate,
+      kbetr as TaxRate,
+      //STBKZ as PostingIndicator,   // !!! New global field name!
+      lstml as TaxReturnCountry,
+
+      @DefaultAggregation:#SUM
+      case shkzg
+        when 'S' then  lwste
+        when 'H' then -lwste   // see REMARK on top
+      end   as TaxAmountInCountryCrcy,
+      @DefaultAggregation:#SUM
+      case shkzg
+        when 'S' then  lwbas
+        when 'H' then -lwbas   // see REMARK on top
+      end   as TaxBaseAmountInCountryCrcy,
+      txdat as TaxDeterminationDate,
+      bupla as BusinessPlace,
+      txjdp as LowestLevelTaxJurisdiction,
+      txjlv as TaxJurisdictionLevel,
+      taxps as TaxItemAcctgDocItemRef,
+      txmod as TaxResultManualModification,
+      shkzg as DebitCreditCode,
+      txdat_from as TaxRateValidityStartDate,
+      tax_country as TaxCountry
+
+};   
+

@@ -1,0 +1,23 @@
+<mvc:View controllerName="gs.fin.bangalore.controller.FirstView" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m"
+	xmlns:ce="sap.ui.codeeditor">
+	<Page id="page" title="{i18n>title}" showNavButton="true" navButtonPress="onNavBack">
+		<content>
+			<IconTabHeader id="iconTabHeader" selectedKey="I_TAXITEM" select=".onSelectTab">
+				<items>
+					<IconTabFilter text="I_TAXITEM" key="I_TAXITEM" icon="sap-icon://source-code"/>
+					<IconTabFilter text="P_BSET" key="P_BSET" icon="sap-icon://syntax"/>
+					<IconTabFilter text="BSET" key="BSET" icon="sap-icon://syntax"/>
+				</items>
+			</IconTabHeader>
+			<ce:CodeEditor id="aCodeEditor" type="javascript" syntaxHints="false" value="{CodeEditorModel>/Code}"/>
+		</content>
+		<footer>
+			<OverflowToolbar id="OverflowToolbar">	
+				<Button press="onSummaryGraph" text="Overview" icon="sap-icon://tree"/>
+				<ToolbarSpacer id="ToolbarSpacer3"/>
+				<Button press="onActivateConfigParamPress" text="Submit Changes" type="Emphasized"/>
+				<Button press="onCancelConfigParamPress" text="Discard"/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

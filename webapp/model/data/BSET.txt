@@ -1,0 +1,185 @@
+//Documentation about annotations can be found at http://help.sap.com searching for CDS annotations //Inserted by VDM CDS Suite Plugin
+@ObjectModel.usageType.sizeCategory: #XL //Inserted by VDM CDS Suite Plugin
+@ObjectModel.usageType.serviceQuality: #C //Inserted by VDM CDS Suite Plugin
+@ObjectModel.usageType.dataClass: #MIXED //Inserted by VDM CDS Suite Plugin
+@AccessControl.authorizationCheck: #CHECK
+@AbapCatalog.compiler.compareFilter: true
+@EndUserText.label: 'Tax Item'
+@VDM.viewType: #BASIC
+@ClientHandling.algorithm: #SESSION_VARIABLE
+@Metadata.ignorePropagatedAnnotations: true
+@AbapCatalog.sqlViewName: 'IFITAXITEM'
+@VDM.lifecycle.contract.type: #PUBLIC_LOCAL_API
+@AbapCatalog.preserveKey: true
+
+define view I_TaxItem
+  as select from P_Bset   as Taxitem
+
+  association  [0..1] to I_CompanyCode as _CompanyCode                            on $projection.CompanyCode = _CompanyCode.CompanyCode
+
+
+  association [0..1] to I_JournalEntry            as _JournalEntry                on  $projection.AccountingDocument      = _JournalEntry.AccountingDocument
+                                                                                  and $projection.CompanyCode             = _JournalEntry.CompanyCode
+                                                                                  and $projection.FiscalYear              = _JournalEntry.FiscalYear
+  
+  association [0..1] to I_AccountingDocument      as _AccountingDocument          on  $projection.CompanyCode        = _AccountingDocument.CompanyCode
+                                                                                  and $projection.AccountingDocument = _AccountingDocument.AccountingDocument
+                                                                                  and $projection.FiscalYear         = _AccountingDocument.FiscalYear
+
+
+
+  association [0..1] to I_GLAccount               as _GLAccount                   on  $projection.GLAccount   = _GLAccount.GLAccount
+                                                                                  and $projection.CompanyCode = _GLAccount.CompanyCode
+
+  association [0..1] to I_Country                 as _CompanyCodeCountry          on  $projection.CompanyCodeCountry = _CompanyCodeCountry.Country
+
+  association [0..1] to I_Country                 as _TaxReturnCountry            on  $projection.TaxReturnCountry = _TaxReturnCountry.Country
+  
+  association [0..1] to I_Country                 as _TaxCountry                  on  $projection.TaxCountry = _TaxCountry.Country
+
+  association [0..*] to I_TaxJurisdiction         as _TaxJurisdiction             on  $projection.TaxJurisdiction = _TaxJurisdiction.TaxJurisdiction
+
+  association [0..1] to I_Currency                as _CompanyCodeCurrency         on  $projection.CompanyCodeCurrency = _CompanyCodeCurrency.Currency
+
+  association [0..1] to I_Currency                as _DocumentCurrency            on  $projection.DocumentCurrency = _DocumentCurrency.Currency
+
+  association [0..1] to I_Currency                as _DocumentAdditionalCurrency1 on  $projection.AdditionalCurrency1 = _DocumentAdditionalCurrency1.Currency
+
+  association [0..1] to I_Currency                as _DocumentAdditionalCurrency2 on  $projection.AdditionalCurrency2 = _DocumentAdditionalCurrency2.Currency
+
+  association [0..*] to I_OperationalAcctgDocItem as _DebtorCreditorRblsPyblsItem on  $projection.CompanyCode        = _DebtorCreditorRblsPyblsItem.CompanyCode
+                                                                                  and $projection.FiscalYear         = _DebtorCreditorRblsPyblsItem.FiscalYear
+                                                                                  and $projection.AccountingDocument = _DebtorCreditorRblsPyblsItem.AccountingDocument
+                                                                                  and (
+     $projection.TaxCode                                                                                             = _DebtorCreditorRblsPyblsItem.TaxCode
+     or _DebtorCreditorRblsPyblsItem.TaxCode                                                                         = '**'
+     or _DebtorCreditorRblsPyblsItem.TaxCode                                                                         = ''
+   )
+  and $projection.TaxCountry                                                                                         = _DebtorCreditorRblsPyblsItem.TaxCountry
+  and $projection.TaxJurisdiction                                                                                    = _DebtorCreditorRblsPyblsItem.TaxJurisdiction
+  and(
+    _DebtorCreditorRblsPyblsItem.FinancialAccountType                                                                = 'D'
+    or _DebtorCreditorRblsPyblsItem.FinancialAccountType                                                             = 'K'
+  )
+  
+  association [0..*] to I_OperationalAcctgDocItem as _TaxReceivablesPayablesItem  on  $projection.CompanyCode        = _TaxReceivablesPayablesItem.CompanyCode
+                                                                                  and $projection.FiscalYear         = _TaxReceivablesPayablesItem.FiscalYear
+                                                                                  and $projection.AccountingDocument = _TaxReceivablesPayablesItem.AccountingDocument
+                                                                                  and $projection.TaxItemGroup       = _TaxReceivablesPayablesItem.TaxItemGroup
+                                                                                  and $projection.TaxCode            = _TaxReceivablesPayablesItem.TaxCode
+                                                                                  and $projection.TaxCountry         = _TaxReceivablesPayablesItem.TaxCountry
+                                                                                  and $projection.TaxJurisdiction    = _TaxReceivablesPayablesItem.TaxJurisdiction
+                                                                                  and (
+     _TaxReceivablesPayablesItem.TaxType                                                                             = 'A'
+     or _TaxReceivablesPayablesItem.TaxType                                                                          = 'V'
+   )
+
+  association [0..*] to I_OperationalAcctgDocItem as _ReceivablesPayablesItem     on  $projection.CompanyCode        = _ReceivablesPayablesItem.CompanyCode
+                                                                                  and $projection.FiscalYear         = _ReceivablesPayablesItem.FiscalYear
+                                                                                  and $projection.AccountingDocument = _ReceivablesPayablesItem.AccountingDocument
+
+{
+
+      //@ObjectModel.foreignKey.association: '_CompanyCode'  //TODO required by VDM check, but inner join -><- association to be clarified
+  key Taxitem.CompanyCode,
+  key AccountingDocument,
+  key FiscalYear,
+  key TaxItem,  
+      TaxCode,
+      //@ObjectModel.foreignKey.association: '_GLAccount' //Inserted by VDM CDS Suite Plugin => Implies also FK asoc for _CompanyCode
+      GLAccount,
+      TaxItemGroup,
+      //DebitCreditCode,
+      @DefaultAggregation:#SUM
+      @Semantics.amount.currencyCode: 'CompanyCodeCurrency'
+      TaxBaseAmountInCoCodeCrcy,
+      @DefaultAggregation:#SUM
+      @Semantics.amount.currencyCode: 'DocumentCurrency'
+      TaxBaseAmountInTransCrcy,
+      @DefaultAggregation:#SUM
+      @Semantics.amount.currencyCode: 'CompanyCodeCurrency'
+      TaxAmountInCoCodeCrcy,
+      @DefaultAggregation:#SUM
+      @Semantics.amount.currencyCode: 'DocumentCurrency'
+      TaxAmount,
+      TransactionTypeDetermination,
+      ConditionRecord,
+      Taxitem.VATRegistration                  as VATRegistration,
+      DestinationCountry,
+      SupplyingCountry,
+      // @ObjectModel.foreignKey.association: '_TaxJurisdiction' //Inserted by VDM CDS Suite Plugin  // Key KALSM missing [0..*]!
+      TaxJurisdiction,
+      @DefaultAggregation:#SUM
+      @Semantics.amount.currencyCode: 'AdditionalCurrency1'
+      TaxAmountInAdditionalCurrency1,
+      @DefaultAggregation:#SUM
+      @Semantics.amount.currencyCode: 'AdditionalCurrency2'
+      TaxAmountInAdditionalCurrency2,
+      @DefaultAggregation:#SUM
+      @Semantics.amount.currencyCode: 'AdditionalCurrency1'
+      TaxBaseAmtInAdditionalCrcy1,
+      @DefaultAggregation:#SUM
+      @Semantics.amount.currencyCode: 'AdditionalCurrency2'
+      TaxBaseAmtInAdditionalCrcy2,
+      ConditionType,
+      TaxReturnDate,
+      cast( TaxReturnExecutionTime as glo_fi_bset_stmti) as TaxReturnExecutionTime,
+      TaxReportingDate,
+      --@Semantics.amount.currencyCode: 'CountryCurrency'
+      cast ( TaxRate as fitaxrate ) as TaxRate,
+      //STBKZ as PostingIndicator,   // !!! New global field name!
+      TaxReturnCountry,
+      @DefaultAggregation:#SUM
+      @Semantics.amount.currencyCode: 'CountryCurrency'
+      TaxAmountInCountryCrcy,
+      @DefaultAggregation:#SUM
+      @Semantics.amount.currencyCode: 'CountryCurrency'
+      TaxBaseAmountInCountryCrcy,
+      TaxDeterminationDate,
+      BusinessPlace,
+      LowestLevelTaxJurisdiction,
+      TaxJurisdictionLevel,
+      TaxItemAcctgDocItemRef  ,
+      TaxResultManualModification,
+      DebitCreditCode,
+      TaxRateValidityStartDate,
+      TaxCountry,
+      @Semantics.currencyCode:true
+      @ObjectModel.foreignKey.association: '_CompanyCodeCurrency' //Inserted by VDM CDS Suite Plugin
+      _CompanyCode.Currency                    as CompanyCodeCurrency,
+      @ObjectModel.foreignKey.association: '_CompanyCodeCountry' //Inserted by VDM CDS Suite Plugin
+      _CompanyCode.Country                     as CompanyCodeCountry,
+      @Semantics.currencyCode:true
+      _JournalEntry.TransactionCurrency            as DocumentCurrency,
+      @Semantics.currencyCode:true
+      _JournalEntry.AdditionalCurrency1 as AdditionalCurrency1,
+      @Semantics.currencyCode:true
+      _JournalEntry.AdditionalCurrency2 as AdditionalCurrency2,
+      @Semantics.currencyCode:true
+      case 
+      when TaxCountry <> '' then _TaxCountry.CountryCurrency 
+      when TaxReturnCountry <> '' then _TaxReturnCountry.CountryCurrency 
+      end  as CountryCurrency,
+      _JournalEntry,
+      
+      @VDM.lifecycle.status:    #DEPRECATED
+      @VDM.lifecycle.successor: '_JournalEntry'
+      _AccountingDocument,
+      _CompanyCode._Currency                  as _Currency,
+      _GLAccount,
+      _CompanyCodeCurrency,
+      _CompanyCodeCountry,
+      _TaxJurisdiction,
+      _DebtorCreditorRblsPyblsItem,
+      _TaxReceivablesPayablesItem,
+      _ReceivablesPayablesItem
+
+
+};        
+  
+  
+  
+  
+  
+  
+ 

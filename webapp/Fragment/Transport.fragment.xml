@@ -1,0 +1,30 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified">
+	<Dialog id="UploadFragment1" afterClose="cancelFileUploadCreation" contentWidth="50%" title="Transport Request" resizable="true" draggable="true" class="sapUiSizeCompact">
+		<content>
+			<f:SimpleForm id="AddCondSimpleForm1" editable="true" visible="true" layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024"
+				labelSpanL="3" labelSpanM="3" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2" >
+				<f:content>
+					 <Label id="conditionDescriptionLabel1" tooltip="{i18n>Description}" text="Transport Request" required="true"
+						labelFor="conditionDescriptionInput"/>
+                    <Input showValueHelp="true" width="50%"/>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<!--</Page>-->
+		<beginButton>
+			<Button id="saveCondId1" press="cancelFileUploadCreation" text="Transport Changes" type="Emphasized">
+				<layoutData>
+					<FlexItemData id="saveCondFlexItemData1" growFactor="1"/>
+				</layoutData>
+			</Button>
+		</beginButton>
+		<endButton>
+			<Button id="cancelCondId1" press="cancelFileUploadCreation" text="Cancel">
+				<layoutData>
+					<FlexItemData id="cancelCondFlexItemData1" growFactor="1"/>
+				</layoutData>
+			</Button>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>
