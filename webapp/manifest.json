@@ -76,9 +76,19 @@
         "uri": "model/data/QuickRDCreation.json"
       },
       "": {
-        "dataSource": "mainService",
-        "preload": true
-      }
+				"dataSource": "mainService",
+				"preload": true,
+				"settings": {
+					"defaultUpdateMethod": "PUT",
+					"defaultCountMode": "Inline",
+					"metadataUrlParams": {
+						"sap-documentation": "heading"
+					},
+          "headers":{
+            "x-csrf-token": "Fetch"
+          }
+				}
+			}
     },
     "resources": {
       "css": [

@@ -11,9 +11,13 @@
 							<u:FileUploader
 								id="fileUploader"
 								name="myFileUpload"
-								uploadUrl="upload/"
+                                sendXHR="true"
+                                fileType="xml"
 								tooltip="Upload your file to the local server"
-								uploadComplete="handleUploadComplete"/>
+								uploadComplete="handleUploadComplete"
+                                uploadStart="handleUploadStart"
+                                change="handleUploadChange"
+                                typeMissmatch="handleTypeMissmatch"/>
 							<Button
 								text="Upload File"
 								type="Emphasized"
