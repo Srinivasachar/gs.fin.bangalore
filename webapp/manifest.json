@@ -87,7 +87,6 @@
 				"dataSource": "mainService",
 				"preload": true,
 				"settings": {
-          "defaultUpdateMethod": "PUT",
 					"defaultCountMode": "Inline",
           "headers":{
             "X-CSRF-Token": "Fetch"

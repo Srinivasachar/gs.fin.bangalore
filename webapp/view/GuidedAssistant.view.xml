@@ -32,17 +32,17 @@
                         <OverflowToolbar active="true" press="onOverflowToolbarPress">
                             <Title text="{Suggesstion>Header}" />
                             <ToolbarSpacer />
-                            <Button text="Completed" visible="{= ${Suggesstion>Completed}}" icon="{= ${Suggesstion>Completed}? 'sap-icon://accept' : ''}" type="{= ${Suggesstion>Completed} ? 'Success' : 'Default' }"/>
+                            <Button visible="{= ${Suggesstion>Completed}}" icon="{= ${Suggesstion>Completed}? 'sap-icon://accept' : ''}" type="{= ${Suggesstion>Completed} ? 'Success' : 'Default' }"/>
                             <Button text="Reset" visible="{= ${Suggesstion>Completed}}"/>
                         </OverflowToolbar>
 		            </headerToolbar>
                     <content>
-			            <OverflowToolbar content="{Suggesstion>Childrens}" >
-                            <!-- <ToggleButton text="{Suggesstion>Name}" press="onSuggesstionClick"/>
-                            <Text text="Suggession 90%"/> -->
+			            <!-- <OverflowToolbar content="{Suggesstion>Childrens}" >
+                            <ToggleButton text="{Suggesstion>Name}" press="onSuggesstionClick"/>
+                            <Text text="Suggession 90%"/>
                                 <ToggleButton text="{Suggesstion>Name}" press="onSuggesstionClick"/>
-                        </OverflowToolbar>
-                        <List mode="MultiSelect" headerText="Custom Content" items="{Suggesstion>Childrens}" >
+                        </OverflowToolbar> -->
+                        <List mode="MultiSelect" items="{Suggesstion>Childrens}" selectionChange="onSuggesstionClick">
                             <!-- <CustomListItem>
                                 <HBox>
                                     <core:Icon size="2rem" src="sap-icon://attachment-photo" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" />
@@ -53,13 +53,13 @@
                                 </HBox>
                             </CustomListItem> -->
                             <StandardListItem 
-                            title="{Suggesstion>Name}"
-                            description="{Suggesstion>Recommendation}"
+                            title="{Suggesstion>Name} - {Suggesstion>Key}"
+                            description=""
                             icon="{icon}"
                             iconInset="false"
                             highlight="Success"
-                            info="{info}"
-                            infoState="{highlight}"
+                            info="Recommendation - {Suggesstion>Recommendation}"
+                            infoState="{= ${Suggesstion>Recommendation} > '70%' ? 'Success' : (${Suggesstion>Recommendation} > '50%' ? 'Warning' : 'Error')}"
                             infoStateInverted="true">
                             </StandardListItem>
 	                    </List>

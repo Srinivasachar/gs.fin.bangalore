@@ -214,11 +214,12 @@ sap.ui.define(
 
       updateCDSView: function(){
         var oFileUploadJSON = this.getView().getModel("CodeEditorModel");
-        this.OdataModel.update("/CdsModelInfoSet",{
+        this.OdataModel.update("/CdsModelInfoSet(Filename='test.xml',Fileversion='0000000003',Cdsviewname='ZRK_TAXITEM')",{
             Filename: "test.xml",
             Fileversion: "0000000003",
             Cdsviewname: "ZRK_TAXITEM",
-            FileContent: window.btoa(oFileUploadJSON.getProperty("/Code"))
+            Cdssqlviewname:"",
+            Filecontent: window.btoa(oFileUploadJSON.getProperty("/Code"))
         },{
             success: function(oResponse){
                 debugger;

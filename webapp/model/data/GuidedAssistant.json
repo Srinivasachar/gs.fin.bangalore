@@ -7,17 +7,17 @@
             {
                 "Name":"Australia",
                 "Key": "AU",
-                "Recommendation": "Recommendation 85%"
+                "Recommendation": "85%"
             },
             {
                 "Name":"South Africa",
                 "Key": "ZA",
-                "Recommendation": "Recommendation 65%"
+                "Recommendation": "65%"
             },
             {
                 "Name": "Germany",
                 "Key": "DE",
-                "Recommendation": "Recommendation 65%"
+                "Recommendation": "25%"
             }
         ]
     },
@@ -29,17 +29,17 @@
             {
                 "Name":"Value Added Tax",
                 "Key": "VAT",
-                "Recommendation": "Recommendation 65%"
+                "Recommendation": "65%"
             },
             {
                 "Name":"Witholding",
                 "Key": "WHT",
-                "Recommendation": "Recommendation 55%"
+                "Recommendation": "55%"
             },
             {
                 "Name": "GST",
                 "Key": "GST",
-                "Recommendation": "Recommendation 55%"
+                "Recommendation": "55%"
             }
         ]
     },
@@ -51,12 +51,12 @@
             {
                 "Name":"Line Item",
                 "Key": "LINE",
-                "Recommendation": "Recommendation 55%"
+                "Recommendation": "55%"
             },
             {
                 "Name":"Box Level",
                 "Key": "BOX",
-                "Recommendation": "Recommendation 95%"
+                "Recommendation": "95%"
             }
         ]
     },
@@ -68,12 +68,12 @@
             {
                 "Name":"TDT",
                 "Key": "LINE",
-                "Recommendation": "Recommendation 95%"
+                "Recommendation": "95%"
             },
             {
                 "Name":"RITA",
                 "Key": "BOX",
-                "Recommendation": "Recommendation 88%"
+                "Recommendation": "88%"
             }
         ]
     },
@@ -84,13 +84,13 @@
         "Childrens": [
             {
                 "Name":"Full Submission",
-                "Key": "LINE",
-                "Recommendation": "Recommendation 75%"
+                "Key": "FS",
+                "Recommendation": "75%"
             },
             {
                 "Name":"Delta Submission",
-                "Key": "BOX",
-                "Recommendation": "Recommendation 45%"
+                "Key": "DS",
+                "Recommendation": "45%"
             }
         ]
     },
@@ -101,19 +101,23 @@
         "Childrens": [
             {
                 "Name":"PDF",
-                "Key": "LINE"
+                "Key": "",
+                "Recommendation": "95%"
             },
             {
                 "Name":"XML",
-                "Key": "BOX"
+                "Key": "BOX",
+                "Recommendation": "95%"
             },
             {
                 "Name":"JSON",
-                "Key": "BOX"
+                "Key": "BOX",
+                "Recommendation": "95%"
             },
             {
                 "Name":"ALV",
-                "Key": "BOX"
+                "Key": "BOX",
+                "Recommendation": "55%"
             }
         ]
     },
@@ -124,15 +128,18 @@
         "Childrens": [
             {
                 "Name":"Declaration",
-                "Key": "LINE"
+                "Key": "DECL",
+                "Recommendation": "95%"
             },
             {
                 "Name":"Correction",
-                "Key": "BOX"
+                "Key": "CORR",
+                "Recommendation": "65%"
             },
             {
                 "Name":"Clarification",
-                "Key": "BOX"
+                "Key": "CLAR",
+                "Recommendation": "35%"
             }
         ]
     },
@@ -143,11 +150,13 @@
         "Childrens": [
             {
                 "Name":"Pre Activities",
-                "Key": "LINE"
+                "Key": "LINE",
+                "Recommendation": "95%"
             },
             {
                 "Name":"Post Activities",
-                "Key": "BOX"
+                "Key": "BOX",
+                "Recommendation": "45%"
             }
         ]
     }

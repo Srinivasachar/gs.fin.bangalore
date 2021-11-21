@@ -30,10 +30,10 @@ sap.ui.define([
             var oGuideOverview = this.getView().getModel("GuideOverview");
             var oSuggModel = this.getView().getModel("Suggesstion");
             var sPath = oEvent.getSource().getBindingContext("Suggesstion").getPath(); 
-            var iCurrentValue = oEvent.getParameter("pressed") ? oGuideOverview.getProperty("/Percentage") + 10 : oGuideOverview.getProperty("/Percentage") - 10;
+            var iCurrentValue = oEvent.getParameter("selected") ? oGuideOverview.getProperty("/Percentage") + 10 : oGuideOverview.getProperty("/Percentage") - 10;
             oGuideOverview.setProperty("/Percentage", iCurrentValue); 
 
-           oSuggModel.setProperty("/"+sPath.split("/")[1]+"/Completed", oEvent.getParameter("pressed"));
+           oSuggModel.setProperty("/"+sPath.split("/")[1]+"/Completed", oEvent.getParameter("selected"));
         },
 
         onSummaryGraph: function(){
