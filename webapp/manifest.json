@@ -19,6 +19,14 @@
           "odataVersion": "2.0",
           "localUri": "localService/metadata.xml"
         }
+      },
+      "altService": {
+        "uri": "/sap/opu/odata/sap/ZCREATE_CDS_FROM_XML_SRV",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/metadata.xml"
+        }
       }
     }
   },
@@ -79,13 +87,10 @@
 				"dataSource": "mainService",
 				"preload": true,
 				"settings": {
-					"defaultUpdateMethod": "PUT",
+          "defaultUpdateMethod": "PUT",
 					"defaultCountMode": "Inline",
-					"metadataUrlParams": {
-						"sap-documentation": "heading"
-					},
           "headers":{
-            "x-csrf-token": "Fetch"
+            "X-CSRF-Token": "Fetch"
           }
 				}
 			}

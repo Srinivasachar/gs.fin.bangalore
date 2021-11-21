@@ -13,28 +13,31 @@
 								name="myFileUpload"
                                 sendXHR="true"
                                 fileType="xml"
+                                useMultipart="false"
+                                value="{CodeEditorModel>/UploadDetails/FileName}"
 								tooltip="Upload your file to the local server"
 								uploadComplete="handleUploadComplete"
                                 uploadStart="handleUploadStart"
                                 change="handleUploadChange"
-                                typeMissmatch="handleTypeMissmatch"/>
+                                typeMissmatch="handleTypeMissmatch"
+                                enabled="{= !${CodeEditorModel>/UploadDetails/FileUploaded}}"
+                                />
 							<Button
 								text="Upload File"
 								type="Emphasized"
-								press="handleUploadPress"/>
+								press="handleUploadPress"
+                                enabled="{= !${CodeEditorModel>/UploadDetails/FileUploaded}}"
+                                />
 					</l:HorizontalLayout>
-					<!-- <Label id="conditionDescriptionLabel" tooltip="{i18n>Description}" text="Execution Mode" required="true"
-						labelFor="conditionDescriptionInput"/>
-                    <RadioButtonGroup id="rbg3" columns="1" class="sapUiMediumMarginBottom">
-						<RadioButton id="RB3-1" text="Production Mode" />
-						<RadioButton id="RB3-2" text="Test Mode" />
-					</RadioButtonGroup> -->
+                    <Label text="CDS View Name"/>
+                    <Input width="65%" valueHelpRequest="openCDSViewsF4Help" value="{CodeEditorModel>/UploadDetails/CDSViewName}" showValueHelp="true" visible="{CodeEditorModel>/UploadDetails/FileUploaded}"/>
+					
 				</f:content>
 			</f:SimpleForm>
 		</content>
 		<!--</Page>-->
 		<beginButton>
-			<Button id="saveCondId" press="cancelFileUploadCreation" text="Proceed" type="Emphasized">
+			<Button id="saveCondId" press="createCDSViewFromXML" text="Proceed" type="Emphasized" enabled="{= ${CodeEditorModel>/UploadDetails/CDSViewName}!== ''}">
 				<layoutData>
 					<FlexItemData id="saveCondFlexItemData" growFactor="1"/>
 				</layoutData>
