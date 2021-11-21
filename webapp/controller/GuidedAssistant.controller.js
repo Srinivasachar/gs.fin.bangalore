@@ -56,6 +56,6 @@ sap.ui.define([
     
         onDialogClose : function () {
             this.SummaryGraphDialog.close();
-        },
+        }
 	});
 });

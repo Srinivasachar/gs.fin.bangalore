@@ -36,7 +36,8 @@ sap.ui.define(
           new JSONModel({
             Code: "",
             UploadDetails: null,
-            CDSCollections: []
+            CDSCollections: [],
+            UploadRules: this.getUploadRules()
           }),
           "CodeEditorModel"
         );
@@ -197,7 +198,7 @@ sap.ui.define(
             success: function (oResponse) {
                 oFileUploadJSON.setProperty("/Code", window.atob(oResponse.Filecontent));
                 oFileUploadJSON.checkUpdate(true);
-                MessageToast.show("Successfully create CDS View");
+                MessageToast.show("Draft objects created successfully");
                 this.FileUpload.then(
                     function (oDialog) {
                       oDialog.close();
@@ -244,6 +245,15 @@ sap.ui.define(
         }
         return "";
     },
+
+    getUploadRules :function(){
+        var sFormattedtext = 
+        "<ul><li>Create XML file using <a href=\"//www.draw.io\">draw.io</a></li>"+
+        "<li>Steps to create <a>Documentation</a></li>"+
+        "<li>Create CDS Views and edit on the fly</li></ul>"
+
+        return sFormattedtext;
+    }
 
     });
   }
