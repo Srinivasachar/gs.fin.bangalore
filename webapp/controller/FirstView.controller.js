@@ -5,7 +5,8 @@ sap.ui.define(
     "sap/ui/core/BusyIndicator",
     "sap/ui/core/Core",
     "sap/ui/unified/FileUploaderParameter",
-    "sap/m/MessageToast"
+    "sap/m/MessageToast",
+    "sap/ui/model/Filter"
   ],
   function (
     BaseController,
@@ -13,7 +14,8 @@ sap.ui.define(
     BusyIndicator,
     Core,
     FileUploaderParameter,
-    MessageToast
+    MessageToast,
+    Filter
   ) {
     "use strict";
 
@@ -25,17 +27,17 @@ sap.ui.define(
             name: "gs.fin.bangalore.Fragment.FileUpload",
           });
         }
-        this.FileUpload.then(
-          function (oDialog) {
-            this.onInitialzeFileUpload();
-            oDialog.open();
-          }.bind(this)
-        );
-
+        this.handleDialog(this.FileUpload);
         this.getView().setModel(
           new JSONModel({
             Code: "",
-            UploadDetails: null,
+            UploadDetails: {
+                FileName: "",
+                FileNameValueState: "None",
+                FileContent: "",
+                FileUploaded: false,
+                CDSViewName: "",
+              },
             CDSCollections: [],
             UploadRules: this.getUploadRules()
           }),
@@ -44,16 +46,37 @@ sap.ui.define(
         this.getView().setModel(new JSONModel([]), "CDSViewsCollection");
       },
 
-      routeMatched: function(oEvent){
-        this.OdataModel = this.getView().getModel();
-        this.readCDSViewsUsingFile();
+      handleDialog: function(oFragment){
+        oFragment.then(
+            function (oDialog) {
+              oDialog.open();
+            }.bind(this)
+          );
       },
 
-      readCDSViewsUsingFile: function(){
+      routeMatched: function(oEvent){
+        this.OdataModel = this.getView().getModel();
+        this.readCDSViewsUsingFile({
+            "Filename": "test.xml",
+            "Fileversion": "0000000003"
+        }, true);
+      },
+
+      readCDSViewsUsingFile: function(oParams, bInitialize){
+        BusyIndicator.show(0);
+        var aFilters = [
+            new Filter("Filename", "EQ", oParams.Filename),
+            new Filter("Fileversion", "EQ", oParams.Fileversion)
+         ];
         var oFileUploadJSON = this.getView().getModel("CDSViewsCollection");
         this.OdataModel.read("/CdsModelInfoSet",{
+            filters: [new Filter({ filters: aFilters, and: true})],
             success: function(oResponse){
+                if(bInitialize){
+                    this.onInitialzeFileUpload();
+                }
                 oFileUploadJSON.setProperty("/", oResponse.results);
+                BusyIndicator.hide();
             }.bind(this)
         })
       },
@@ -82,14 +105,6 @@ sap.ui.define(
         this.uploadPath =
         this.getView().getModel().sServiceUrl + "/UploadCDSViewSet";
         oFileUploader.setUploadUrl(this.uploadPath);
-        var oFileUploadJSON = this.getView().getModel("CodeEditorModel");
-        oFileUploadJSON.setProperty("/UploadDetails", {
-          FileName: "",
-          FileNameValueState: "None",
-          FileContent: "",
-          FileUploaded: false,
-          CDSViewName: "",
-        });
       },
 
       handleUploadPress: function (oEvent) {
@@ -131,10 +146,22 @@ sap.ui.define(
         if (oEvent.getParameter("status") !== 201) {
           return;
         }
-        MessageToast.show("File Uploaded Successfully!")
-        // var oFileUploadJSON = this.getView().getModel("CodeEditorModel");
-        // var responseRaw = oEvent.getParameter("responseRaw");
-        // oFileUploadJSON.setProperty("/UploadDetails/fileContent", responseRaw);
+        var oResponse = oEvent.getParameter("responseRaw")
+        MessageToast.show("File Uploaded Successfully!");
+        var sFileVersion = this.getValuesByTagName(oResponse, "d:Fileversion");
+        var sCDSViewName = this.getValuesByTagName(oResponse, "d:CdsViewName");
+        var sFileName = this.getValuesByTagName(oResponse, "d:SourceFilename");
+        //var sFileContent = this.getValuesByTagName(oResponse, "d:FileContent");
+        var oFileUploadJSON = this.getView().getModel("CodeEditorModel");
+        this.readCDSViewsUsingFile({
+            "Filename": sFileName,
+            "Fileversion": sFileVersion
+        }, false);
+         oFileUploadJSON.setProperty("/UploadDetails/FileName", sFileName);
+         //oFileUploadJSON.setProperty("/UploadDetails/FileContent", sFileContent);
+         oFileUploadJSON.setProperty("/UploadDetails/CDSViewName", sCDSViewName);
+         //oFileUploadJSON.setProperty("/Code", window.atob(sFileContent));
+         oFileUploadJSON.setProperty("/UploadDetails/FileVersion", sFileVersion);
       },
 
       readCodeFromAPI: function (sFile) {
@@ -186,13 +213,13 @@ sap.ui.define(
       createCDSViewFromXML: function () {
         var oFileUploadJSON = this.getView().getModel("CodeEditorModel");
         var oModel = this.getView().getModel();
-        BusyIndicator.show();
+        BusyIndicator.show(0);
         oModel.create(
           "/CdsModelInfoSet",
           {
-            Filename: "test.xml",
-            Fileversion: "0000000003",
-            Cdsviewname: "ZRK_TAXITEM",
+            Filename: oFileUploadJSON.getProperty("/UploadDetails/FileName"), //"aaaaaaaa.xml"//"test.xml",
+            Fileversion: oFileUploadJSON.getProperty("/UploadDetails/FileVersion"),
+            Cdsviewname: oFileUploadJSON.getProperty("/UploadDetails/CDSViewName") //"ZRK_TAXRRRR" //"ZRK_TAXITEM",
           },
           {
             success: function (oResponse) {
@@ -215,35 +242,31 @@ sap.ui.define(
 
       updateCDSView: function(){
         var oFileUploadJSON = this.getView().getModel("CodeEditorModel");
-        this.OdataModel.update("/CdsModelInfoSet(Filename='test.xml',Fileversion='0000000003',Cdsviewname='ZRK_TAXITEM')",{
-            Filename: "test.xml",
-            Fileversion: "0000000003",
-            Cdsviewname: "ZRK_TAXITEM",
-            Cdssqlviewname:"",
+        BusyIndicator.show(0);
+        var sFileName = oFileUploadJSON.getProperty("/UploadDetails/FileName");
+        var sFileVersion = oFileUploadJSON.getProperty("/UploadDetails/FileVersion");
+        var sCDSViewName = oFileUploadJSON.getProperty("/UploadDetails/CDSViewName");
+
+
+        this.OdataModel.update("/CdsModelInfoSet(Filename='"+sFileName+"',Fileversion='"+sFileVersion+"',Cdsviewname='"+sCDSViewName+"')",{
+            Filename: sFileName, 
+            Fileversion: sFileVersion,
+            Cdsviewname: sCDSViewName, 
             Filecontent: window.btoa(oFileUploadJSON.getProperty("/Code"))
         },{
             success: function(oResponse){
-                debugger;
+                BusyIndicator.hide();
             }.bind(this),
             error: function(oError){
-                debugger;
+                BusyIndicator.hide();
             }.bind(this)
         });
       },
 
       getValuesByTagName: function (sResponseRaw, sTagName) {
-        var sResponseProperties = jQuery.parseXML(sResponseRaw).getElementsByTagName("m:properties")[0],
-            oElementsInProperties = sResponseProperties.getElementsByTagName(sTagName)[0];
-        //In Internet Explorer (IE) browser, the elements property 'innerHTML' does not work.
-        //Hence we do a workaround to fetch the childNotes first, and get the wholeText from it.
-        //This workaround also works in other browsers but makes the execution slow.
-        //Hence we keep innerHTML usage in all other browsers and use childNodes only in IE.
-        if (oElementsInProperties && !Device.browser.msie) {
-            return oElementsInProperties.innerHTML;
-        } else if (oElementsInProperties && oElementsInProperties.childNodes.length) {
-            return oElementsInProperties.childNodes[0].wholeText;
-        }
-        return "";
+        var sResponseProperties = jQuery.parseXML(sResponseRaw).getElementsByTagName(sTagName);
+        sResponseProperties = sResponseProperties[0].innerHTML;
+        return sResponseProperties;
     },
 
     getUploadRules :function(){

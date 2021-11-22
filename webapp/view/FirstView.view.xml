@@ -4,9 +4,9 @@
 		<content>
 			<IconTabHeader id="iconTabHeader" selectedKey="I_TAXITEM" select=".onSelectTab">
 				<items>
-					<IconTabFilter text="I_TAXITEM" key="I_TAXITEM" icon="sap-icon://source-code"/>
-					<IconTabFilter text="P_BSET" key="P_BSET" icon="sap-icon://syntax"/>
-					<IconTabFilter text="BSET" key="BSET" icon="sap-icon://syntax"/>
+					<IconTabFilter text="{CodeEditorModel>/UploadDetails/CDSViewName}" key="I_TAXITEM" icon="sap-icon://document"/>
+					<!-- <IconTabFilter text="P_BSET" key="P_BSET" icon="sap-icon://syntax"/>
+					<IconTabFilter text="BSET" key="BSET" icon="sap-icon://syntax"/> -->
 				</items>
 			</IconTabHeader>
 			<ce:CodeEditor id="aCodeEditor" type="javascript" syntaxHints="false" value="{CodeEditorModel>/Code}"/>
