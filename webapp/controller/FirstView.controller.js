@@ -26,6 +26,7 @@ sap.ui.define(
           new JSONModel({
             Code: "",
             BusyIndicator: true,
+            Editable: false,
             UploadDetails: {
                 FileName: "",
                 FileNameValueState: "None",
@@ -112,6 +113,10 @@ sap.ui.define(
 
       handleUploadPress: function (oEvent) {
         var oFileUploader = oEvent.getSource().getParent().getContent()[0];
+        if(!oFileUploader.getValue()){
+            MessageToast.show("Select a file to proceed with file upload");
+            return;
+        }
         oFileUploader.removeAllHeaderParameters();
         var aHeaderParameters = [
           {
@@ -150,20 +155,18 @@ sap.ui.define(
           return;
         }
         var oResponse = oEvent.getParameter("responseRaw")
-        MessageToast.show("File Uploaded Successfully!");
         var sFileVersion = this.getValuesByTagName(oResponse, "d:Fileversion");
         var sCDSViewName = this.getValuesByTagName(oResponse, "d:CdsViewName");
         var sFileName = this.getValuesByTagName(oResponse, "d:SourceFilename");
-        //var sFileContent = this.getValuesByTagName(oResponse, "d:FileContent");
+        
         var oFileUploadJSON = this.getView().getModel("CodeEditorModel");
         this.readCDSViewsUsingFile({
             "Filename": sFileName,
             "Fileversion": sFileVersion
         }, false);
+        MessageToast.show("File Uploaded Successfully!");
          oFileUploadJSON.setProperty("/UploadDetails/FileName", sFileName);
-         //oFileUploadJSON.setProperty("/UploadDetails/FileContent", sFileContent);
          oFileUploadJSON.setProperty("/UploadDetails/CDSViewName", sCDSViewName);
-         //oFileUploadJSON.setProperty("/Code", window.atob(sFileContent));
          oFileUploadJSON.setProperty("/UploadDetails/FileVersion", sFileVersion);
       },
 
@@ -182,12 +185,7 @@ sap.ui.define(
       },
 
       cancelFileUploadCreation: function () {
-        // this.FileUpload.then(
-        //   function (oDialog) {
-        //     this.readCodeFromAPI("I_TAXITEM");
-        //     oDialog.close();
-        //   }.bind(this)
-        // );
+        window.history.back();
       },
 
       onSelectTab: function (oEvent) {
@@ -227,8 +225,9 @@ sap.ui.define(
           {
             success: function (oResponse) {
                 oFileUploadJSON.setProperty("/Code", window.atob(oResponse.Filecontent));
+                oFileUploadJSON.setProperty("/Editable", true);
                 oFileUploadJSON.checkUpdate(true);
-                MessageToast.show("Draft objects created successfully");
+                MessageToast.show("Draft object(s) created successfully");
                 this.FileUpload.then(
                     function (oDialog) {
                       oDialog.close();
@@ -245,12 +244,11 @@ sap.ui.define(
 
       updateCDSView: function(){
         var oFileUploadJSON = this.getView().getModel("CodeEditorModel");
-        BusyIndicator.show(0);
         var sFileName = oFileUploadJSON.getProperty("/UploadDetails/FileName");
         var sFileVersion = oFileUploadJSON.getProperty("/UploadDetails/FileVersion");
         var sCDSViewName = oFileUploadJSON.getProperty("/UploadDetails/CDSViewName");
 
-
+        BusyIndicator.show(0);
         this.OdataModel.update("/CdsModelInfoSet(Filename='"+sFileName+"',Fileversion='"+sFileVersion+"',Cdsviewname='"+sCDSViewName+"')",{
             Filename: sFileName, 
             Fileversion: sFileVersion,
@@ -258,9 +256,12 @@ sap.ui.define(
             Filecontent: window.btoa(oFileUploadJSON.getProperty("/Code"))
         },{
             success: function(oResponse){
+                MessageToast.show("CDS view created successfully!");
+                oFileUploadJSON.setProperty("/Editable", false);
                 BusyIndicator.hide();
             }.bind(this),
             error: function(oError){
+                MessageToast.show(JSON.parse(oError.responseText).error.message.value);
                 BusyIndicator.hide();
             }.bind(this)
         });
@@ -275,7 +276,7 @@ sap.ui.define(
     getUploadRules :function(){
         var sFormattedtext = 
         "<ul><li>Create XML file using <a href=\"//www.draw.io\">draw.io</a></li>"+
-        "<li>Steps to create <a>Documentation</a></li>"+
+        "<li>Steps to create <a href=\"../model/drawio-documentation.pdf\">Documentation</a></li>"+
         "<li>Create CDS Views and edit on the fly</li></ul>"
 
         return sFormattedtext;

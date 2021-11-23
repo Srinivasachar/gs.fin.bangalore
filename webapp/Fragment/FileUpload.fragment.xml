@@ -1,6 +1,6 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns="sap.m" xmlns:l="sap.ui.layout"
 	xmlns:u="sap.ui.unified">
-	<Dialog id="UploadFragment" afterClose="cancelFileUploadCreation" contentWidth="50%" title="Upload your XML" resizable="true" draggable="true" class="sapUiSizeCompact" busy="{CodeEditorModel>/BusyIndicator}">
+	<Dialog id="UploadFragment" contentWidth="50%" title="Upload your XML" resizable="true" draggable="true" class="sapUiSizeCompact" busy="{CodeEditorModel>/BusyIndicator}">
 		<content>
 			<f:SimpleForm id="AddCondSimpleForm" editable="true" visible="true" layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024"
 				labelSpanL="3" labelSpanM="3" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2" title="Create your artifacts by just uploading XML file ">
@@ -20,7 +20,7 @@
                                 uploadStart="handleUploadStart"
                                 change="handleUploadChange"
                                 typeMissmatch="handleTypeMissmatch"
-                                enabled="{= !${CodeEditorModel>/UploadDetails/FileUploaded}}"
+                                enabled="{= !${CodeEditorModel>/UploadDetails/FileUploaded} &amp;&amp; !${CodeEditorModel>/BusyIndicator}}"
                                 />
 							<Button
 								text="Upload File"

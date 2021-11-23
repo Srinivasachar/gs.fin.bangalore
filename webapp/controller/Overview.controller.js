@@ -15,12 +15,14 @@ sap.ui.define(
               {
                 Header: "ACR Guided Assistance",
                 Subheader: "Assistance",
-                Key: 0
+                Key: 0,
+                Count: 27
               },
               {
                 Header: "Intelligent artifacts creation",
                 Subheader: "Creation",
-                Key: 1
+                Key: 1,
+                Count: 65
               },
             ];
           this.getView().setModel(new JSONModel(aTileContainer), "TileCollection");

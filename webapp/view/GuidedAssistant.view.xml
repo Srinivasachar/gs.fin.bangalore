@@ -1,7 +1,7 @@
 <mvc:View controllerName="gs.fin.bangalore.controller.GuidedAssistant" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:ce="sap.ui.codeeditor" xmlns:mc="sap.suite.ui.microchart" xmlns:core="sap.ui.core">
         <Page id="idGuidedAssistant" title="ACR Guided Assistant" class="sapUiSizeCompact" showNavButton="true" navButtonPress="onNavBack">
         <content>
-        <!-- <ObjectHeader
+         <ObjectHeader
 				responsive="true"
 				title="">
 				<headerContainer>
@@ -25,10 +25,10 @@
 						</FlexBox>
 					</HeaderContainer>
 				</headerContainer>
-			</ObjectHeader> -->
-            <FlexBox class="sapUiSmallMarginBegin" width="10rem" height="6rem" justifyContent="Start">
+			</ObjectHeader> 
+            <!-- <FlexBox class="sapUiSmallMarginBegin" width="10rem" height="6rem" justifyContent="Start">
                 <mc:RadialMicroChart percentage="{GuideOverview>/Percentage}"/>
-			</FlexBox>
+			</FlexBox> -->
             <VBox items="{Suggesstion>/}">
                 <Panel expandable="true" expand="onExpand" expanded="{Suggesstion>Expanded}">
                     <headerToolbar>
