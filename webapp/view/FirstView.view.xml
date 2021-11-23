@@ -16,7 +16,7 @@
 				<Button press="onSummaryGraph" text="Overview" icon="sap-icon://tree"/>
 				<ToolbarSpacer id="ToolbarSpacer3"/>
 				<Button press="updateCDSView" text="Submit Changes" type="Emphasized"/>
-				<Button press="onCancelConfigParamPress" text="Discard"/>
+				<Button press="onNavBack" text="Discard"/>
 			</OverflowToolbar>
 		</footer>
 	</Page>

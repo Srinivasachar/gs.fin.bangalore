@@ -58,7 +58,7 @@ sap.ui.define([
 			if (sPreviousHash !== undefined) {
 				window.history.go(-1);
 			} else {
-				this.getRouter().navTo("", {}, true /*no history*/);
+				window.history.go(-1);
 			}
 		},
 		onSummaryGraph: function(){

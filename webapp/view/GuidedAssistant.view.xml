@@ -75,7 +75,7 @@
                 <ToolbarSpacer id="ToolbarSpacer3"/>
                 <Button press="onSummaryGraph" text="Summary" visible="false"/>
                 <Button press="onActivateConfigParamPress" text="Proceed Creation" type="Emphasized"/>
-                <Button press="onCancelConfigParamPress" text="Discard"/>
+                <Button press="onNavBack" text="Discard"/>
             </OverflowToolbar>
         </footer>
     </Page>

@@ -19,16 +19,6 @@
         "state": "Negative",
         "stateText": "Pending",
         "texts": ["Package: ZTEST_CDS_GSINNOVATION" ]
-    },{
-        "id": "3",
-        "lane": "0",
-        "title": "BSET",
-        "titleAbbreviation": "BSET",
-        "children": [],
-        "isTitleClickable": true,
-        "state": "Positive",
-        "stateText": "Created",
-        "texts": [ "Package: ZTEST_CDS_GSINNOVATION" ]
     }],
     "Lanes":[
         {
