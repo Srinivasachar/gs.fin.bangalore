@@ -1,6 +1,6 @@
 <mvc:View controllerName="gs.fin.bangalore.controller.FirstView" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m"
 	xmlns:ce="sap.ui.codeeditor">
-	<Page id="page" title="{i18n>title}" showNavButton="true" navButtonPress="onNavBack">
+	<Page id="page" title="Intelligent artifacts creation" showNavButton="true" navButtonPress="onNavBack">
 		<content>
 			<IconTabHeader id="iconTabHeader" selectedKey="I_TAXITEM" select=".onSelectTab">
 				<items>

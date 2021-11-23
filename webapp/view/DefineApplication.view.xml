@@ -1,0 +1,411 @@
+<mvc:View controllerName="gs.fin.bangalore.controller.DefineApplication" 
+xmlns:mvc="sap.ui.core.mvc" 
+displayBlock="true" xmlns="sap.m"
+xmlns:ce="sap.ui.codeeditor"
+xmlns:form="sap.ui.layout.form"
+xmlns:h="sap.ui.layout"
+xmlns:l="sap.ui.layout" xmlns:p="sap.uxap" xmlns:semantic="sap.m.semantic" xmlns:tree="sap.ui.table"
+xmlns:u="sap.ui.unified" xmlns:rule="sap.rules.ui">
+	<Page id="defineApp" title="Intelligent artifacts creation" showNavButton="true" navButtonPress="onNavBack">
+		<content>
+			<Wizard complete="wizardCompletedHandler" id="reportDefinitionsWizard" showNextButton="true">
+						<steps>
+							<!--************************** STEP-1 : GENERAL PROPERTIES **************************-->
+							<WizardStep height="auto" id="reportDefinitionPropertiesWizard" complete="onClickNextStep" nextStep="parametersWizard"
+								title="General Properties" validated="false">
+								<Label text="Report Definition ID"/>
+                                <Input/>
+                                <Label text="Description"/>
+                                <Input/>
+							</WizardStep>
+							<!--************************** STEP-2 : PARAMETERS **************************-->
+							<WizardStep height="auto" id="parametersWizard" nextStep="QueriesWizard" title="Parameter" validated="true"
+								complete="onClickNextStep">
+								<Table backgroundDesign="Translucent" growing="true" growingThreshold="{tableGrowingModel>/ParametersTable}" growingScrollToLoad="true"
+									id="parametersTable" items="{path:'JsonModel>/ParamModel', filters : [ { path : 'InheritanceStatus', operator : 'NE', value1 : 'X'} ]}"
+									mode="MultiSelect" noDataText="{viewProperties>/ParamNoDataText}" autoPopinMode="true" select="selectParam"
+									selectionChange="onParameterSelection" updateFinished="adjustViewPropertiesModelParameter">
+									<headerToolbar>
+										<Toolbar height="auto" id="lineItemsToolbar" width="auto">
+											<Title id="parameterTableTitle" text="{viewProperties>/ParamTitle}"/>
+											<ToolbarSpacer id="toolbarspacer0"/>
+											<Button enabled="true" id="addParameter" press="onAddParameter" text="{i18n>add}" type="Ghost" visible="true="/>
+											<Button enabled="false" id="editParameter" press="onEditParameter" text="{i18n>edit}" type="Transparent" visible="true"/>
+											<Button enabled="false" id="deleteParameter" press="onDeleteId" text="{i18n>delete}" type="Transparent" visible="true"/>
+											<Button enabled="false" id="moveParameterUp"
+												visible="{= ${ModeModel>/EditMode} &amp;&amp; ${oPropertiesModelDc>/ExtendedRepId} === '' ? true : false}" press="onMoveUp"
+												text="{i18n>moveUp}" type="Transparent"></Button>
+											<Button enabled="false" id="moveParameterDown"
+												visible="{= ${ModeModel>/EditMode} &amp;&amp; ${oPropertiesModelDc>/ExtendedRepId} === '' ? true : false}" press="onMoveDown"
+												text="{i18n>moveDown}" type="Transparent"></Button>
+											<Button enabled="false" id="revertParameter"
+												visible="{= ${ModeModel>/EditMode} &amp;&amp; ${oPropertiesModelDc>/ExtendedRepId} !== '' ? true : false}" press="onRevertParameter"
+												text="{i18n>revert}" type="Transparent"></Button>
+										</Toolbar>
+									</headerToolbar>
+									<columns>
+										<Column id="paramIdColumn">
+											<Text id="paramId" text="{i18n>paramId}"/>
+										</Column>
+										<Column id="dataElementColumn">
+											<Text id="dataElement" text="{i18n>dataElement}"/>
+										</Column>
+										<Column id="searchHelpColumn">
+											<Text id="searchHelp" text="{i18n>searchHelp}"/>
+										</Column>
+										<Column id="searchParamColumn" demandPopin="true" minScreenWidth="Tablet">
+											<Text id="searchParam" text="{i18n>searchParam}"/>
+										</Column>
+										<Column id="selectOptionColumn" demandPopin="true" minScreenWidth="Tablet">
+											<Text id="selectOption" text="{i18n>selectOption}"/>
+										</Column>
+										<Column id="isOptionalColumn" demandPopin="true" minScreenWidth="Tablet">
+											<Text id="isOptional" text="{i18n>isOptional}"/>
+										</Column>
+										<Column id="isHiddenColumn" demandPopin="true" minScreenWidth="Tablet">
+											<Text id="isHidden" text="{i18n>isHidden}"/>
+										</Column>
+										<Column id="isReadOnlyColumn" demandPopin="true" minScreenWidth="Tablet">
+											<Text id="isReadOnly" text="{i18n>isReadOnly}"/>
+										</Column>
+										<Column id="inheritStatusColumn" visible="{= ${oPropertiesModelDc>/ExtendedRepId} !== '' ? true : false}" demandPopin="true"
+											minScreenWidth="Tablet">
+											<Text id="inheritStatus" text="{i18n>inheritStatus}"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem id="ColumnListItem0">
+											<cells>
+												<Text id="ParamIdCell" text="{JsonModel>ParamId}"/>
+												<Text id="DataElementCell" text="{JsonModel>DataElement}"/>
+												<Text id="SearchHelpCell" text="{JsonModel>SearchHelp}"/>
+												<Text id="SearchHelpParameterCell" text="{JsonModel>SearchHelpParameter}"/>
+												<Text id="IsSelectOptionCell" text="{= ${JsonModel>IsSelectOption} === 'X' ? ${i18n>yes} : ${i18n>no}}"/>
+												<Text id="IsOptionalCell" text="{= ${JsonModel>IsOptional} === 'X' ? ${i18n>yes} : ${i18n>no}}"/>
+												<Text id="IsHiddenCell" text="{= ${JsonModel>IsHidden} === 'X' ? ${i18n>yes} : ${i18n>no}}"/>
+												<Text id="IsReadOnlyCell" text="{= ${JsonModel>IsReadOnly} === 'X' ? ${i18n>yes} : ${i18n>no}}"/>
+												<Text id="InheritStatusCell" text="{path:'JsonModel>InheritanceStatus',formatter:'.formatter.InheritanceStatusValue'}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</WizardStep>
+							<!--************************** STEP-3 : QUERIES **************************-->
+							<WizardStep id="QueriesWizard" title="Queries" nextStep="govtDocsWizard">
+								<Table items="{path:'oQueryModel>/', filters : [ { path : 'InheritanceStatus', operator : 'NE', value1 : 'X'} ]}"
+									noDataText="{viewProperties>/QueryNoDataText}" updateFinished="adjustViewPropertiesModelQuery" growing="true"
+									growingThreshold="{tableGrowingModel>/QueryTable}" autoPopinMode="true" mode="MultiSelect" selectionChange="onQuerySelection"
+									id="queriesTable">
+									<headerToolbar>
+										<Toolbar id="Toolbar1">
+											<Title id="q" text="{viewProperties>/QueryTitle}"/>
+											<ToolbarSpacer id="ToolbarSpacer1"/>
+											<Button enabled="true" id="addQuery" press="onAddQuery" text="{i18n>add}" type="Ghost" visible="true"/>
+											<Button enabled="false" id="renameQueryMain" press="onRenameNamespace" text="{i18n>rename}" type="Transparent"
+												visible="true"/>
+											<Button enabled="false" id="copyQueryMain" press="onCopyQueryMain" text="{i18n>copy}" type="Transparent" visible="true"/>
+											<Button enabled="false" id="queryDeleteMain" type="Transparent" text="{i18n>Delete}" press="onDeleteId" visible="true"/>
+											<Button enabled="false" id="revertQueryMain"
+												visible="{= ${ModeModel>/EditMode} &amp;&amp; ${oPropertiesModelDc>/ExtendedRepId} !== '' ? true : false}" press="onRevertQuery"
+												text="{i18n>revert}" type="Transparent"/>
+										</Toolbar>
+									</headerToolbar>
+									<columns>
+										<Column id="queryIdColumn">
+											<Text id="queryIdText" text="{i18n>queryId}"/>
+										</Column>
+										<Column id="dataSourceLablColumn">
+											<Text id="dataSourceLabl" text="{i18n>dataSourceLabl}"/>
+										</Column>
+										<Column id="dataSourceNameColumn">
+											<Text id="dataSourceName" text="{i18n>dataSourceName}"/>
+										</Column>
+										<Column id="DescriptionColumn" demandPopin="true" minScreenWidth="Tablet">
+											<Text id="Description" text="{i18n>Description}"/>
+										</Column>
+										<Column id="inheritanceStatusColumn" visible="{= ${oPropertiesModelDc>/ExtendedRepId} !== '' ? true : false}" demandPopin="true"
+											minScreenWidth="Tablet">
+											<Text id="inheritanceStatus" text="{i18n>inheritStatus}"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem id="ColumnListItem1" type="Navigation" press="onQueryNavigationRep">
+											<cells>
+												<Text id="QueryIdCell" text="{oQueryModel>QueryId}"/>
+												<Text id="DataSourceTextCell" text="{oQueryModel>DataSourceText}"/>
+												<Text id="DataSourceValCell"
+													text="{parts:[{path:'oQueryModel>DataSource'}, {path:'oQueryModel>DataSourceVal'}, {path:'oQueryModel>QuerySourceGroup'}], formatter: '.formatter.formatDataSourceValue'} "/>
+												<Text id="NameCell" text="{oQueryModel>Name}"/>
+												<Text id="InheritanceStatusCell" text="{path:'oQueryModel>InheritanceStatus',formatter:'.formatter.InheritanceStatusValue'}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</WizardStep>
+							<!--************************** STEP-4 : DOCUMENTS **************************-->
+							<WizardStep complete="onClickNextStep" height="auto" id="govtDocsWizard" nextStep="correspondenceDocStep" title="Documents"
+								validated="true">
+								<Table growing="true" growingScrollToLoad="true" id="govtDocumentTable"
+									items="{path:'JsonModel>/DocumentModel', filters : [ { path : 'InheritanceStatus', operator : 'NE', value1 : 'X'} ], sorter: {path: 'DocumentId'}}"
+									mode="MultiSelect" noDataText="{viewProperties>/DocumentNoDataText}" selectionChange="onDocumentChangeView" visible="true"
+									updateFinished="adjustViewPropertiesModelDocument" showSeparators="All" autoPopinMode="true">
+									<headerToolbar>
+										<Toolbar id="Toolbar2">
+											<Title id="govtDocumentTableTitle" text="{viewProperties>/DocumentTitle}"/>
+											<ToolbarSpacer id="ToolbarSpacer2"/>
+											<Button enabled="true" id="addGovtDocument" press="onAddDocGeneral" text="{i18n>Add}" type="Ghost" visible="true"/>
+											<Button enabled="false" id="renameGovtDocument" press="onRenameNamespace" text="{i18n>rename}" type="Transparent"
+												visible="true"/>
+											<Button enabled="false" id="deleteGovtDocument" press="onDeleteId" text="{i18n>delete}" type="Transparent" visible="true"/>
+											<Button enabled="false" id="download" press="onDownloadPress" text="{i18n>exportSchema}" type="Transparent"/>
+											<Button enabled="false" id="revertGovtDocument" text="{i18n>revert}" type="Transparent"
+												visible="{= ${ModeModel>/EditMode} &amp;&amp; ${oPropertiesModelDc>/ExtendedRepId} !== '' ? true : false}" press="onRevertGovtDocument"/>
+											<Button id="SettingsButton" icon="sap-icon://action-settings" press="onPersoButtonPressed" type="Transparent"/>
+										</Toolbar>
+									</headerToolbar>
+									<columns id="Columns">
+										<Column id="DocId" visible="true">
+											<Text id="docIdColumnText" text="{i18n>docId}"/>
+										</Column>
+										<Column id="DocFor" visible="true">
+											<Text id="docFormatColumnText" text="{i18n>docFormat}"/>
+										</Column>
+										<Column id="SchId" visible="true">
+											<Text id="schemaIdColumnText" text="{i18n>schemaId}"/>
+										</Column>
+										<Column id="DocN" visible="true" minScreenWidth="Tablet" demandPopin="true">
+											<Text id="docNameColumnText" text="{i18n>docName}"/>
+										</Column>
+										<Column id="FormT" visible="true" minScreenWidth="Tablet" demandPopin="true">
+											<Text id="formTemplateColumnText" text="{i18n>formTemplate}"/>
+										</Column>
+										<Column id="CodeP" visible="true" minScreenWidth="Tablet" demandPopin="true">
+											<Text id="CodePageColumnText" text="{i18n>CodePage}"/>
+										</Column>
+										<Column id="DataS" visible="false" minScreenWidth="Tablet" demandPopin="true">
+											<Text id="DataSourceLablColumnText" text="{i18n>DataSourceLabl}"/>
+										</Column>
+										<Column id="CorrV" visible="false" minScreenWidth="Tablet" demandPopin="true">
+											<Text id="fileNameColumnText" text="{i18n>fileName}"/>
+										</Column>
+										<Column id="OptionalDocument" visible="false" minScreenWidth="Tablet" demandPopin="true">
+											<Text id="isOptionalColumnText" text="{i18n>isOptional}"/>
+										</Column>
+										<Column id="Visualization" visible="true" minScreenWidth="Tablet" demandPopin="true">
+											<Text id="visualizationColumnText" text="{i18n>visualization}"/>
+										</Column>
+										<Column id="DataPreview" visible="false" minScreenWidth="Tablet" demandPopin="true">
+											<Text id="extendedDataPreviewColumnText" text="{i18n>extendedDataPreview}"/>
+										</Column>
+										<Column id="DocumentSplitQuery" visible="false" minScreenWidth="Tablet" demandPopin="true">
+											<Text id="docSplitQueryColumnText" text="{i18n>documentSplitQuery}"/>
+										</Column>
+										<Column visible="true" minScreenWidth="Tablet" demandPopin="true" id="RefDocId">
+											<Text id="RefDocColumnColumnText" text="{i18n>RefDocColumn}"/>
+										</Column>
+										<Column visible="{= ${oPropertiesModelDc>/ExtendedRepId} !== '' ? true : false}" minScreenWidth="Tablet" demandPopin="true" id="InhStatusId">
+											<Text id="inheritStatusColumnText" text="{i18n>inheritStatus}"/>
+										</Column>
+										<Column visible="true" id="schQueryId" demandPopin="true" minScreenWidth="Tablet">
+											<Text id="queryIdColumnText" text="{i18n>queryId}"/>
+										</Column>
+										<Column visible="false" id="ColQryAnalyticsId" demandPopin="true" minScreenWidth="Tablet">
+											<Text id="analyticalQryTitleColumnText" text="{i18n>analyticalQryTitle}"/>
+										</Column>
+										<Column visible="false" id="ColDelimiter" demandPopin="true" minScreenWidth="Tablet">
+											<Text id="delimiterColumnText" text="{i18n>delimiter}"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem id="ColumnListItem2" type="Navigation" press="onMappingPress"
+											highlight="{= ${JsonModel>InheritanceStatus} === 'DIN' ? 'None' : ${JsonModel>IsSchemaDeleted} === true ? 'Warning' : 'None'}">
+											<cells>
+												<!--<Text enabled="false" id="docId" text="{JsonModel>DocumentId}"/>-->
+												<VBox id="VBox0">
+													<ObjectIdentifier id="docId" title="{JsonModel>DocumentId}"/>
+													<Link id="documentInconsistentLink" text="{i18n>documentInconsistent}"
+														visible="{= ${JsonModel>InheritanceStatus} === 'DIN' ? false : ${JsonModel>IsSchemaDeleted} === true}" press="onInconsistentDoc"/>
+												</VBox>
+												<Text id="formatId" text="{JsonModel>DocumentFormat}"/>
+												<Text id="schemaId"
+													text="{parts:[{ path:'JsonModel>SchemaId'},{ path:'JsonModel>SchemaQueryId' }], formatter:'.formatter.formatSchemaName'}"/>
+												<Text id="docNameId" text="{JsonModel>DocumentName}"/>
+												<Text id="formtemplate" text="{JsonModel>FormTemplate}"/>
+												<Text id="codePage" text="{JsonModel>CodePage}"/>
+												<Text id="dataSourceDoc" text="{JsonModel>SourceTypeS}"/>
+												<Text id="corresValueDoc" text="{parts:[{ path:'JsonModel>FileName'}], formatter:'.formatter.formatCorss1'}"/>
+												<Text id="optionalDocId" text="{= ${JsonModel>IsSelectable} === 'X' ? ${i18n>yes} : ${i18n>no}}"/>
+												<Text id="visualizationDoc" text="{parts: [{path:'JsonModel>DocumentVisualization'}], formatter:'.formatter.visualFormatter'}"/>
+												<Text id="extendedDataPreview" text="{= ${JsonModel>FieldArrangement} === '1' ? ${i18n>yes} : ${i18n>no}}"/>
+												<Text id="documentSplitQueryId" text="{JsonModel>SplitQueryId}"/>
+												<Text id="ReferenceDocumentId" text="{JsonModel>ReferenceDocumentId}"/>
+												<Text id="InheritanceStatus" text="{path:'JsonModel>InheritanceStatus',formatter:'.formatter.InheritanceStatusValue'}"/>
+												<Text id="SchemaQueryId" text="{JsonModel>SchemaQueryId}"/>
+												<Text id="QueriesForAnalytics" text="{path:'JsonModel>QueriesForAnalytics',formatter:'.formatter.queryAnalyticsList'}"
+													tooltip="{path:'JsonModel>QueriesForAnalytics',formatter:'.formatter.queryAnalyticsTooltip'}"/>
+												<Text id="DefaultDelimiter" text="{JsonModel>DefaultDelimiter}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</WizardStep>
+							<!--************************** STEP-5 : CORRESPONDENCE DOCUMENTS **************************-->
+							<WizardStep height="auto" id="correspondenceDocStep" nextStep="eventHandlerStep" title="Corresponding Documents" validated="true"
+								complete="onClickNextStep">
+								<Table class="sapFioriListReportSmartTable" id="correspondenceDocumentTable" autoPopinMode="true"
+									items="{path:'JsonModel>/CorrDocumentModel', filters : [ { path : 'InheritanceStatus', operator : 'NE', value1 : 'X'} ], sorter: {path: 'CorrspId'}}"
+									mode="MultiSelect" noDataText="{viewProperties>/CorrespondenceNoDataText}" selectionChange="onCorrespondenceDocumentChange" visible="true"
+									updateFinished="adjustViewPropertiesModelCorrDocument">
+									<headerToolbar>
+										<Toolbar id="Toolbar3">
+											<Title id="correspondenceDocumentsTableTitle" text="{viewProperties>/CorrespondenceTitle}"/>
+											<ToolbarSpacer id="ToolbarSpacer3"/>
+											<Button enabled="true" id="addCorrespondenceDocument" press="onAddCorrespondenceDocument" text="{i18n>add}" type="Ghost"
+												visible="true"/>
+											<Button enabled="false" id="renameCorrespondenceDocument" press="onRenameNamespace" text="{i18n>rename}" type="Transparent"
+												visible="true"/>
+											<Button enabled="false" id="editCorrespondenceDocument" press="onEditCorrespondenceDocument" text="{i18n>edit}" type="Transparent"
+												visible="true"/>
+											<Button enabled="false" id="deleteCorrespondenceDocument" press="onDeleteId" text="{i18n>delete}" type="Transparent"
+												visible="true"/>
+											<Button enabled="false" id="correspDownload" press="onCorrspDownloadPress" text="{i18n>downloadXSD}" type="Transparent"
+												visible="true"/>
+											<Button enabled="false" id="revertCorrespondence"
+												visible="{= ${ModeModel>/EditMode} &amp;&amp; ${oPropertiesModelDc>/ExtendedRepId} !== '' ? true : false}" press="onRevertCorrespondence"
+												text="{i18n>revert}" type="Transparent"/>
+										</Toolbar>
+									</headerToolbar>
+									<columns >
+										<Column id="corrIdColumn">
+											<Text id="corrId" text="{i18n>corrId}"/>
+										</Column>
+										<Column id="corrFormTemplateColumn">
+											<Text id="corrFormTemplate" text="{i18n>formTemplate}"/>
+										</Column>
+										<Column id="corrQueryIdColumn">
+											<Text id="corrQueryId" text="{i18n>queryId}"/>
+										</Column>
+										<Column id="corrNameColumn" demandPopin="true" minScreenWidth="Tablet">
+											<Text id="corrName" text="{i18n>corrName}"/>
+										</Column>
+										<Column id="outputTypeColumn" demandPopin="true" minScreenWidth="Tablet">
+											<Text id="corrOutputType" text="{i18n>outputType}"/>
+										</Column>
+										<Column id="ExtendedRepIdColumn" visible="{= ${oPropertiesModelDc>/ExtendedRepId} !== '' ? true : false}" demandPopin="true"
+											minScreenWidth="Tablet">
+											<Text id="ExtendedRepId" text="{i18n>inheritStatus}"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem id="ColumnListItem3" type="Navigation" press="onPdfMappingPress">
+											<cells>
+												<Text id="correspondenceId" text="{JsonModel>CorrspId}"/>
+												<Text id="formTemplate" text="{JsonModel>FormTemplate}"/>
+												<Link id="queryId" enabled="{path:'JsonModel>QueryId', formatter: '.checkQuery'}" text="{JsonModel>QueryId}" press="onPressQueryLink"/>
+												<Text id="correspondenceName" text="{JsonModel>CorrspName}"/>
+												<Text id="outputType" text="{JsonModel>OutputType}"/>
+												<Text id="RepdefInheritanceCorr" text="{path:'JsonModel>InheritanceStatus',formatter:'.formatter.InheritanceStatusValue'}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</WizardStep>
+							<!--************************** STEP-6 : EVENTS **************************-->
+							<WizardStep activate="optionalStepActivation" id="eventHandlerStep" nextStep="DocumentSelectionStep" title="Events"
+								validated="true" complete="onClickNextStep">
+								<Table backgroundDesign="Translucent" growing="true" growingScrollToLoad="true" id="eventTable" autoPopinMode="true"
+									items="{path:'JsonModel>/EventModel', filters : [ { path : 'InheritanceStatus', operator : 'NE', value1 : 'X'} ] , sorter: {path: 'EventId'}}"
+									mode="MultiSelect" noDataText="{viewProperties>/EventNoDataText}" select="selectEvent" selectionChange="onEventSelection"
+									updateFinished="adjustViewPropertiesModelEvent">
+									<headerToolbar>
+										<Toolbar height="auto" id="EventhandlerToolbar" width="auto">
+											<Title id="eventHandlerTableTitle" text="{viewProperties>/EventTitle}"/>
+											<ToolbarSpacer id="ToolbarSpacer4"/>
+											<Button enabled="true" id="eventAdd" press="onAddEvent" text="{i18n>add}" type="Ghost" visible="true"/>
+											<Button enabled="false" id="eventEdit" press="onEditEvent" text="{i18n>edit}" type="Transparent" visible="true"/>
+											<Button enabled="false" id="eventDelete" press="onDeleteEvent" text="{i18n>delete}" type="Transparent" visible="true"/>
+											<Button enabled="false" id="revertEvent" text="{i18n>revert}" type="Transparent"
+												visible="{= ${ModeModel>/EditMode} &amp;&amp; ${oPropertiesModelDc>/ExtendedRepId} !== '' ? true : false}" press="onRevertEvent"/>
+										</Toolbar>
+									</headerToolbar>
+									<columns>
+										<Column id="eventIdColumnen_column20" demandPopin="true" minScreenWidth="Tablet">
+											<Text id="eventId" text="{i18n>eventId}"/>
+										</Column>
+										<Column id="eventDescColumn" demandPopin="true" minScreenWidth="Tablet">
+											<Text id="eventDesc" text="{i18n>eventDesc}"/>
+										</Column>
+										<Column id="implClassNameColumn" demandPopin="true" minScreenWidth="Tablet">
+											<Text id="implClassName" text="{i18n>implClassName}"/>
+										</Column>
+										<Column id="eventInheritStatusColumn" demandPopin="true" minScreenWidth="Tablet"
+											visible="{= ${oPropertiesModelDc>/ExtendedRepId} !== '' ? true : false}">
+											<Text id="eventInheritStatus" text="{i18n>inheritStatus}"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem id="ColumnListItem4">
+											<cells>
+												<Text id="EventIdCell" text="{JsonModel>EventId}"/>
+												<Text id="EventNameCell" text="{JsonModel>EventName}"/>
+												<Text id="ImplClassNameCell" text="{JsonModel>ImplClassName}"/>
+												<Text id="eventInheritanceStatusCell" text="{path:'JsonModel>InheritanceStatus',formatter:'.formatter.InheritanceStatusValue'}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</WizardStep>
+							<!--************************** STEP-7 : REPORTED ITEMS LOG **************************-->
+							<WizardStep id="DocumentSelectionStep" title="Report Items Log" validated="true" complete="onClickNextStep">
+								<Table backgroundDesign="Translucent" growing="true" growingScrollToLoad="true" id="queryTable" autoPopinMode="true"
+									items="{path:'JsonModel>/DocumentSelModel', filters : [ { path : 'InheritanceStatus', operator : 'NE', value1 : 'X'} ] , sorter: {path: 'TableName'} }"
+									mode="MultiSelect" noDataText="{viewProperties>/DocSelNoDataText}" select="selectDocument" selectionChange="onDocumentSelection"
+									updateFinished="adjustViewPropertiesModelDocSel">
+									<headerToolbar>
+										<Toolbar height="auto" id="DocumentSelectionToolbar" width="auto">
+											<Title id="documentSelectionTableTitle" text="{viewProperties>/DocSelTitle}"/>
+											<ToolbarSpacer id="ToolbarSpacer5"/>
+											<Button enabled="true" id="documentSelectionAdd" press="onAddDocumentSelection" text="{i18n>add}" type="Ghost"
+												visible="true"/>
+											<Button enabled="false" id="documentSelectionDelete" press="onDeleteDocumentSelection" text="{i18n>delete}" type="Transparent"
+												visible="true"/>
+											<Button enabled="false" id="documentSelectionRevert" text="{i18n>revert}" type="Transparent"
+												visible="{= ${ModeModel>/EditMode} &amp;&amp; ${oPropertiesModelDc>/ExtendedRepId} !== '' ? true : false}" press="onRevertDocumentSelection"/>
+										</Toolbar>
+									</headerToolbar>
+									<columns>
+										<Column id="tableNameColumn" demandPopin="true" minScreenWidth="Tablet">
+											<Text id="tableName" text="{i18n>tableName}"/>
+										</Column>
+										<Column id="logQueryIdColumn" demandPopin="true" minScreenWidth="Tablet">
+											<Text id="logQueryId" text="{i18n>queryId}"/>
+										</Column>
+										<Column id="logInheritStatusColumn" demandPopin="true" minScreenWidth="Tablet"
+											visible="{= ${oPropertiesModelDc>/ExtendedRepId} !== '' ? true : false}">
+											<Text id="logInheritStatus" text="{i18n>inheritStatus}"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem id="ColumnListItem5">
+											<cells>
+												<Text id="TableNameCell" text="{JsonModel>TableName}"/>
+												<Link id="logQueryIdCell" text="{JsonModel>QueryId}" enabled="{path:'JsonModel>QueryId', formatter: '.checkQuery'}" press="onPressQueryLink"/>
+												<Text id="logInheritanceStatusCell" text="{path:'JsonModel>InheritanceStatus',formatter:'.formatter.InheritanceStatusValue'}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</WizardStep>
+						</steps>
+					</Wizard>
+		</content>
+		<footer>
+			<OverflowToolbar id="OverflowToolbarDef">	
+				<Button press="onSummaryGraph" text="Overview" icon="sap-icon://tree"/>
+				<ToolbarSpacer id="ToolbarSpacerdefine"/>
+				<Button press="updateCDSView" text="Submit Changes" type="Emphasized"/>
+				<Button press="onCancelConfigParamPress" text="Discard"/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

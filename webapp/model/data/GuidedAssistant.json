@@ -66,13 +66,13 @@
         "Expanded": false,
         "Childrens": [
             {
-                "Name":"TDT",
-                "Key": "LINE",
+                "Key":"TDT",
+                "Name": "Time dependant taxes",
                 "Recommendation": "95%"
             },
             {
-                "Name":"RITA",
-                "Key": "BOX",
+                "Key":"RITA",
+                "Name": "Registration of indirect taxes",
                 "Recommendation": "88%"
             }
         ]
@@ -106,17 +106,17 @@
             },
             {
                 "Name":"XML",
-                "Key": "BOX",
+                "Key": "",
                 "Recommendation": "95%"
             },
             {
                 "Name":"JSON",
-                "Key": "BOX",
+                "Key": "",
                 "Recommendation": "95%"
             },
             {
                 "Name":"ALV",
-                "Key": "BOX",
+                "Key": "",
                 "Recommendation": "55%"
             }
         ]
@@ -150,12 +150,12 @@
         "Childrens": [
             {
                 "Name":"Pre Activities",
-                "Key": "LINE",
+                "Key": "Manage Tax Item",
                 "Recommendation": "95%"
             },
             {
                 "Name":"Post Activities",
-                "Key": "BOX",
+                "Key": "TPP",
                 "Recommendation": "45%"
             }
         ]

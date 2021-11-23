@@ -18,7 +18,7 @@ sap.ui.define(
                 Key: 0
               },
               {
-                Header: "Intelligent artefacts creation",
+                Header: "Intelligent artifacts creation",
                 Subheader: "Creation",
                 Key: 1
               },

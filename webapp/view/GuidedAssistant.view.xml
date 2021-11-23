@@ -1,9 +1,9 @@
 <mvc:View controllerName="gs.fin.bangalore.controller.GuidedAssistant" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:ce="sap.ui.codeeditor" xmlns:mc="sap.suite.ui.microchart" xmlns:core="sap.ui.core">
         <Page id="idGuidedAssistant" title="ACR Guided Assistant" class="sapUiSizeCompact" showNavButton="true" navButtonPress="onNavBack">
         <content>
-        <ObjectHeader
+        <!-- <ObjectHeader
 				responsive="true"
-				title="Overview">
+				title="">
 				<headerContainer>
 					<HeaderContainer
 						scrollStep="200"
@@ -25,14 +25,17 @@
 						</FlexBox>
 					</HeaderContainer>
 				</headerContainer>
-			</ObjectHeader>
+			</ObjectHeader> -->
+            <FlexBox class="sapUiSmallMarginBegin" width="10rem" height="6rem" justifyContent="Start">
+                <mc:RadialMicroChart percentage="{GuideOverview>/Percentage}"/>
+			</FlexBox>
             <VBox items="{Suggesstion>/}">
                 <Panel expandable="true" expand="onExpand" expanded="{Suggesstion>Expanded}">
                     <headerToolbar>
                         <OverflowToolbar active="true" press="onOverflowToolbarPress">
                             <Title text="{Suggesstion>Header}" />
                             <ToolbarSpacer />
-                            <Button visible="{= ${Suggesstion>Completed}}" icon="{= ${Suggesstion>Completed}? 'sap-icon://accept' : ''}" type="{= ${Suggesstion>Completed} ? 'Success' : 'Default' }"/>
+                            <!-- <Button visible="{= ${Suggesstion>Completed}}" icon="{= ${Suggesstion>Completed}? 'sap-icon://accept' : ''}" type="{= ${Suggesstion>Completed} ? 'Success' : 'Default' }"/> -->
                             <Button text="Reset" visible="{= ${Suggesstion>Completed}}"/>
                         </OverflowToolbar>
 		            </headerToolbar>
@@ -70,7 +73,7 @@
         <footer>
             <OverflowToolbar id="OverflowToolbar">	
                 <ToolbarSpacer id="ToolbarSpacer3"/>
-                <Button press="onSummaryGraph" text="Summary"/>
+                <Button press="onSummaryGraph" text="Summary" visible="false"/>
                 <Button press="onActivateConfigParamPress" text="Proceed Creation" type="Emphasized"/>
                 <Button press="onCancelConfigParamPress" text="Discard"/>
             </OverflowToolbar>

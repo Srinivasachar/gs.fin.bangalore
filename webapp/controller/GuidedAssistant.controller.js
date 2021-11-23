@@ -56,6 +56,15 @@ sap.ui.define([
     
         onDialogClose : function () {
             this.SummaryGraphDialog.close();
+        },
+
+        onActivateConfigParamPress: function(){
+            // var oDialog = new sap.m.Dialog({
+            //     title: "Success",
+            //     type:"Message",
+            //     content: []
+            // });
+            this.getRouter().navTo("DefineApplication");
         }
 	});
 });

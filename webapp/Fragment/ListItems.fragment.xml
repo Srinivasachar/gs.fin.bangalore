@@ -13,7 +13,7 @@
 		}">
 		<StandardListItem
 			title="{CDSViewsCollection>Cdsviewname}"
-			description="{CDSViewsCollection>Fileversion}"
+			description=""
 			iconDensityAware="false"
 			iconInset="false"
 			type="Active" />

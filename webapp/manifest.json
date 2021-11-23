@@ -126,6 +126,11 @@
           "name": "GuidedAssistant",
           "pattern": "GuidedAssistant",
           "target": ["GuidedAssistant"]
+        },
+        {
+          "name": "DefineApplication",
+          "pattern": "DefineApplication",
+          "target": ["DefineApplication"]
         }
       ],
       "targets": {
@@ -149,6 +154,13 @@
           "clearControlAggregation": false,
           "viewId": "GuidedAssistant",
           "viewName": "GuidedAssistant"
+        },
+        "DefineApplication": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "DefineApplication",
+          "viewName": "DefineApplication"
         }
       }
     }

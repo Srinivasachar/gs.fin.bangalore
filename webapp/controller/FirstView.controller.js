@@ -22,21 +22,16 @@ sap.ui.define(
     return BaseController.extend("gs.fin.bangalore.controller.FirstView", {
       onInit: function () {
         this.getRouter().getRoute("FirstView").attachPatternMatched(this.routeMatched, this);
-        if (!this.FileUpload) {
-          this.FileUpload = this.loadFragment({
-            name: "gs.fin.bangalore.Fragment.FileUpload",
-          });
-        }
-        this.handleDialog(this.FileUpload);
         this.getView().setModel(
           new JSONModel({
             Code: "",
+            BusyIndicator: true,
             UploadDetails: {
                 FileName: "",
                 FileNameValueState: "None",
                 FileContent: "",
                 FileUploaded: false,
-                CDSViewName: "",
+                CDSViewName: ""
               },
             CDSCollections: [],
             UploadRules: this.getUploadRules()
@@ -55,6 +50,12 @@ sap.ui.define(
       },
 
       routeMatched: function(oEvent){
+        if (!this.FileUpload) {
+            this.FileUpload = this.loadFragment({
+              name: "gs.fin.bangalore.Fragment.FileUpload",
+            });
+          }
+        this.handleDialog(this.FileUpload);
         this.OdataModel = this.getView().getModel();
         this.readCDSViewsUsingFile({
             "Filename": "test.xml",
@@ -68,14 +69,16 @@ sap.ui.define(
             new Filter("Filename", "EQ", oParams.Filename),
             new Filter("Fileversion", "EQ", oParams.Fileversion)
          ];
-        var oFileUploadJSON = this.getView().getModel("CDSViewsCollection");
+         var oFileUploadJSON = this.getView().getModel("CodeEditorModel");
+        var oCDSViewCollection = this.getView().getModel("CDSViewsCollection");
         this.OdataModel.read("/CdsModelInfoSet",{
             filters: [new Filter({ filters: aFilters, and: true})],
             success: function(oResponse){
                 if(bInitialize){
                     this.onInitialzeFileUpload();
                 }
-                oFileUploadJSON.setProperty("/", oResponse.results);
+                oCDSViewCollection.setProperty("/", oResponse.results);
+                oFileUploadJSON.setProperty("/BusyIndicator", false);
                 BusyIndicator.hide();
             }.bind(this)
         })
@@ -101,7 +104,7 @@ sap.ui.define(
       },
 
       onInitialzeFileUpload: function () {
-         var oFileUploader = this.getView().byId("fileUploader");
+        var oFileUploader = this.getView().byId("fileUploader");
         this.uploadPath =
         this.getView().getModel().sServiceUrl + "/UploadCDSViewSet";
         oFileUploader.setUploadUrl(this.uploadPath);
