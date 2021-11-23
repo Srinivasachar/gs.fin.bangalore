@@ -14,6 +14,16 @@ sap.ui.define([
              this.loadInitialData(); 
         },
 
+        handleGuideNavigation: function(oEvent){
+            var oPage = this.getView().byId("idGuidedAssistant");
+            var iPosition = oEvent.getSource().getBindingContext("Suggesstion").getObject("Seq");
+            var aPanels = this.getView().byId("GuidePanel").getItems();
+            aPanels.map(function(oPanel, i){
+                oPanel.setExpanded(i === (iPosition-1));
+            });
+            oPage.scrollToElement()
+        },
+
         loadInitialData: function(){
                 $.ajax({
                     type: "GET",

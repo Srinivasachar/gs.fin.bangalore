@@ -1,16 +1,22 @@
 <mvc:View controllerName="gs.fin.bangalore.controller.GuidedAssistant" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:ce="sap.ui.codeeditor" xmlns:mc="sap.suite.ui.microchart" xmlns:core="sap.ui.core">
         <Page id="idGuidedAssistant" title="ACR Guided Assistant" class="sapUiSizeCompact" showNavButton="true" navButtonPress="onNavBack">
         <content>
+        <FlexBox alignItems="Center" class="sapUiSmallMarginBegin" width="" height="5rem" justifyContent="Start" direction="RowReverse">
+            <mc:RadialMicroChart percentage="{GuideOverview>/Percentage}"/>
+            <ObjectIdentifier title="Completion Percentage"/>
+		</FlexBox>
          <ObjectHeader
 				responsive="true"
-				title="">
+				title="Guided Assistant Creation">
 				<headerContainer>
 					<HeaderContainer
 						scrollStep="200"
 						scrollTime="500"
 						showDividers="true"
-						class="sapUiSmallMargin">
-						<FlexBox
+						class="sapUiSmallMargin"
+                        content="{Suggesstion>/}"
+                        >
+						<!-- <FlexBox
 							width="12rem"
 							height="10rem"
 							alignItems="Center"
@@ -22,14 +28,23 @@
 							<FlexBox width="6rem" height="6rem">
 								<mc:RadialMicroChart percentage="{GuideOverview>/Percentage}"/>
 							</FlexBox>
-						</FlexBox>
+						</FlexBox> -->
+                        <NumericContent size="S" scale="{Suggesstion>Subtitle}" value="{Suggesstion>Seq}" press="handleGuideNavigation"/>
 					</HeaderContainer>
 				</headerContainer>
+                <attributes>
+                <ObjectAttribute
+                    title=""
+                    text=""/>
+		        </attributes>
+                <statuses>
+                    <ObjectStatus
+                        title="Status"
+                        text="In Process"
+                        state="Warning"/>
+		        </statuses>
 			</ObjectHeader> 
-            <!-- <FlexBox class="sapUiSmallMarginBegin" width="10rem" height="6rem" justifyContent="Start">
-                <mc:RadialMicroChart percentage="{GuideOverview>/Percentage}"/>
-			</FlexBox> -->
-            <VBox items="{Suggesstion>/}">
+            <VBox items="{Suggesstion>/}" id="GuidePanel">
                 <Panel expandable="true" expand="onExpand" expanded="{Suggesstion>Expanded}">
                     <headerToolbar>
                         <OverflowToolbar active="true" press="onOverflowToolbarPress">

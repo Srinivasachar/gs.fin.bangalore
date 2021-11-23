@@ -1,6 +1,8 @@
 [
     {
         "Header": "1. For Which Country you want to create the Rep.Def?",
+        "Seq": 1,
+        "Subtitle": "Country",
         "Completed": false,
         "Expanded": true,
         "Childrens": [
@@ -23,6 +25,8 @@
     },
     {
         "Header": "2. Which Report functionality you want to enablement?",
+        "Seq": 2,
+        "Subtitle": "Report Type",
         "Completed": false,
         "Expanded": false,
         "Childrens": [
@@ -45,6 +49,8 @@
     },
     {
         "Header": "3. Would the report be a line item report or a box level report?",
+        "Subtitle": "Report Level",
+        "Seq": 3,
         "Completed": false,
         "Expanded": false,
         "Childrens": [
@@ -62,6 +68,8 @@
     },
     {
         "Header": "4. Would the report have the following functionality ?",
+        "Seq": 4,
+        "Subtitle": "Functionality",
         "Completed": false,
         "Expanded": false,
         "Childrens": [
@@ -78,7 +86,9 @@
         ]
     },
     {
-        "Header": "6.Audit trail should be enabled for all reports by default?",
+        "Header": "5.Audit trail should be enabled for all reports by default?",
+        "Seq": 5,
+        "Subtitle": "Submission Type",
         "Completed": false,
         "Expanded": false,
         "Childrens": [
@@ -95,7 +105,9 @@
         ]
     },
     {
-        "Header": "7. What kind of file output type?",
+        "Header": "6. What kind of file output type?",
+        "Seq": 6,
+        "Subtitle": "Document Type",
         "Completed": false,
         "Expanded": false,
         "Childrens": [
@@ -122,7 +134,9 @@
         ]
     },
     {
-        "Header": "8. Phase Type?",
+        "Header": "7. Phase Type?",
+        "Seq": 7,
+        "Subtitle": "Phase Type",
         "Completed": false,
         "Expanded": false,
         "Childrens": [
@@ -144,7 +158,9 @@
         ]
     },
     {
-        "Header": "9. Activity Needed?",
+        "Header": "8. Activity Needed?",
+        "Seq": 8,
+        "Subtitle": "Activities",
         "Completed": false,
         "Expanded": false,
         "Childrens": [

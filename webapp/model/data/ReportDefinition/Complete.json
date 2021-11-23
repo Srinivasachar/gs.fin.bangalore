@@ -1,0 +1,22 @@
+{
+    "Parameters": [
+        {
+            "ReportId": "ZINNOV_VAT_ZA",
+            "ParamId": "ParamId 1",
+            "DataElement": "DataElement 1",
+            "SearchHelp": "SearchHelp 1",
+            "SearchHelpParameter": "SearchHelpParameter 1",
+            "IsSelectOption": "IsSelectOption 1",
+            "IsOptional": "IsOptional 1",
+            "IsHidden": "IsHidden 1",
+            "IsBoolean": "IsBoolean 1",
+            "IsReadOnly": "IsReadOnly 1",
+            "SequenceNumber": "SequenceNumber 1",
+            "InheritanceStatus": "InheritanceStatus 1",
+            "__metadata": {
+                "uri": "SelectionParameterInfoSet(ReportId='ReportId%201',ParamId='ParamId%201')",
+                "type": "SRF_REPORT_DEFINTION.SelectionParameterInfo"
+            }
+        }
+    ]
+}

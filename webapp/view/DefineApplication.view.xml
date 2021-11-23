@@ -1,7 +1,8 @@
 <mvc:View controllerName="gs.fin.bangalore.controller.DefineApplication"
 	xmlns:mvc="sap.ui.core.mvc" 
-displayBlock="true"
+    displayBlock="true"
 	xmlns="sap.m"
+    xmlns:core="sap.ui.core"
 	xmlns:ce="sap.ui.codeeditor"
 	xmlns:form="sap.ui.layout.form"
 	xmlns:h="sap.ui.layout"
@@ -16,38 +17,38 @@ displayBlock="true"
 			<Wizard id="reportDefinitionsWizard" currentStep="DocumentSelectionStep">
 				<steps>
 					<!--************************** STEP-1 : GENERAL PROPERTIES **************************-->
-					<WizardStep height="auto" id="reportDefinitionPropertiesWizard"
-								title="General Properties" >
-                        <VBox>
-						<Label text="Report Definition ID"/>
-						<Text text="ZINNOV_REPORT_VAT"/>
-                        </VBox>
-                        <VBox>
-						<Label text="Description"/>
-						<TextArea value="VAT Report for south africa" />
-                        </VBox>
+					<WizardStep height="auto" id="reportDefinitionPropertiesWizard" title="General Properties" >
+                        <form:SimpleForm id="DisplayRDForm" class="editableForm" editable="false" hAlign="Center" layout="ResponsiveGridLayout"
+			                maxContainerCols="1" minWidth="1024">
+                            <form:content>
+                                <core:Title id="DisplayRDTitle"/>
+                                <Label id="DisplayRDRepDefLabel" tooltip="{i18n>reportDefinition}" labelFor="reportDefinitionId" text="Report Definition"/>
+                                <Text id="DisplayRDRepDefText" text="ZINNOV_VAT_ZA" tooltip="Description"/>
+                                <Label tooltip="{i18n>reportDescription}" labelFor="reportDefinitionName" id="Reportun1" text="{i18n>reportDescription}"/>
+                                <Text id="DisplayRDNameText" text="South Africa VAT Report" />
+                            </form:content>
+            	        </form:SimpleForm>
 					</WizardStep>
 					<!--************************** STEP-2 : PARAMETERS **************************-->
 					<WizardStep height="auto" id="parametersWizard" title="Parameter">
-						<Table backgroundDesign="Translucent" growing="true" growingThreshold="{tableGrowingModel>/ParametersTable}" growingScrollToLoad="true"
-									id="parametersTable" items="{path:'JsonModel>/ParamModel', filters : [ { path : 'InheritanceStatus', operator : 'NE', value1 : 'X'} ]}"
-									mode="MultiSelect" noDataText="{viewProperties>/ParamNoDataText}" autoPopinMode="true" select="selectParam"
-									selectionChange="onParameterSelection" updateFinished="adjustViewPropertiesModelParameter">
+						<Table backgroundDesign="Translucent" growing="true"  growingScrollToLoad="true"
+									id="parametersTable" items="{path:'ReportDef>/ParamModel'}"
+									mode="MultiSelect" autoPopinMode="true" select="selectParam">
 							<headerToolbar>
 								<Toolbar height="auto" id="lineItemsToolbar" width="auto">
-									<Title id="parameterTableTitle" text="{viewProperties>/ParamTitle}"/>
+									<Title id="parameterTableTitle" text="Parameter (2)"/>
 									<ToolbarSpacer id="toolbarspacer0"/>
-									<Button enabled="true" id="addParameter" press="onAddParameter" text="{i18n>add}" type="Ghost" visible="true="/>
+									<Button enabled="true" id="addParameter" press="onAddParameter" text="{i18n>add}" type="Ghost" visible="true"/>
 									<Button enabled="false" id="editParameter" press="onEditParameter" text="{i18n>edit}" type="Transparent" visible="true"/>
 									<Button enabled="false" id="deleteParameter" press="onDeleteId" text="{i18n>delete}" type="Transparent" visible="true"/>
 									<Button enabled="false" id="moveParameterUp"
-												visible="{= ${ModeModel>/EditMode} &amp;&amp; ${oPropertiesModelDc>/ExtendedRepId} === '' ? true : false}" press="onMoveUp"
+												visible="true" press="onMoveUp"
 												text="{i18n>moveUp}" type="Transparent"></Button>
 									<Button enabled="false" id="moveParameterDown"
-												visible="{= ${ModeModel>/EditMode} &amp;&amp; ${oPropertiesModelDc>/ExtendedRepId} === '' ? true : false}" press="onMoveDown"
+												visible="true" press="onMoveDown"
 												text="{i18n>moveDown}" type="Transparent"></Button>
 									<Button enabled="false" id="revertParameter"
-												visible="{= ${ModeModel>/EditMode} &amp;&amp; ${oPropertiesModelDc>/ExtendedRepId} !== '' ? true : false}" press="onRevertParameter"
+												visible="true" press="onRevertParameter"
 												text="{i18n>revert}" type="Transparent"></Button>
 								</Toolbar>
 							</headerToolbar>
@@ -114,7 +115,7 @@ displayBlock="true"
 									<Button enabled="false" id="copyQueryMain" press="onCopyQueryMain" text="{i18n>copy}" type="Transparent" visible="true"/>
 									<Button enabled="false" id="queryDeleteMain" type="Transparent" text="{i18n>Delete}" press="onDeleteId" visible="true"/>
 									<Button enabled="false" id="revertQueryMain"
-												visible="{= ${ModeModel>/EditMode} &amp;&amp; ${oPropertiesModelDc>/ExtendedRepId} !== '' ? true : false}" press="onRevertQuery"
+												visible="true" press="onRevertQuery"
 												text="{i18n>revert}" type="Transparent"/>
 								</Toolbar>
 							</headerToolbar>
@@ -167,7 +168,7 @@ displayBlock="true"
 									<Button enabled="false" id="deleteGovtDocument" press="onDeleteId" text="{i18n>delete}" type="Transparent" visible="true"/>
 									<Button enabled="false" id="download" press="onDownloadPress" text="{i18n>exportSchema}" type="Transparent"/>
 									<Button enabled="false" id="revertGovtDocument" text="{i18n>revert}" type="Transparent"
-												visible="{= ${ModeModel>/EditMode} &amp;&amp; ${oPropertiesModelDc>/ExtendedRepId} !== '' ? true : false}" press="onRevertGovtDocument"/>
+												visible="true" press="onRevertGovtDocument"/>
 									<Button id="SettingsButton" icon="sap-icon://action-settings" press="onPersoButtonPressed" type="Transparent"/>
 								</Toolbar>
 							</headerToolbar>
@@ -279,7 +280,7 @@ displayBlock="true"
 									<Button enabled="false" id="correspDownload" press="onCorrspDownloadPress" text="{i18n>downloadXSD}" type="Transparent"
 												visible="true"/>
 									<Button enabled="false" id="revertCorrespondence"
-												visible="{= ${ModeModel>/EditMode} &amp;&amp; ${oPropertiesModelDc>/ExtendedRepId} !== '' ? true : false}" press="onRevertCorrespondence"
+												visible="true" press="onRevertCorrespondence"
 												text="{i18n>revert}" type="Transparent"/>
 								</Toolbar>
 							</headerToolbar>
@@ -333,7 +334,7 @@ displayBlock="true"
 									<Button enabled="false" id="eventEdit" press="onEditEvent" text="{i18n>edit}" type="Transparent" visible="true"/>
 									<Button enabled="false" id="eventDelete" press="onDeleteEvent" text="{i18n>delete}" type="Transparent" visible="true"/>
 									<Button enabled="false" id="revertEvent" text="{i18n>revert}" type="Transparent"
-												visible="{= ${ModeModel>/EditMode} &amp;&amp; ${oPropertiesModelDc>/ExtendedRepId} !== '' ? true : false}" press="onRevertEvent"/>
+												visible="true" press="onRevertEvent"/>
 								</Toolbar>
 							</headerToolbar>
 							<columns>
@@ -378,7 +379,7 @@ displayBlock="true"
 									<Button enabled="false" id="documentSelectionDelete" press="onDeleteDocumentSelection" text="{i18n>delete}" type="Transparent"
 												visible="true"/>
 									<Button enabled="false" id="documentSelectionRevert" text="{i18n>revert}" type="Transparent"
-												visible="{= ${ModeModel>/EditMode} &amp;&amp; ${oPropertiesModelDc>/ExtendedRepId} !== '' ? true : false}" press="onRevertDocumentSelection"/>
+												visible="true" press="onRevertDocumentSelection"/>
 								</Toolbar>
 							</headerToolbar>
 							<columns>
