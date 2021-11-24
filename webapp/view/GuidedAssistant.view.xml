@@ -27,8 +27,8 @@
                 <statuses>
                     <ObjectStatus
                         title="Status"
-                        text="In Process"
-                        state="Warning"/>
+                        text="New"
+                        state="Information"/>
 		        </statuses>
 			</ObjectHeader> 
             <VBox items="{Suggesstion>/}" id="GuidePanel">
