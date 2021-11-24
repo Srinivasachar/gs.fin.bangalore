@@ -2,8 +2,9 @@ sap.ui.define([
 	"gs/fin/bangalore/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/BusyIndicator",
-    "sap/ui/core/Fragment"
-], function (BaseController, JSONModel, BusyIndicator, Fragment) {
+    "sap/ui/core/Fragment",
+    "sap/m/MessageBox"
+], function (BaseController, JSONModel, BusyIndicator, Fragment, MessageBox) {
 	"use strict";
 
 	return BaseController.extend("gs.fin.bangalore.controller.GuidedAssistant", {
@@ -69,12 +70,20 @@ sap.ui.define([
         },
 
         onActivateConfigParamPress: function(){
-            // var oDialog = new sap.m.Dialog({
-            //     title: "Success",
-            //     type:"Message",
-            //     content: []
-            // });
-            this.getRouter().navTo("DefineApplication");
+            MessageBox.confirm("Do you want to proceed with the creation?", {
+                styleClass: "sapUiSizeCompact",
+				actions: ["Confirm", MessageBox.Action.CLOSE],
+				emphasizedAction: "Confirm",
+				onClose: function (sAction) {
+                    BusyIndicator.show(0);
+                    if(sAction === "Confirm"){
+                        setTimeout(function(){
+                            this.getRouter().navTo("DefineApplication");
+                            BusyIndicator.hide();
+                        }.bind(this),2000)
+                    }
+				}.bind(this)
+			});
         }
 	});
 });
