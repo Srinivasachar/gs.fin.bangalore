@@ -101,7 +101,9 @@ sap.ui.define(
       onCDSF4Confirmation: function(oEvent){
         var oSelectedItem = oEvent.getParameter("selectedItem");
         var oFileUploadJSON = this.getView().getModel("CodeEditorModel");
-        oFileUploadJSON.setProperty("/UploadDetails/CDSViewName", oSelectedItem.getTitle());
+        if(oSelectedItem){
+            oFileUploadJSON.setProperty("/UploadDetails/CDSViewName", oSelectedItem.getTitle());
+        }
       },
 
       onInitialzeFileUpload: function () {
@@ -113,10 +115,12 @@ sap.ui.define(
 
       handleUploadPress: function (oEvent) {
         var oFileUploader = oEvent.getSource().getParent().getContent()[0];
+        var oFileUploadJSON = this.getView().getModel("CodeEditorModel");
         if(!oFileUploader.getValue()){
             MessageToast.show("Select a file to proceed with file upload");
             return;
         }
+        oFileUploadJSON.setProperty("/UploadDetails/FileName", oFileUploader.getValue());
         oFileUploader.removeAllHeaderParameters();
         var aHeaderParameters = [
           {
@@ -154,10 +158,12 @@ sap.ui.define(
         if (oEvent.getParameter("status") !== 201) {
           return;
         }
+        var oFileUploadJSON = this.getView().getModel("CodeEditorModel");
         var oResponse = oEvent.getParameter("responseRaw")
         var sFileVersion = this.getValuesByTagName(oResponse, "d:Fileversion");
         var sCDSViewName = this.getValuesByTagName(oResponse, "d:CdsViewName");
-        var sFileName = this.getValuesByTagName(oResponse, "d:SourceFilename");
+        var sFileName = oFileUploadJSON.getProperty("/UploadDetails/FileName");
+        //var sFileName = this.getValuesByTagName(oResponse, "d:SourceFilename");
         
         var oFileUploadJSON = this.getView().getModel("CodeEditorModel");
         this.readCDSViewsUsingFile({
@@ -165,7 +171,7 @@ sap.ui.define(
             "Fileversion": sFileVersion
         }, false);
         MessageToast.show("File Uploaded Successfully!");
-         oFileUploadJSON.setProperty("/UploadDetails/FileName", sFileName);
+         //oFileUploadJSON.setProperty("/UploadDetails/FileName", sFileName);
          oFileUploadJSON.setProperty("/UploadDetails/CDSViewName", sCDSViewName);
          oFileUploadJSON.setProperty("/UploadDetails/FileVersion", sFileVersion);
       },

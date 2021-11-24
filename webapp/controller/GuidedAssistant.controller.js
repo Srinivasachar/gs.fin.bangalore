@@ -82,6 +82,7 @@ sap.ui.define([
                             BusyIndicator.hide();
                         }.bind(this),2000)
                     }
+                    BusyIndicator.hide();
 				}.bind(this)
 			});
         }
