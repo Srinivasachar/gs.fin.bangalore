@@ -101,7 +101,7 @@
 					</WizardStep>
 					<!--************************** STEP-3 : QUERIES **************************-->
 					<WizardStep id="QueriesWizard" title="Queries" nextStep="govtDocsWizard">
-						<Table items="{path:'ReportDefModel>/Queries', filters : [ { path : 'InheritanceStatus', operator : 'NE', value1 : 'X'} ]}"
+						<Table items="{path:'ReportDefModel>/Queries'}"
 									noDataText="{viewProperties>/QueryNoDataText}" updateFinished="adjustViewPropertiesModelQuery" growing="true"
 									growingThreshold="{tableGrowingModel>/QueryTable}" autoPopinMode="true" mode="MultiSelect" selectionChange="onQuerySelection"
 									id="queriesTable">
@@ -143,7 +143,7 @@
 										<Text id="QueryIdCell" text="{ReportDefModel>QueryId}"/>
 										<Text id="DataSourceTextCell" text="{ReportDefModel>DataSourceText}"/>
 										<Text id="DataSourceValCell"
-													text="{parts:[{path:'ReportDefModel>DataSource'}, {path:'oQueryModel>DataSourceVal'}, {path:'oQueryModel>QuerySourceGroup'}], formatter: '.formatter.formatDataSourceValue'} "/>
+													text="{ReportDefModel>DataSourceVal}"/>
 										<Text id="NameCell" text="{ReportDefModel>Name}"/>
 										<Text id="InheritanceStatusCell" text="{path:'ReportDefModel>InheritanceStatus',formatter:'.formatter.InheritanceStatusValue'}"/>
 									</cells>
