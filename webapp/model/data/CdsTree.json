@@ -2,13 +2,13 @@
     "Nodes":[{
         "id": "1",
         "lane": "0",
-        "title": "CDS ZINNOV_TEST_CDS",
-        "titleAbbreviation": "ZINNOV_TEST_CDS",
+        "title": "ZINNOV_CDS_VIEW_TEST",
+        "titleAbbreviation": "",
         "children": [],
         "isTitleClickable": true,
         "state": "Positive",
         "stateText": "Created",
-        "texts": [ "Package: ZTEST_CDS_GSINNOVATION" ]
+        "texts": [ "Package: $TMP" ]
     },{
         "id": "2",
         "lane": "0",
@@ -16,9 +16,9 @@
         "titleAbbreviation": "P_BSET",
         "children": [],
         "isTitleClickable": true,
-        "state": "Negative",
-        "stateText": "Pending",
-        "texts": ["Package: ZTEST_CDS_GSINNOVATION" ]
+        "state": "Positive",
+        "stateText": "Already Existing",
+        "texts": ["Package: FINS_FIS_APAR" ]
     }],
     "Lanes":[
         {
