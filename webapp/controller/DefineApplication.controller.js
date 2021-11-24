@@ -10,8 +10,19 @@ sap.ui.define(
   
       return BaseController.extend("gs.fin.bangalore.controller.DefineApplication", {
         onInit: function () {
-
-        }
+            this.loadInitialData();
+        },
+        loadInitialData: function(){
+            $.ajax({
+                type: "GET",
+                timeout: 50000,
+                url: "./model/data/ReportDefinition/Complete.json",
+                data: null,
+                success: function (data) {
+                    this.getView().setModel(new JSONModel(data), "ReportDefModel");
+                }.bind(this)
+            });
+    },
       });
     }
   );

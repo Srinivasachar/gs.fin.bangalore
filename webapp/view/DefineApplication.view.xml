@@ -32,7 +32,7 @@
 					<!--************************** STEP-2 : PARAMETERS **************************-->
 					<WizardStep height="auto" id="parametersWizard" title="Parameter">
 						<Table backgroundDesign="Translucent" growing="true"  growingScrollToLoad="true"
-									id="parametersTable" items="{path:'ReportDef>/ParamModel'}"
+									id="parametersTable" items="{path:'ReportDefModel>/Parameters'}"
 									mode="MultiSelect" autoPopinMode="true" select="selectParam">
 							<headerToolbar>
 								<Toolbar height="auto" id="lineItemsToolbar" width="auto">
@@ -85,15 +85,15 @@
 							<items>
 								<ColumnListItem id="ColumnListItem0">
 									<cells>
-										<Text id="ParamIdCell" text="{JsonModel>ParamId}"/>
-										<Text id="DataElementCell" text="{JsonModel>DataElement}"/>
-										<Text id="SearchHelpCell" text="{JsonModel>SearchHelp}"/>
-										<Text id="SearchHelpParameterCell" text="{JsonModel>SearchHelpParameter}"/>
-										<Text id="IsSelectOptionCell" text="{= ${JsonModel>IsSelectOption} === 'X' ? ${i18n>yes} : ${i18n>no}}"/>
-										<Text id="IsOptionalCell" text="{= ${JsonModel>IsOptional} === 'X' ? ${i18n>yes} : ${i18n>no}}"/>
-										<Text id="IsHiddenCell" text="{= ${JsonModel>IsHidden} === 'X' ? ${i18n>yes} : ${i18n>no}}"/>
-										<Text id="IsReadOnlyCell" text="{= ${JsonModel>IsReadOnly} === 'X' ? ${i18n>yes} : ${i18n>no}}"/>
-										<Text id="InheritStatusCell" text="{path:'JsonModel>InheritanceStatus',formatter:'.formatter.InheritanceStatusValue'}"/>
+										<Text id="ParamIdCell" text="{ReportDefModel>ParamId}"/>
+										<Text id="DataElementCell" text="{ReportDefModel>DataElement}"/>
+										<Text id="SearchHelpCell" text="{ReportDefModel>SearchHelp}"/>
+										<Text id="SearchHelpParameterCell" text="{ReportDefModel>SearchHelpParameter}"/>
+										<Text id="IsSelectOptionCell" text="{= ${ReportDefModel>IsSelectOption} === 'X' ? ${i18n>yes} : ${i18n>no}}"/>
+										<Text id="IsOptionalCell" text="{= ${ReportDefModel>IsOptional} === 'X' ? ${i18n>yes} : ${i18n>no}}"/>
+										<Text id="IsHiddenCell" text="{= ${ReportDefModel>IsHidden} === 'X' ? ${i18n>yes} : ${i18n>no}}"/>
+										<Text id="IsReadOnlyCell" text="{= ${ReportDefModel>IsReadOnly} === 'X' ? ${i18n>yes} : ${i18n>no}}"/>
+										<Text id="InheritStatusCell" text="{path:'ReportDefModel>InheritanceStatus',formatter:'.formatter.InheritanceStatusValue'}"/>
 									</cells>
 								</ColumnListItem>
 							</items>
@@ -101,7 +101,7 @@
 					</WizardStep>
 					<!--************************** STEP-3 : QUERIES **************************-->
 					<WizardStep id="QueriesWizard" title="Queries" nextStep="govtDocsWizard">
-						<Table items="{path:'oQueryModel>/', filters : [ { path : 'InheritanceStatus', operator : 'NE', value1 : 'X'} ]}"
+						<Table items="{path:'ReportDefModel>/Queries', filters : [ { path : 'InheritanceStatus', operator : 'NE', value1 : 'X'} ]}"
 									noDataText="{viewProperties>/QueryNoDataText}" updateFinished="adjustViewPropertiesModelQuery" growing="true"
 									growingThreshold="{tableGrowingModel>/QueryTable}" autoPopinMode="true" mode="MultiSelect" selectionChange="onQuerySelection"
 									id="queriesTable">
@@ -140,12 +140,12 @@
 							<items>
 								<ColumnListItem id="ColumnListItem1" type="Navigation" press="onQueryNavigationRep">
 									<cells>
-										<Text id="QueryIdCell" text="{oQueryModel>QueryId}"/>
-										<Text id="DataSourceTextCell" text="{oQueryModel>DataSourceText}"/>
+										<Text id="QueryIdCell" text="{ReportDefModel>QueryId}"/>
+										<Text id="DataSourceTextCell" text="{ReportDefModel>DataSourceText}"/>
 										<Text id="DataSourceValCell"
-													text="{parts:[{path:'oQueryModel>DataSource'}, {path:'oQueryModel>DataSourceVal'}, {path:'oQueryModel>QuerySourceGroup'}], formatter: '.formatter.formatDataSourceValue'} "/>
-										<Text id="NameCell" text="{oQueryModel>Name}"/>
-										<Text id="InheritanceStatusCell" text="{path:'oQueryModel>InheritanceStatus',formatter:'.formatter.InheritanceStatusValue'}"/>
+													text="{parts:[{path:'ReportDefModel>DataSource'}, {path:'oQueryModel>DataSourceVal'}, {path:'oQueryModel>QuerySourceGroup'}], formatter: '.formatter.formatDataSourceValue'} "/>
+										<Text id="NameCell" text="{ReportDefModel>Name}"/>
+										<Text id="InheritanceStatusCell" text="{path:'ReportDefModel>InheritanceStatus',formatter:'.formatter.InheritanceStatusValue'}"/>
 									</cells>
 								</ColumnListItem>
 							</items>
@@ -155,7 +155,7 @@
 					<WizardStep complete="onClickNextStep" height="auto" id="govtDocsWizard" nextStep="correspondenceDocStep" title="Documents"
 								validated="true">
 						<Table growing="true" growingScrollToLoad="true" id="govtDocumentTable"
-									items="{path:'JsonModel>/DocumentModel', filters : [ { path : 'InheritanceStatus', operator : 'NE', value1 : 'X'} ], sorter: {path: 'DocumentId'}}"
+									items="{path:'ReportDefModel>/Documents', filters : [ { path : 'InheritanceStatus', operator : 'NE', value1 : 'X'} ], sorter: {path: 'DocumentId'}}"
 									mode="MultiSelect" noDataText="{viewProperties>/DocumentNoDataText}" selectionChange="onDocumentChangeView" visible="true"
 									updateFinished="adjustViewPropertiesModelDocument" showSeparators="All" autoPopinMode="true">
 							<headerToolbar>
@@ -227,32 +227,32 @@
 							</columns>
 							<items>
 								<ColumnListItem id="ColumnListItem2" type="Navigation" press="onMappingPress"
-											highlight="{= ${JsonModel>InheritanceStatus} === 'DIN' ? 'None' : ${JsonModel>IsSchemaDeleted} === true ? 'Warning' : 'None'}">
+											highlight="{= ${ReportDefModel>InheritanceStatus} === 'DIN' ? 'None' : ${JsonModel>IsSchemaDeleted} === true ? 'Warning' : 'None'}">
 									<cells>
 										<!--<Text enabled="false" id="docId" text="{JsonModel>DocumentId}"/>-->
 										<VBox id="VBox0">
-											<ObjectIdentifier id="docId" title="{JsonModel>DocumentId}"/>
+											<ObjectIdentifier id="docId" title="{ReportDefModel>DocumentId}"/>
 											<Link id="documentInconsistentLink" text="{i18n>documentInconsistent}"
-														visible="{= ${JsonModel>InheritanceStatus} === 'DIN' ? false : ${JsonModel>IsSchemaDeleted} === true}" press="onInconsistentDoc"/>
+														visible="{= ${ReportDefModel>InheritanceStatus} === 'DIN' ? false : ${JsonModel>IsSchemaDeleted} === true}" press="onInconsistentDoc"/>
 										</VBox>
-										<Text id="formatId" text="{JsonModel>DocumentFormat}"/>
+										<Text id="formatId" text="{ReportDefModel>DocumentFormat}"/>
 										<Text id="schemaId"
-													text="{parts:[{ path:'JsonModel>SchemaId'},{ path:'JsonModel>SchemaQueryId' }], formatter:'.formatter.formatSchemaName'}"/>
-										<Text id="docNameId" text="{JsonModel>DocumentName}"/>
-										<Text id="formtemplate" text="{JsonModel>FormTemplate}"/>
-										<Text id="codePage" text="{JsonModel>CodePage}"/>
-										<Text id="dataSourceDoc" text="{JsonModel>SourceTypeS}"/>
-										<Text id="corresValueDoc" text="{parts:[{ path:'JsonModel>FileName'}], formatter:'.formatter.formatCorss1'}"/>
-										<Text id="optionalDocId" text="{= ${JsonModel>IsSelectable} === 'X' ? ${i18n>yes} : ${i18n>no}}"/>
-										<Text id="visualizationDoc" text="{parts: [{path:'JsonModel>DocumentVisualization'}], formatter:'.formatter.visualFormatter'}"/>
-										<Text id="extendedDataPreview" text="{= ${JsonModel>FieldArrangement} === '1' ? ${i18n>yes} : ${i18n>no}}"/>
-										<Text id="documentSplitQueryId" text="{JsonModel>SplitQueryId}"/>
-										<Text id="ReferenceDocumentId" text="{JsonModel>ReferenceDocumentId}"/>
-										<Text id="InheritanceStatus" text="{path:'JsonModel>InheritanceStatus',formatter:'.formatter.InheritanceStatusValue'}"/>
-										<Text id="SchemaQueryId" text="{JsonModel>SchemaQueryId}"/>
-										<Text id="QueriesForAnalytics" text="{path:'JsonModel>QueriesForAnalytics',formatter:'.formatter.queryAnalyticsList'}"
-													tooltip="{path:'JsonModel>QueriesForAnalytics',formatter:'.formatter.queryAnalyticsTooltip'}"/>
-										<Text id="DefaultDelimiter" text="{JsonModel>DefaultDelimiter}"/>
+													text="{parts:[{ path:'ReportDefModel>SchemaId'},{ path:'JsonModel>SchemaQueryId' }], formatter:'.formatter.formatSchemaName'}"/>
+										<Text id="docNameId" text="{ReportDefModel>DocumentName}"/>
+										<Text id="formtemplate" text="{ReportDefModel>FormTemplate}"/>
+										<Text id="codePage" text="{ReportDefModel>CodePage}"/>
+										<Text id="dataSourceDoc" text="{ReportDefModel>SourceTypeS}"/>
+										<Text id="corresValueDoc" text="{parts:[{ path:'ReportDefModel>FileName'}], formatter:'.formatter.formatCorss1'}"/>
+										<Text id="optionalDocId" text="{= ${ReportDefModel>IsSelectable} === 'X' ? ${i18n>yes} : ${i18n>no}}"/>
+										<Text id="visualizationDoc" text="{parts: [{path:'ReportDefModel>DocumentVisualization'}], formatter:'.formatter.visualFormatter'}"/>
+										<Text id="extendedDataPreview" text="{= ${ReportDefModel>FieldArrangement} === '1' ? ${i18n>yes} : ${i18n>no}}"/>
+										<Text id="documentSplitQueryId" text="{ReportDefModel>SplitQueryId}"/>
+										<Text id="ReferenceDocumentId" text="{ReportDefModel>ReferenceDocumentId}"/>
+										<Text id="InheritanceStatus" text="{path:'ReportDefModel>InheritanceStatus',formatter:'.formatter.InheritanceStatusValue'}"/>
+										<Text id="SchemaQueryId" text="{ReportDefModel>SchemaQueryId}"/>
+										<Text id="QueriesForAnalytics" text="{path:'ReportDefModel>QueriesForAnalytics',formatter:'.formatter.queryAnalyticsList'}"
+													tooltip="{path:'ReportDefModel>QueriesForAnalytics',formatter:'.formatter.queryAnalyticsTooltip'}"/>
+										<Text id="DefaultDelimiter" text="{ReportDefModel>DefaultDelimiter}"/>
 									</cells>
 								</ColumnListItem>
 							</items>
@@ -262,7 +262,7 @@
 					<WizardStep height="auto" id="correspondenceDocStep" nextStep="eventHandlerStep" title="Corresponding Documents" validated="true"
 								complete="onClickNextStep">
 						<Table class="sapFioriListReportSmartTable" id="correspondenceDocumentTable" autoPopinMode="true"
-									items="{path:'JsonModel>/CorrDocumentModel', filters : [ { path : 'InheritanceStatus', operator : 'NE', value1 : 'X'} ], sorter: {path: 'CorrspId'}}"
+									items="{path:'ReportDefModel>/Correspondence'}"
 									mode="MultiSelect" noDataText="{viewProperties>/CorrespondenceNoDataText}" selectionChange="onCorrespondenceDocumentChange" visible="true"
 									updateFinished="adjustViewPropertiesModelCorrDocument">
 							<headerToolbar>
@@ -308,12 +308,12 @@
 							<items>
 								<ColumnListItem id="ColumnListItem3" type="Navigation" press="onPdfMappingPress">
 									<cells>
-										<Text id="correspondenceId" text="{JsonModel>CorrspId}"/>
-										<Text id="formTemplate" text="{JsonModel>FormTemplate}"/>
-										<Link id="queryId" enabled="{path:'JsonModel>QueryId', formatter: '.checkQuery'}" text="{JsonModel>QueryId}" press="onPressQueryLink"/>
-										<Text id="correspondenceName" text="{JsonModel>CorrspName}"/>
-										<Text id="outputType" text="{JsonModel>OutputType}"/>
-										<Text id="RepdefInheritanceCorr" text="{path:'JsonModel>InheritanceStatus',formatter:'.formatter.InheritanceStatusValue'}"/>
+										<Text id="correspondenceId" text="{ReportDefModel>CorrspId}"/>
+										<Text id="formTemplate" text="{ReportDefModel>FormTemplate}"/>
+										<Link id="queryId" enabled="{path:'ReportDefModel>QueryId', formatter: '.checkQuery'}" text="{JsonModel>QueryId}" press="onPressQueryLink"/>
+										<Text id="correspondenceName" text="{ReportDefModel>CorrspName}"/>
+										<Text id="outputType" text="{ReportDefModel>OutputType}"/>
+										<Text id="RepdefInheritanceCorr" text="{path:'ReportDefModel>InheritanceStatus',formatter:'.formatter.InheritanceStatusValue'}"/>
 									</cells>
 								</ColumnListItem>
 							</items>
@@ -323,7 +323,7 @@
 					<WizardStep activate="optionalStepActivation" id="eventHandlerStep" nextStep="DocumentSelectionStep" title="Events"
 								validated="true" complete="onClickNextStep">
 						<Table backgroundDesign="Translucent" growing="true" growingScrollToLoad="true" id="eventTable" autoPopinMode="true"
-									items="{path:'JsonModel>/EventModel', filters : [ { path : 'InheritanceStatus', operator : 'NE', value1 : 'X'} ] , sorter: {path: 'EventId'}}"
+									items="{path:'ReportDefModel>/Events', filters : [ { path : 'InheritanceStatus', operator : 'NE', value1 : 'X'} ] , sorter: {path: 'EventId'}}"
 									mode="MultiSelect" noDataText="{viewProperties>/EventNoDataText}" select="selectEvent" selectionChange="onEventSelection"
 									updateFinished="adjustViewPropertiesModelEvent">
 							<headerToolbar>
@@ -355,10 +355,10 @@
 							<items>
 								<ColumnListItem id="ColumnListItem4">
 									<cells>
-										<Text id="EventIdCell" text="{JsonModel>EventId}"/>
-										<Text id="EventNameCell" text="{JsonModel>EventName}"/>
-										<Text id="ImplClassNameCell" text="{JsonModel>ImplClassName}"/>
-										<Text id="eventInheritanceStatusCell" text="{path:'JsonModel>InheritanceStatus',formatter:'.formatter.InheritanceStatusValue'}"/>
+										<Text id="EventIdCell" text="{ReportDefModel>EventId}"/>
+										<Text id="EventNameCell" text="{ReportDefModel>EventName}"/>
+										<Text id="ImplClassNameCell" text="{ReportDefModel>ImplClassName}"/>
+										<Text id="eventInheritanceStatusCell" text="{path:'ReportDefModel>InheritanceStatus',formatter:'.formatter.InheritanceStatusValue'}"/>
 									</cells>
 								</ColumnListItem>
 							</items>
@@ -367,7 +367,7 @@
 					<!--************************** STEP-7 : REPORTED ITEMS LOG **************************-->
 					<WizardStep id="DocumentSelectionStep" title="Report Items Log" validated="true" complete="onClickNextStep">
 						<Table backgroundDesign="Translucent" growing="true" growingScrollToLoad="true" id="queryTable" autoPopinMode="true"
-									items="{path:'JsonModel>/DocumentSelModel', filters : [ { path : 'InheritanceStatus', operator : 'NE', value1 : 'X'} ] , sorter: {path: 'TableName'} }"
+									items="{path:'ReportDefModel>/ReportItemLog', filters : [ { path : 'InheritanceStatus', operator : 'NE', value1 : 'X'} ] , sorter: {path: 'TableName'} }"
 									mode="MultiSelect" noDataText="{viewProperties>/DocSelNoDataText}" select="selectDocument" selectionChange="onDocumentSelection"
 									updateFinished="adjustViewPropertiesModelDocSel">
 							<headerToolbar>
@@ -397,9 +397,9 @@
 							<items>
 								<ColumnListItem id="ColumnListItem5">
 									<cells>
-										<Text id="TableNameCell" text="{JsonModel>TableName}"/>
-										<Link id="logQueryIdCell" text="{JsonModel>QueryId}" enabled="{path:'JsonModel>QueryId', formatter: '.checkQuery'}" press="onPressQueryLink"/>
-										<Text id="logInheritanceStatusCell" text="{path:'JsonModel>InheritanceStatus',formatter:'.formatter.InheritanceStatusValue'}"/>
+										<Text id="TableNameCell" text="{ReportDefModel>TableName}"/>
+										<Link id="logQueryIdCell" text="{ReportDefModel>QueryId}" enabled="{path:'JsonModel>QueryId', formatter: '.checkQuery'}" press="onPressQueryLink"/>
+										<Text id="logInheritanceStatusCell" text="{path:'ReportDefModel>InheritanceStatus',formatter:'.formatter.InheritanceStatusValue'}"/>
 									</cells>
 								</ColumnListItem>
 							</items>

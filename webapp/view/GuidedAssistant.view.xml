@@ -16,19 +16,6 @@
 						class="sapUiSmallMargin"
                         content="{Suggesstion>/}"
                         >
-						<!-- <FlexBox
-							width="12rem"
-							height="10rem"
-							alignItems="Center"
-							justifyContent="Center"
-							direction="Column">
-							<Title
-								text="Completion Percentage"
-								class="sapUiSmallMargin"/>
-							<FlexBox width="6rem" height="6rem">
-								<mc:RadialMicroChart percentage="{GuideOverview>/Percentage}"/>
-							</FlexBox>
-						</FlexBox> -->
                         <NumericContent size="S" scale="{Suggesstion>Subtitle}" value="{Suggesstion>Seq}" press="handleGuideNavigation"/>
 					</HeaderContainer>
 				</headerContainer>
@@ -55,21 +42,7 @@
                         </OverflowToolbar>
 		            </headerToolbar>
                     <content>
-			            <!-- <OverflowToolbar content="{Suggesstion>Childrens}" >
-                            <ToggleButton text="{Suggesstion>Name}" press="onSuggesstionClick"/>
-                            <Text text="Suggession 90%"/>
-                                <ToggleButton text="{Suggesstion>Name}" press="onSuggesstionClick"/>
-                        </OverflowToolbar> -->
                         <List mode="MultiSelect" items="{Suggesstion>Childrens}" selectionChange="onSuggesstionClick">
-                            <!-- <CustomListItem>
-                                <HBox>
-                                    <core:Icon size="2rem" src="sap-icon://attachment-photo" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" />
-                                    <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
-                                        <Link text="{Suggesstion>Name}" target="{ProductPicUrl}" press="handlePress"/>
-                                        <Label text="{Suggesstion>Recommendation}"/>
-                                    </VBox>
-                                </HBox>
-                            </CustomListItem> -->
                             <StandardListItem 
                             title="{Suggesstion>Name} - {Suggesstion>Key}"
                             description=""

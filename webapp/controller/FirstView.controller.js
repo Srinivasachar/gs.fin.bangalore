@@ -22,23 +22,6 @@ sap.ui.define(
     return BaseController.extend("gs.fin.bangalore.controller.FirstView", {
       onInit: function () {
         this.getRouter().getRoute("FirstView").attachPatternMatched(this.routeMatched, this);
-        this.getView().setModel(
-          new JSONModel({
-            Code: "",
-            BusyIndicator: true,
-            Editable: false,
-            UploadDetails: {
-                FileName: "",
-                FileNameValueState: "None",
-                FileContent: "",
-                FileUploaded: false,
-                CDSViewName: ""
-              },
-            CDSCollections: [],
-            UploadRules: this.getUploadRules()
-          }),
-          "CodeEditorModel"
-        );
         this.getView().setModel(new JSONModel([]), "CDSViewsCollection");
       },
 
@@ -56,6 +39,23 @@ sap.ui.define(
               name: "gs.fin.bangalore.Fragment.FileUpload",
             });
           }
+          this.getView().setModel(
+            new JSONModel({
+              Code: "",
+              BusyIndicator: true,
+              Editable: false,
+              UploadDetails: {
+                  FileName: "",
+                  FileNameValueState: "None",
+                  FileContent: "",
+                  FileUploaded: false,
+                  CDSViewName: ""
+                },
+              CDSCollections: [],
+              UploadRules: this.getUploadRules()
+            }),
+            "CodeEditorModel"
+          );
         this.handleDialog(this.FileUpload);
         this.OdataModel = this.getView().getModel();
         this.readCDSViewsUsingFile({
