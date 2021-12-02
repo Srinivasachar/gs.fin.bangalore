@@ -1,1 +1,6 @@
 /* Enter your custom styles here */
+.exampleDiv {
+	height: 6rem;
+	width: 100%;
+	background-color: #A9EAFF;
+}

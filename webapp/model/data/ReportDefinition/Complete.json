@@ -60,12 +60,6 @@
       ],
     "Documents": [
         {
-          "__metadata": {
-            "id": "https://uyt902-er9500.wdf.sap.corp/sap/opu/odata/sap/SRF_REPORT_DEFINITION/DocumentDefinitionSet(ReportId='RZA_VAT_REP_V0_LOG',DocumentId='VAT_SUMMARY')",
-            "uri": "https://uyt902-er9500.wdf.sap.corp/sap/opu/odata/sap/SRF_REPORT_DEFINITION/DocumentDefinitionSet(ReportId='RZA_VAT_REP_V0_LOG',DocumentId='VAT_SUMMARY')",
-            "type": "SRF_REPORT_DEFINTION.DocumentDefinition",
-            "etag": "W/\"datetime'2021-06-16T14%3A44%3A32.1726310'\""
-          },
           "ParallelizationGroup": "",
           "ChangedOn": "/Date(1623854672172)/",
           "IsSchemaDeleted": false,
@@ -96,12 +90,6 @@
       ],
     "Queries": [
         {
-          "__metadata": {
-            "id": "https://uyt902-er9500.wdf.sap.corp/sap/opu/odata/sap/SRF_REPORT_DEFINITION/QueryDefinitionSet(ReportId='RZA_VAT_REP_V0_LOG',QueryId='DOC_SEL')",
-            "uri": "https://uyt902-er9500.wdf.sap.corp/sap/opu/odata/sap/SRF_REPORT_DEFINITION/QueryDefinitionSet(ReportId='RZA_VAT_REP_V0_LOG',QueryId='DOC_SEL')",
-            "type": "SRF_REPORT_DEFINTION.QueryDefinition",
-            "etag": "W/\"datetime'2021-06-16T14%3A44%3A32.0168430'\""
-          },
           "OutputType": "",
           "AnaDispInd": "",
           "MessageParName": "",

@@ -1,6 +1,33 @@
-<mvc:View controllerName="gs.fin.bangalore.controller.GuidedAssistant" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:ce="sap.ui.codeeditor" xmlns:mc="sap.suite.ui.microchart" xmlns:core="sap.ui.core">
+<mvc:View controllerName="gs.fin.bangalore.controller.GuidedAssistant" xmlns:suite="sap.suite.ui.commons" 	xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:ce="sap.ui.codeeditor" xmlns:mc="sap.suite.ui.microchart" xmlns:core="sap.ui.core">
         <Page id="idGuidedAssistant" title="ACR Guided Assistant" class="sapUiSizeCompact" showNavButton="true" navButtonPress="onNavBack">
         <content>
+        	<!-- <l:VerticalLayout
+				width="100%"
+                position="Centre"
+				class="gridWrapper">
+			    <l:Grid
+					containerQuery="false" class="sapUiResponsiveMargin">
+                <suite:ChartContainer
+					title="{
+						parts: [
+							'i18n>chartContainerBulletChartTitle',
+							'business>/temperatureUnit'
+						],
+						formatter: '.formatMessage'
+					}">
+					<suite:ChartContainerContent
+						icon="sap-icon://vertical-bullet-chart"
+						title="{i18n>chartContainerBulletChartContentTitle}">
+						<suite:content>
+							<mc:RadialMicroChart percentage="{GuideOverview>/Percentage}" class="exampleDiv"/>
+						</suite:content>
+					</suite:ChartContainerContent>
+                	</suite:ChartContainer>
+				<mc:RadialMicroChart percentage="{GuideOverview>/Percentage}" />
+                <ObjectNumber class="sapMObjectNumberLarge" number="10" unit="%"/>
+                <html:div class="exampleDiv"> testing </html:div>
+			</l:Grid>
+		</l:VerticalLayout>  -->
         <FlexBox alignItems="Center" class="sapUiSmallMarginBegin" width="" height="5rem" justifyContent="Start" direction="RowReverse">
             <mc:RadialMicroChart percentage="{GuideOverview>/Percentage}"/>
             <ObjectIdentifier title="Completion Percentage"/>
@@ -27,6 +54,7 @@
                 <statuses>
                     <ObjectStatus
                         title="Status"
+                        class="sapMObjectStatusMedium"
                         text="New"
                         state="Information"/>
 		        </statuses>
@@ -42,13 +70,13 @@
                         </OverflowToolbar>
 		            </headerToolbar>
                     <content>
-                        <List mode="MultiSelect" items="{Suggesstion>Childrens}" selectionChange="onSuggesstionClick">
+                        <List mode="{= ${Suggesstion>SingleSelectMode} ? 'SingleSelectLeft' : 'MultiSelect'}" items="{Suggesstion>Childrens}" selectionChange="onSuggesstionClick">
                             <StandardListItem 
                             title="{Suggesstion>Name} - {Suggesstion>Key}"
                             description=""
                             icon="{icon}"
                             iconInset="false"
-                            highlight="Success"
+                            highlight="None"
                             info="Recommendation - {Suggesstion>Recommendation}"
                             infoState="{= ${Suggesstion>Recommendation} > '70%' ? 'Success' : (${Suggesstion>Recommendation} > '50%' ? 'Warning' : 'Error')}"
                             infoStateInverted="true">
@@ -59,7 +87,8 @@
             </VBox>
          </content>
         <footer>
-            <OverflowToolbar id="OverflowToolbar">	
+            <OverflowToolbar id="OverflowToolbar">
+                <Button id="idMessageManager" icon="sap-icon://alert" visible="{= ${message>/}.length > 0 }" type="Emphasized" press="handleMessageManager"/>
                 <ToolbarSpacer id="ToolbarSpacer3"/>
                 <Button press="onSummaryGraph" text="Summary" visible="false"/>
                 <Button press="onActivateConfigParamPress" text="Proceed Creation" type="Emphasized"/>

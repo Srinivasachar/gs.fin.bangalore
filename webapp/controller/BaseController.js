@@ -62,6 +62,7 @@ sap.ui.define([
 			}
 		},
 		onSummaryGraph: function(){
+            BusyIndicator.show(0);
             if (!this.SummaryGraphDialog) {
                 Fragment.load({
                     name: "gs.fin.bangalore.Fragment.Summary",
@@ -69,9 +70,11 @@ sap.ui.define([
                 }).then(function (oDialog) {
                     this.SummaryGraphDialog = oDialog;
                     this.getView().addDependent(this.SummaryGraphDialog);
+                    BusyIndicator.hide();
                     this.onDialogOpen();
                 }.bind(this));
             } else {
+                BusyIndicator.hide();
                 this.onDialogOpen();
             }
         },
