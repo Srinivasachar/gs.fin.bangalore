@@ -28,10 +28,10 @@
                 <html:div class="exampleDiv"> testing </html:div>
 			</l:Grid>
 		</l:VerticalLayout>  -->
-        <FlexBox alignItems="Center" class="sapUiSmallMarginBegin" width="" height="5rem" justifyContent="Start" direction="RowReverse">
+        <!-- <FlexBox alignItems="Center" class="sapUiSmallMarginBegin" width="" height="5rem" justifyContent="Start" direction="RowReverse">
             <mc:RadialMicroChart percentage="{GuideOverview>/Percentage}"/>
             <ObjectIdentifier title="Completion Percentage"/>
-		</FlexBox>
+		</FlexBox> -->
          <ObjectHeader
 				responsive="true"
 				title="Guided Assistant Creation">
@@ -43,7 +43,7 @@
 						class="sapUiSmallMargin"
                         content="{Suggesstion>/}"
                         >
-                        <NumericContent size="S" scale="{Suggesstion>Subtitle}" value="{Suggesstion>Seq}" press="handleGuideNavigation"/>
+                        <NumericContent size="L" scale="{Suggesstion>Subtitle}" value="{Suggesstion>Seq}" press="handleGuideNavigation"/>
 					</HeaderContainer>
 				</headerContainer>
                 <attributes>
@@ -59,6 +59,10 @@
                         state="Information"/>
 		        </statuses>
 			</ObjectHeader> 
+            <FlexBox alignItems="Center" class="sapUiTinyMargin" width="" height="4rem" justifyContent="Start" direction="RowReverse">
+                 <mc:RadialMicroChart percentage="{GuideOverview>/Percentage}"/>
+                 <ObjectIdentifier title="Completion Percentage"/>
+		    </FlexBox>
             <VBox items="{Suggesstion>/}" id="GuidePanel">
                 <Panel expandable="true" expand="onExpand" expanded="{Suggesstion>Expanded}">
                     <headerToolbar>

@@ -5,6 +5,7 @@
     xmlns:common="sap.suite.ui.commons">
 	<Dialog
 		title="Hierarchy Overview"
+        class="sapUiSizeCompact"
 		verticalScrolling="false">
 		<buttons>
 			<Button

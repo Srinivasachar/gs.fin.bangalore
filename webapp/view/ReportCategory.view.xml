@@ -1,0 +1,315 @@
+<mvc:View controllerName="gs.fin.bangalore.controller.ReportCategory"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:uxap="sap.uxap"
+	xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Page navButtonPress="discardCategory" showNavButton="true" title="{i18n>appTitle1}" id="ReportCategory" class="sapUiSizeCompact"
+		showFooter="true">
+		<content>
+			<uxap:ObjectPageLayout upperCaseAnchorBar="false" alwaysShowContentHeader="true" class="sapUiResponsiveContentPadding" id="newCategory"
+				enableLazyLoading="true">
+				<uxap:headerTitle>
+					<uxap:ObjectPageHeader id="reportCategoryId"
+						objectTitle="Category ID: ZA_VAT_DCL_RC"/>
+				</uxap:headerTitle>
+				<uxap:headerContent>
+					<ObjectAttribute id="idRefCatId" visible="false" title="{i18n>reportExtedCategoryLabel}"
+						text="ZA_VAT_DCL_RC"/>
+				</uxap:headerContent>
+				<uxap:sections>
+					<uxap:ObjectPageSection id="categoryPageSection" title="{i18n>generalProperties}">
+						<uxap:subSections>
+							<uxap:ObjectPageSubSection id="categoryPageSubSection">
+								<uxap:blocks>
+									<VBox id="EditRCPropertiesVBox" class="sapUiSmallMargin" visible="true">
+										<f:SimpleForm id="idCategoryGeneralInfo" editable="true" layout="ResponsiveGridLayout" maxContainerCols="1" minWidth="1024">
+											<f:content>
+												
+												<Label id="categoryNameLabel" tooltip="{i18n>categoryName}" labelFor="idCategoryDesc" text="{i18n>categoryName}" textAlign="Center"
+					required="true"/>
+												<TextArea id="idCategoryDesc" maxLength="80" valueStateText="{i18n>categoryDescValueText}" liveChange="onLiveChangeActName"
+					enabled="false" width="15rem" value="South Africa VAT Declaration"/>
+												<Label id="categoryCountryLabel" tooltip="{i18n>categoryCountry}" labelFor="idCategoryCountry" text="{i18n>categoryCountry}"
+					textAlign="Center"/>
+												<Input id="idCategoryCountry" valueHelpRequest="onValueHelpCountryOld" width="15rem" type="Text" showValueHelp="true"
+					enabled="false" value="ZA" liveChange="countryLiveChange"/>
+											</f:content>
+										</f:SimpleForm>
+									</VBox>
+								</uxap:blocks>
+							</uxap:ObjectPageSubSection>
+						</uxap:subSections>
+					</uxap:ObjectPageSection>
+					<uxap:ObjectPageSection id="ObjectPageSection" titleUppercase="false">
+						<uxap:subSections>
+							<uxap:ObjectPageSubSection id="reportCategoryPhase" title="{i18n>phase}">
+								<uxap:blocks>
+									<Table backgroundDesign="Translucent" growing="true" growingScrollToLoad="true" id="phaseTable" items="{ReportCategory>/Phases}"
+										autoPopinMode="true" mode="MultiSelect"
+										noDataText="{i18n>noDataPhaseText}" select="selectPhase" selectionChange="onPhaseSelection" updateFinished="handleUpdateFinishedPhase"
+										class="sapUiSizeCompact">
+										<headerToolbar>
+											<Toolbar height="auto" id="toolBarPhase" width="auto">
+												<Title id="phaseTableTitle" text="{viewProperties>/PhaseTitle}"/>
+												<ToolbarSpacer id="ToolbarSpacer"/>
+												<Button id="btnAddPhase"
+													enabled="{= ${GeneralModel>/bEditable} &amp;&amp; ${GeneralModel>/bPhaseButtons} &amp;&amp; !${GeneralModel>/bExtended}}" press="onAddPhase"
+													text="{i18n>add}" type="Transparent" visible="true"/>
+												<Button id="btnEditPhase" enabled="false" press="onEditPhase" text="{i18n>edit}" type="Transparent"
+													visible="true"/>
+												<Button id="btnDeletePhase" enabled="false" press="onDeletePhase" text="{i18n>delete}" type="Transparent"
+													visible="true"/>
+											</Toolbar>
+										</headerToolbar>
+										<columns>
+											<Column id="phaseTypeColumn" hAlign="Left">
+												<header>
+													<Text id="phaseType" text="{i18n>phaseType}"/>
+												</header>
+											</Column>
+											<Column id="phaseNameColumn" hAlign="Left">
+												<header>
+													<Text id="phaseName" text="{i18n>phaseName}"/>
+												</header>
+											</Column>
+											<Column id="phaseOccurrenceColumn" hAlign="Left">
+												<header>
+													<Text id="phaseOccurrence" text="{i18n>phaseOccurrence}"/>
+												</header>
+											</Column>
+											<Column id="SubmissionLevel" demandPopin="true" minScreenWidth="Tablet" hAlign="Left">
+												<header>
+													<Text id="SubmissionLevelColumn" text="{i18n>SubmissionLevel}"/>
+												</header>
+											</Column>
+											<Column id="submissionDateUntilColumn" demandPopin="true" minScreenWidth="Tablet" hAlign="Left">
+												<header>
+													<Text id="submissionDateUntil" text="{i18n>submissionDeadline}"/>
+												</header>
+											</Column>
+											<Column id="validFromColumn" demandPopin="true" minScreenWidth="Tablet" hAlign="Right">
+												<header>
+													<Text id="validFrom" text="{i18n>validFrom}"/>
+												</header>
+											</Column>
+											<Column id="inheritStatusColumn" demandPopin="true" minScreenWidth="Tablet" hAlign="Right" visible="{GeneralModel>/bExtended}">
+												<header>
+													<Text id="inheritStatus" text="{i18n>inheritStatus}"/>
+												</header>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem id="repCategoryListItemId">
+												<cells>
+                                                
+                                                    <Text text="{ReportCategory>ActivityPhase}"/>
+                                                    <Text text="{ReportCategory>PhaseName}"/>
+                                                    <Text text="{ReportCategory>PhaseOccurrence}"/>
+                                                    <Text text="{= ${ReportCategory>FileLevelSubmInd} === '' ? ${i18n>RunLevelSubmission}: ${i18n>FileLevelSubmission}}"/>
+                                                    <Text text="{ReportCategory>SubPossibleUntilYears}"/>
+													<!-- <Text id="phaseTypeCellId" text="{path:'ReportCategory>ActivityPhase', formatter:'.handlePhaseType'}"/>
+													<Text id="phaseNameCellId"
+														text="{parts : [{path: 'ReportCategory>PhaseName'},{path:'ReportCategory>ActivityPhase'}], formatter:'.formatter.handlePhaseType'}"/>
+													<Text id="PhaseOccurrenceCellId" text="{= ${ReportCategory>PhaseOccurrence} === 'ONE' ? ${i18n>singlePhaseEntry} : ${i18n>multiplePhaseEntry}}"/>
+													<Text id="FileLevelSubmIndCellId" text="{= ${ReportCategory>FileLevelSubmInd} === '' ? ${i18n>RunLevelSubmission}: ${i18n>FileLevelSubmission}}"/>
+													<Text id="SubPossibleUntilCellId"
+														text="{parts : [{path: 'ReportCategory>SubPossibleUntilYears'},{path:'ReportCategory>SubPossibleUntilMonths'},{path: 'ReportCategory>SubPossibleUntilDays'}], formatter:'.formattedSubmissionDate'}"/>
+													<Text id="validFromCellId" text="{path:'ReportCategory>ValidFrom', type: 'sap.ui.model.type.Date', formatOptions: {style:'medium', UTC: false}}"/>
+													<Text id="InheritanceStatusCellId" text="{= ${GeneralModel>/sExtCatId}? ${i18n>INH} : ''}"/> -->
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</uxap:blocks>
+							</uxap:ObjectPageSubSection>
+						</uxap:subSections>
+					</uxap:ObjectPageSection>
+					<uxap:ObjectPageSection id="Reportinglevel" title="{i18n>repLevelTitle}" titleUppercase="false">
+						<uxap:subSections>
+							<uxap:ObjectPageSubSection id="ReportingSublevel">
+								<uxap:blocks>
+									<Table mode="MultiSelect" autoPopinMode="true"
+										items="{ReportCategory>/OrgUnits}" id="reportingLevelTable" selectionChange="onLevelSelection"
+										updateFinished="adjustViewReportingModelCategory" noDataText="{i18n>noOrgUnitText}" class="sapUiSizeCompact">
+										<headerToolbar>
+											<Toolbar id="Toolbar0" height="auto" width="auto">
+												<Title id="reportLevelTitle" text="{i18n>repLevelTitle}"/>
+												<ToolbarSpacer id="ToolbarSpacer1"/>
+												<Button enabled="{= ${GeneralModel>/bEditable} &amp;&amp; ${GeneralModel>/bOrgUnitButtons} &amp;&amp; !${GeneralModel>/bExtended}}"
+													id="addlevel" press="onAddOrEditRepLevels" text="{i18n>add}" type="Transparent" visible="true"/>
+												<Button enabled="false" id="editLevel" press="onAddOrEditRepLevels" text="{i18n>edit}" type="Transparent"
+													visible="true"/>
+												<Button enabled="false" id="deleteLevel" press="deleteLevels" text="{i18n>delete}" type="Transparent"
+													visible="true"/>
+											</Toolbar>
+										</headerToolbar>
+										<columns>
+											<Column id="repLevelTitleColumn">
+												<Text id="repLevelTitle" text="{i18n>repLevelTitle}"/>
+											</Column>
+											<Column id="DescriptionColumn">
+												<Text id="Description" text="{i18n>Description}"/>
+											</Column>
+											<Column id="isOptionalColumn">
+												<Text id="isOptional" text="{i18n>isOptional}"/>
+											</Column>
+											<Column id="authDetailsColumn" demandPopin="true" minScreenWidth="Tablet">
+												<Text id="authDetailsText" text="{i18n>authDetails}"/>
+											</Column>
+											<Column id="inheritStatusCol" demandPopin="true" minScreenWidth="Tablet" visible="{GeneralModel>/bExtended}" hAlign="Right">
+												<Text id="inheritStatusText" text="{i18n>inheritStatus}"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem id="ReportlevelId">
+												<cells>
+													<Text id="OrgUnitId" text="{ReportCategory>OrgUnitId}" width="50%"/>
+													<Text id="repLevelDesc" text="{ReportCategory>FldDescription}"/>
+													<Text id="optionalReporting" text="{= ${ReportCategory>IsOptional} === 'X' ? ${i18n>yes} : ${i18n>no}}"/>
+													<Link id="authDetails" text="{i18n>authDetailsCol}" press="onAuthDetailsPress"/>
+													<Text id="InheritanceStatus" text="{= ${ReportCategory>/sExtCatId}? ${i18n>INH} : ''}"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</uxap:blocks>
+							</uxap:ObjectPageSubSection>
+						</uxap:subSections>
+					</uxap:ObjectPageSection>
+					<uxap:ObjectPageSection id="Activity" title="{i18n>activity}" titleUppercase="false">
+						<uxap:subSections>
+							<uxap:ObjectPageSubSection id="ObjectPageSubSection0">
+								<uxap:blocks>
+									<Table id="activityTableId" growing="true" growingScrollToLoad="true" width="auto" showSeparators="All"
+										mode="MultiSelect" autoPopinMode="true"
+										items="{ReportCategory>/Activities}"
+										updateFinished="adjustViewActivityCategory" selectionChange="onActivitySelection" noDataText="{i18n>noActivityText}"
+										class="sapUiSizeCompact">
+										<headerToolbar>
+											<Toolbar height="auto" id="ActivityToolbar" width="auto">
+												<Title id="ActivityTitle" text="{i18n>activity}"/>
+												<ToolbarSpacer id="ToolbarSpacer2"/>
+												<Button id="AddactivityID" text="{i18n>assign}" press="onAddactivity" type="Transparent"
+													enabled="{= ${GeneralModel>/bEditable} &amp;&amp; ${GeneralModel>/bActivityButtons}}" visible="true"/>
+												<Button id="EditactivityID" text="{i18n>edit}" press="onEditActivity" type="Transparent"
+													enabled="false" visible="true"/>
+												<Button id="deleteActbutton" text="{i18n>delete}" press="onDeleteActivity" type="Transparent" enabled="false"
+													visible="true"/>
+												<Button id="MoveupAct" text="{i18n>moveUp}" press="moveActivities" cd:move="UP" type="Transparent"
+													enabled="false" visible="true"/>
+												<Button id="MoveDownAct" text="{i18n>moveDown}" press="moveActivities" cd:move="DOWN" type="Transparent"
+													enabled="false" visible="true"/>
+												<Button id="SettingsButton" icon="sap-icon://action-settings" press="onPersoButtonPressed"/>
+											</Toolbar>
+										</headerToolbar>
+										<columns>
+											<Column id="gsActType">
+												<Text id="activityType" text="{i18n>activityType}"/>
+											</Column>
+											<Column id="gsApplication">
+												<Text id="genericID" text="{i18n>genericID}"/>
+											</Column>
+											<Column id="gsActId">
+												<Text id="categoryActivityKey" text="{i18n>categoryActivityKey}"/>
+											</Column>
+											<Column id="gsActDesc" minScreenWidth="Tablet" demandPopin="true">
+												<Text id="DescriptionId" text="{i18n>Description}"/>
+											</Column>
+											
+											<Column id="gsActPhase" minScreenWidth="Tablet" demandPopin="true">
+												<Text id="activityPhase" text="{i18n>activityPhase}"/>
+											</Column>
+											<Column id="gsActPhaseName" minScreenWidth="Tablet" demandPopin="true" visible="false">
+												<Text id="phaseNameId" text="{i18n>phaseName}"/>
+											</Column>
+											<Column id="gsSubMode" minScreenWidth="Tablet" demandPopin="true">
+												<Text id="submissionMode" text="{i18n>submissionMode}"/>
+											</Column>
+											<Column id="gsValidFrom" minScreenWidth="Tablet" demandPopin="true">
+												<Text id="validFromId" text="{i18n>validFrom}"/>
+											</Column>
+											<Column id="gsEarliest" visible="false" minScreenWidth="Tablet" demandPopin="true">
+												<Text id="earliestDate" text="{i18n>earliestDate}"/>
+											</Column>
+											<Column id="gsValidTo" minScreenWidth="Tablet" demandPopin="true">
+												<Text id="validTo" text="{i18n>validTo}"/>
+											</Column>
+											<Column id="gsInherit" minScreenWidth="Tablet" demandPopin="true" visible="{= ${GeneralModel>/sExtCatId} !== 'undefined' ? true : false}">
+												<Text id="inheritStatusId" text="{i18n>inheritStatus}"/>
+											</Column>
+											<Column id="gsReopen">
+												<Text id="reopen" text="{i18n>reopen}"/>
+											</Column>
+											<Column id="gsParameterDetail" hAlign="Center">
+												<Text id="paramDet" text="{i18n>paramDet}"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem id="ActivityColumId">
+												<cells>
+													<Text text="{= ${ReportCategory>ActivityType} === 'SRF' ? 'Report Defintion' : 'SAP Fiori Application'}"/>
+                                                    <Link text="{ReportCategory>ActivityId}" press="handleActivityNav"/>
+                                                    <Text text="{ReportCategory>ActivityId}"/>
+                                                    <Text text="{ReportCategory>ActivityName}"/>
+                                                    <Text text="Standard"/>
+                                                    <Text text="{ReportCategory>ActivityPhase}"/>
+                                                    <Text text="{= ${ReportCategory>SubmissionMode} === 'M' ? 'Only manual submission is possible' : ''}"/>
+                                                    <Text text="{ReportCategory>ValidFrom}"/>
+                                                    <Text text="{ReportCategory>ValidFromEarliest}"/>
+                                                    <Text text="{ReportCategory>ValidTo}"/>
+                                                    <Text text="New"/>
+                                                    <Text text="{= ${ReportCategory>CanBeReopened} === 'X' ? 'Yes' : 'No'}"/>
+                                                    <Link text="{i18n>detailsDraft}" visible="{= ${ReportCategory>ActivityType} !== 'SRF' ? true : false}"/>
+
+													<!-- <Link id="ReportingActivityIdCell" text="{ReportCategory>ReportingActivityId}" press="navigateToReportingActivity"/>
+													<Text id="ActivityIdCell" text="{ReportCategory>ActivityId}"/>
+													<Text id="ActivityNameCell" text="{ReportCategory>ActivityName}"/>
+													<Text id="ActivityGroup" text="{ReportCategory>ActivityGroup}"/>
+													<Text id="ActivityPhaseCell"
+														text="{path: 'ReportCategory>ActivityPhase', formatter:'.formatter.convertToFormattedTextPhase'}"/>
+													<Text id="ActivityPhaseNameCell" text="{path: 'ReportCategory>ActivityPhase', formatter:'.findPhaseName'}"/>
+													<Text id="SubmissionModeCell" visible="{= ${ReportCategory>ActivityType} === 'SRF' ? true : false}"
+														text="{path: 'ReportCategory>SubmissionMode', formatter: '.formatter.displaySmodeText'}"/>
+													<Text id="ValidFromCell"
+														text="{path: 'ReportCategory>ValidFrom', formatter: '.formatter.stringToFormattedDate'}"/>
+													<Text id="ValidFromEarliestCell"
+														text="{path: 'ReportCategory>ValidFromEarliest', formatter: '.formatter.stringToFormattedDate'}"/>
+													<Text id="ValidToCell"
+														text="{path: 'ReportCategory>ValidTo', formatter: '.formatter.stringToFormattedDate'}"/>
+													<Text id="InheritanceStatusCell"
+														text="{parts : [{path: 'GeneralModel>/sExtCatId'},{path:'ReportCategory>'}] ,formatter:'.formatter.catInheritanceStatusValue'}"/>
+													<Text id="CanBeReopenedCell" visible="{= ${ReportCategory>ActivityType} !== 'SRF' ? true : false}"
+														text="{= ${ReportCategory>CanBeReopened} === 'X'? ${i18n>yes} : ${i18n>no}}"/>
+													<Link id="detailsDraftCell" visible="{= ${ReportCategory>ActivityType} !== 'SRF' ? true : false}" text="{i18n>detailsDraft}"
+														press="onActivityDetail"/> -->
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</uxap:blocks>
+							</uxap:ObjectPageSubSection>
+						</uxap:subSections>
+					</uxap:ObjectPageSection>
+				</uxap:sections>
+			</uxap:ObjectPageLayout>
+		</content>
+		<footer>
+			<OverflowToolbar id="OverflowToolbar">
+				<!--<Button icon="sap-icon://message-popup" text="" id="infoButtonReportCategory" press="handleMessagePopoverPress"-->
+				<!--	tooltip="{i18n>messagePopUp}" visible="false" type="Emphasized"/>-->
+				<Button icon="{path: 'ErrorModel>/', formatter: '.formatter.buttonIconFormatter'}" visible="false"
+					id="infoButtonReportCategory" press="handleMessagePopoverPress" tooltip="{i18n>messagePopUp}"
+					type="{path: 'ErrorModel>/', formatter: '.formatter.buttonTypeFormatter'}"/>
+				<ToolbarSpacer id="ToolbarSpacer3"/>
+				<!--<Button id="editButtonCategory"-->
+				<!--	visible="{= ${modelATO>/isATO} ? (!(${modelLockCategory>/isVisible}) &amp;&amp; !${GeneralModel>/bEditable}) :${modelATO>/isATO}}"-->
+				<!--	press="onEditPress" text="{i18n>edit}" type="Emphasized"/>-->
+				<Button id="repCatSaveBtn" press="onVerifySaveCategory" text="{i18n>activate}" visible="true" type="Emphasized"/>
+				<Button id="verifyDraft" press="onVerifySaveCategory" text="{i18n>verify}" visible="true" type="Ghost"/>
+				<Button id="repCatCancelBtn" press="onCancelPress" text="{i18n>cancel}" visible="true"/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

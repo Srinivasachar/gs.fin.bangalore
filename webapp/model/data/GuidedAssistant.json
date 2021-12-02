@@ -4,6 +4,7 @@
         "Seq": 1,
         "SingleSelectMode": true,
         "Subtitle": "Country",
+        "Icon": "sap-icon://map",
         "Completed": false,
         "Expanded": true,
         "Childrens": [

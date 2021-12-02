@@ -128,7 +128,7 @@ sap.ui.define(
               if (sAction === "Confirm") {
                 setTimeout(
                   function () {
-                    this.getRouter().navTo("DefineApplication");
+                    this.getRouter().navTo("ReportCategory");
                     BusyIndicator.hide();
                   }.bind(this),
                   2000

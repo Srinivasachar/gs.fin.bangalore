@@ -1,6 +1,6 @@
 <mvc:View controllerName="gs.fin.bangalore.controller.Overview" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m"
 xmlns:layout="sap.ui.layout" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Page id="OverviewPage" title="IntelliDev" showNavButton="true" navButtonPress="onNavBack">
+	<Page id="OverviewPage" title="IntelliDev" showNavButton="true" navButtonPress="onNavBack" class="sapUiSizeCompact">
         <content>
            <layout:VerticalLayout class="sapUiResponsiveMargin">
 			<layout:HorizontalLayout allowWrapping="true" content="{TileCollection>/}">
