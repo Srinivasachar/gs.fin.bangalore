@@ -13,6 +13,7 @@
 								name="myFileUpload"
                                 sendXHR="true"
                                 fileType="xml"
+								sameFilenameAllowed="true"
                                 useMultipart="false"
                                 value="{CodeEditorModel>/UploadDetails/FileName}"
 								tooltip="Upload your file to the local server"
