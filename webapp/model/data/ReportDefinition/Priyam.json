@@ -1,0 +1,52 @@
+{
+    "Phases": [
+        {
+            "RepCatId": "JP_VAT_DCL",
+            "FileLevelSubmInd": "",
+            "InheritanceStatus": "",
+            "PhaseName": "DECLARATION",
+            "ActivityPhase": "STAND",
+            "SequenceNumber": "0001",
+            "PhaseOccurrence": "ONE",
+            "SubPossibleUntilYears": "",
+            "SubPossibleUntilMonths": 0,
+            "SubPossibleUntilDays": 0,
+            "ValidFrom": "20211206"
+        }
+    ],
+    "OrgUnits": [
+        {
+            "InheritanceStatus": "",
+            "IsOptional": "",
+            "OrgUnitId": "COMPANYCODE",
+            "RepCatId": "JP_VAT_DCL",
+            "FldDescription": "",
+            "ToCategoryAuthorization": {}
+        }
+    ],
+    "Activites": [
+        {
+            "ApplicationId": "MANAGE_TAX_ITEMS",
+            "IsClassicReport": false,
+            "ReportingActivityId": "MANAGE_TAX_ITEMS",
+            "SequenceNumber": "0001",
+            "InheritanceStatus": "",
+            "ReportId": "",
+            "ValidTo": "",
+            "RepCatId": "JP_VAT_DCL",
+            "ActivityId": "MANAGE_TAX_ITEMS",
+            "ActivityName": "Manage Tax Items",
+            "ActivityType": "TAR",
+            "ActivityTypeText": "SAP Fiori Application",
+            "ActivityPhase": "STAND",
+            "ActivityGroup": "",
+            "ValidFrom": "20211206",
+            "ValidFromEarliest": "",
+            "SubmissionMode": "",
+            "SubmissionModeText": "Only Manual Submission is Possible",
+            "CanBeReopened": "X",
+            "ActivityPredecessor": "",
+            "ActivityParameterSet": {}
+        }
+    ]
+}

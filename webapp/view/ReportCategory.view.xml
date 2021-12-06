@@ -52,7 +52,7 @@
 										class="sapUiSizeCompact">
 										<headerToolbar>
 											<Toolbar height="auto" id="toolBarPhase" width="auto">
-												<Title id="phaseTableTitle" text="{viewProperties>/PhaseTitle}"/>
+												<Title id="phaseTableTitle" text="Phases (3)"/>
 												<ToolbarSpacer id="ToolbarSpacer"/>
 												<Button id="btnAddPhase"
 													enabled="{= ${GeneralModel>/bEditable} &amp;&amp; ${GeneralModel>/bPhaseButtons} &amp;&amp; !${GeneralModel>/bExtended}}" press="onAddPhase"
@@ -135,7 +135,7 @@
 										updateFinished="adjustViewReportingModelCategory" noDataText="{i18n>noOrgUnitText}" class="sapUiSizeCompact">
 										<headerToolbar>
 											<Toolbar id="Toolbar0" height="auto" width="auto">
-												<Title id="reportLevelTitle" text="{i18n>repLevelTitle}"/>
+												<Title id="reportLevelTitle" text="Organizational Units (1)"/>
 												<ToolbarSpacer id="ToolbarSpacer1"/>
 												<Button enabled="{= ${GeneralModel>/bEditable} &amp;&amp; ${GeneralModel>/bOrgUnitButtons} &amp;&amp; !${GeneralModel>/bExtended}}"
 													id="addlevel" press="onAddOrEditRepLevels" text="{i18n>add}" type="Transparent" visible="true"/>
@@ -189,7 +189,7 @@
 										class="sapUiSizeCompact">
 										<headerToolbar>
 											<Toolbar height="auto" id="ActivityToolbar" width="auto">
-												<Title id="ActivityTitle" text="{i18n>activity}"/>
+												<Title id="ActivityTitle" text="Assigned Reporting Activities (6)"/>
 												<ToolbarSpacer id="ToolbarSpacer2"/>
 												<Button id="AddactivityID" text="{i18n>assign}" press="onAddactivity" type="Transparent"
 													enabled="{= ${GeneralModel>/bEditable} &amp;&amp; ${GeneralModel>/bActivityButtons}}" visible="true"/>

@@ -1,0 +1,27 @@
+<View controllerName="gs.fin.bangalore.controller.NewGuided" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:u="sap.ui.unified" xmlns:core="sap.ui.core" xmlns:layout="sap.ui.layout" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Page id="NewGuided" title="Guided Assistant" showNavButton="true" navButtonPress="onNavBack" class="sapUiSizeCompact">
+		<content>
+			<Wizard id="CreateProductWizard" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" showNextButton="true" renderMode="Page">
+				<WizardStep id="ProductTypeStep" title="Product Type" validated="true" activate="productTypeActivate">
+					<MessageStrip class="sapUiSmallMarginBottom" text="The Wizard control is supposed to break down large tasks, into smaller steps, easier for the user to work with." showIcon="true" />
+					<Text class="sapUiSmallMarginBottom" text="Sed fermentum, mi et tristique ullamcorper, sapien sapien faucibus sem, quis pretium nibh lorem malesuada diam. Nulla quis arcu aliquet, feugiat massa semper, volutpat diam. Nam vitae ante posuere, molestie neque sit amet, dapibus velit. Maecenas eleifend tempor lorem. Mauris vitae elementum mi, sed eleifend ligula. Nulla tempor vulputate dolor, nec dignissim quam convallis ut. Praesent vitae commodo felis, ut iaculis felis. Fusce quis eleifend sapien, eget facilisis nibh. Suspendisse est velit, scelerisque ut commodo eget, dignissim quis metus. Cras faucibus consequat gravida. Curabitur vitae quam felis. Phasellus ac leo eleifend, commodo tortor et, varius quam. Aliquam erat volutpat" />
+				</WizardStep>
+				<WizardStep id="ProductInfoStep" validated="false" title="Product Information" activate="additionalInfoValidation">
+					<MessageStrip class="sapUiSmallMarginBottom" text="Validation in the wizard is controlled by calling the validateStep(Step) and invalidateStep(Step) methods " showIcon="true" />
+					<Text text="Cras tellus leo, volutpat vitae ullamcorper eu, posuere malesuada nisl. Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec pulvinar, sapien et viverra imperdiet, orci erat porttitor nulla, eget commodo metus nibh nec ipsum. Aliquam lacinia euismod metus, sollicitudin pellentesque purus volutpat eget. Pellentesque egestas erat quis eros convallis mattis. Mauris hendrerit sapien a malesu corper eu, posuere malesuada nisl. Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec pulvinar, sapien	corper eu, posuere malesuada nisl. Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec pulvinar, sapien	" />
+				</WizardStep>
+				<WizardStep id="OptionalInfoStep" validated="false" activate="optionalStepActivation" title="Optional Information">
+					<MessageStrip class="sapUiSmallMarginBottom" text="You can validate steps by default with the validated='true' property of the step. The next button is always enabled." showIcon="true" />
+					<Text text="Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec ppellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec pulvinar, sapien	corper eu, posuere malesuada nisl. Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec pulvinar, sapien	" />
+					
+				</WizardStep>
+				<WizardStep id="PricingStep" activate="pricingActivate" complete="pricingComplete" validated="false" title="Pricing">
+					<MessageStrip class="sapUiSmallMarginBottom" text="You can use the wizard previousStep() and nextStep() methods to navigate from step to step without validation. Also you can use the GoToStep(step) method to scroll programmatically to previously visited steps." showIcon="true" />
+				</WizardStep>
+				<WizardStep id="ReviewPage" activate="reviewActivate" complete="reviewComplete" validated="false" title="Review page">
+					<MessageStrip class="sapUiSmallMarginBottom" text="You can use the wizard previousStep() and nextStep() methods to navigate from step to step without validation. Also you can use the GoToStep(step) method to scroll programmatically to previously visited steps." showIcon="true" />
+				</WizardStep>
+			</Wizard>
+		</content>
+	</Page>
+</View>

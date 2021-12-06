@@ -136,6 +136,11 @@
           "name": "ReportCategory",
           "pattern": "ReportCategory",
           "target": ["ReportCategory"]
+        },
+        {
+          "name": "NewGuided",
+          "pattern": "NewGuided",
+          "target": ["NewGuided"]
         }
       ],
       "targets": {
@@ -173,6 +178,13 @@
           "clearControlAggregation": false,
           "viewId": "ReportCategory",
           "viewName": "ReportCategory"
+        },
+        "NewGuided": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "NewGuided",
+          "viewName": "NewGuided"
         }
       }
     }

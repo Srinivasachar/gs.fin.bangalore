@@ -140,7 +140,9 @@
             "uri": "https://uyt902-er9500.wdf.sap.corp/sap/opu/odata/sap/SRF_REPORT_DEFINITION/ReportCategoryActivitiesSet(RepCatId='RZA_VAT_DCL',ActivityId='RZA_VAT_REP_V0_LOG_S')/ActivityParameterSet"
           }
         }
-      },
+      }
+    ],
+    "Dummy":[
       {
         "__metadata": {
           "id": "https://uyt902-er9500.wdf.sap.corp/sap/opu/odata/sap/SRF_REPORT_DEFINITION/ReportCategoryActivitiesSet(RepCatId='RZA_VAT_DCL',ActivityId='TAX_PAYABLE_POSTING_S')",
@@ -204,71 +206,6 @@
             "uri": "https://uyt902-er9500.wdf.sap.corp/sap/opu/odata/sap/SRF_REPORT_DEFINITION/ReportCategoryActivitiesSet(RepCatId='RZA_VAT_DCL',ActivityId='MANAGE_TAX_ITEMS_C')/ActivityParameterSet"
           }
         }
-      },
-      {
-        "__metadata": {
-          "id": "https://uyt902-er9500.wdf.sap.corp/sap/opu/odata/sap/SRF_REPORT_DEFINITION/ReportCategoryActivitiesSet(RepCatId='RZA_VAT_DCL',ActivityId='RZA_VAT_REP_V0_LOG_C')",
-          "uri": "https://uyt902-er9500.wdf.sap.corp/sap/opu/odata/sap/SRF_REPORT_DEFINITION/ReportCategoryActivitiesSet(RepCatId='RZA_VAT_DCL',ActivityId='RZA_VAT_REP_V0_LOG_C')",
-          "type": "SRF_REPORT_DEFINTION.ReportCategoryActivities"
-        },
-        "ApplicationId": "",
-        "IsClassicReport": false,
-        "ReportingActivityId": "RZA_VAT_REP_V0_LOG",
-        "SequenceNumber": "0005",
-        "InheritanceStatus": "",
-        "ReportId": "RZA_VAT_REP_V0_LOG",
-        "ValidTo": "",
-        "RepCatId": "RZA_VAT_DCL",
-        "ActivityId": "RZA_VAT_REP_V0_LOG_C",
-        "ActivityName": "South Africa VAT summary report with reported Item log Information",
-        "ActivityType": "SRF",
-        "ActivityTypeText": "Report Definition",
-        "ActivityPhase": "CORR",
-        "ActivityGroup": "",
-        "ValidFrom": "20150101",
-        "ValidFromEarliest": "",
-        "SubmissionMode": "M",
-        "SubmissionModeText": "Only Manual Submission is Possible",
-        "CanBeReopened": "",
-        "ActivityPredecessor": "MANAGE_TAX_ITEMS_C",
-        "ActivityParameterSet": {
-          "__deferred": {
-            "uri": "https://uyt902-er9500.wdf.sap.corp/sap/opu/odata/sap/SRF_REPORT_DEFINITION/ReportCategoryActivitiesSet(RepCatId='RZA_VAT_DCL',ActivityId='RZA_VAT_REP_V0_LOG_C')/ActivityParameterSet"
-          }
-        }
-      },
-      {
-        "__metadata": {
-          "id": "https://uyt902-er9500.wdf.sap.corp/sap/opu/odata/sap/SRF_REPORT_DEFINITION/ReportCategoryActivitiesSet(RepCatId='RZA_VAT_DCL',ActivityId='RZA_VAT_REP_V1_DET_CL')",
-          "uri": "https://uyt902-er9500.wdf.sap.corp/sap/opu/odata/sap/SRF_REPORT_DEFINITION/ReportCategoryActivitiesSet(RepCatId='RZA_VAT_DCL',ActivityId='RZA_VAT_REP_V1_DET_CL')",
-          "type": "SRF_REPORT_DEFINTION.ReportCategoryActivities"
-        },
-        "ApplicationId": "",
-        "IsClassicReport": false,
-        "ReportingActivityId": "RZA_VAT_REP_V1_DET",
-        "SequenceNumber": "0006",
-        "InheritanceStatus": "",
-        "ReportId": "RZA_VAT_REP_V1_DET",
-        "ValidTo": "",
-        "RepCatId": "RZA_VAT_DCL",
-        "ActivityId": "RZA_VAT_REP_V1_DET_CL",
-        "ActivityName": "South Africa Line Item Report",
-        "ActivityType": "SRF",
-        "ActivityTypeText": "Report Definition",
-        "ActivityPhase": "CLARF",
-        "ActivityGroup": "",
-        "ValidFrom": "20150101",
-        "ValidFromEarliest": "",
-        "SubmissionMode": "M",
-        "SubmissionModeText": "Only Manual Submission is Possible",
-        "CanBeReopened": "",
-        "ActivityPredecessor": "",
-        "ActivityParameterSet": {
-          "__deferred": {
-            "uri": "https://uyt902-er9500.wdf.sap.corp/sap/opu/odata/sap/SRF_REPORT_DEFINITION/ReportCategoryActivitiesSet(RepCatId='RZA_VAT_DCL',ActivityId='RZA_VAT_REP_V1_DET_CL')/ActivityParameterSet"
-          }
-        }
       }
-    
     ]
 }

@@ -13,7 +13,7 @@ sap.ui.define(
           var aTileContainer =
              [
               {
-                Header: "ACR Guided Assistance",
+                Header: "DRC Guided Assistance",
                 Subheader: "Assistance",
                 Key: 0,
                 Count: 27

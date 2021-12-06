@@ -10,16 +10,24 @@ sap.ui.define(
 
     return BaseController.extend("gs.fin.bangalore.controller.ReportCategory", {
       onInit: function () {
+        this.getRouter()
+            .getRoute("ReportCategory")
+            .attachPatternMatched(this.routeMatched, this);
+      },
+
+      routeMatched: function(){
         this.loadInitialData();
       },
+
       loadInitialData: function () {
         $.ajax({
           type: "GET",
           timeout: 50000,
-          url: "./model/data/ACR/ReportCategory.json",
+          url: "./model/data/ReportDefinition/ReportCategory.json",
           data: null,
           success: function (data) {
             this.getView().setModel(new JSONModel(data), "ReportCategory");
+            BusyIndicator.hide();
           }.bind(this),
         });
       },

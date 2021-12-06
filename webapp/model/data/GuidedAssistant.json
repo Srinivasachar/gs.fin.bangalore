@@ -1,7 +1,7 @@
 [
     {
         "Header": "1. For Which Country you want to create the report definition?",
-        "Seq": 1,
+        "Seq": "1",
         "SingleSelectMode": true,
         "Subtitle": "Country",
         "Icon": "sap-icon://map",
@@ -27,7 +27,7 @@
     },
     {
         "Header": "2. Which report functionality you want to enablement?",
-        "Seq": 2,
+        "Seq": "2",
         "SingleSelectMode": true,
         "Subtitle": "Report Type",
         "Completed": false,
@@ -53,7 +53,7 @@
     {
         "Header": "3. Would the report be a line item report or a box level report?",
         "Subtitle": "Report Level",
-        "Seq": 3,
+        "Seq": "3",
         "SingleSelectMode": false,
         "Completed": false,
         "Expanded": false,
@@ -72,7 +72,7 @@
     },
     {
         "Header": "4. Would the report have the following functionality ?",
-        "Seq": 4,
+        "Seq": "4",
         "SingleSelectMode": false,
         "Subtitle": "Functionality",
         "Completed": false,
@@ -92,7 +92,7 @@
     },
     {
         "Header": "5.Audit trail should be enabled for all reports by default?",
-        "Seq": 5,
+        "Seq": "5",
         "SingleSelectMode": false,
         "Subtitle": "Submission Type",
         "Completed": false,
@@ -112,7 +112,7 @@
     },
     {
         "Header": "6. What kind of file output type?",
-        "Seq": 6,
+        "Seq": "6",
         "SingleSelectMode": false,
         "Subtitle": "Document Type",
         "Completed": false,
@@ -142,7 +142,7 @@
     },
     {
         "Header": "7. Phase type?",
-        "Seq": 7,
+        "Seq": "7",
         "SingleSelectMode": false,
         "Subtitle": "Phase Type",
         "Completed": false,
@@ -167,7 +167,7 @@
     },
     {
         "Header": "8. Activity needed?",
-        "Seq": 8,
+        "Seq": "8",
         "SingleSelectMode": false,
         "Subtitle": "Activities",
         "Completed": false,

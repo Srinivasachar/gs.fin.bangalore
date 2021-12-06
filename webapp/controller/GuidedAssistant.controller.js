@@ -119,22 +119,22 @@ sap.ui.define(
             this.getView().byId("idMessageManager").firePress();
             return;
           }
+          BusyIndicator.show(0);
           MessageBox.confirm("Do you want to proceed with the creation?", {
             styleClass: "sapUiSizeCompact",
             actions: ["Confirm", MessageBox.Action.CLOSE],
             emphasizedAction: "Confirm",
             onClose: function (sAction) {
-              BusyIndicator.show(0);
-              if (sAction === "Confirm") {
-                setTimeout(
-                  function () {
-                    this.getRouter().navTo("ReportCategory");
-                    BusyIndicator.hide();
-                  }.bind(this),
-                  2000
-                );
+              if (sAction !== "Confirm") {
+                BusyIndicator.hide();
+                return;
               }
-              BusyIndicator.hide();
+              setTimeout(
+                function () {
+                  this.getRouter().navTo("ReportCategory");
+                }.bind(this),
+                2000
+              );
             }.bind(this),
           });
         },
