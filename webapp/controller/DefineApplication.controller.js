@@ -16,7 +16,7 @@ sap.ui.define(
             $.ajax({
                 type: "GET",
                 timeout: 50000,
-                url: "./model/data/ACR/Complete.json",
+                url: "./model/data/ReportDefinition/Complete.json",
                 data: null,
                 success: function (data) {
                     this.getView().setModel(new JSONModel(data), "ReportDefModel");

@@ -6,7 +6,8 @@ sap.ui.define(
     "sap/ui/core/Core",
     "sap/ui/unified/FileUploaderParameter",
     "sap/m/MessageToast",
-    "sap/ui/model/Filter"
+    "sap/ui/model/Filter",
+    "sap/ui/core/Fragment",
   ],
   function (
     BaseController,
@@ -15,7 +16,8 @@ sap.ui.define(
     Core,
     FileUploaderParameter,
     MessageToast,
-    Filter
+    Filter,
+    Fragment
   ) {
     "use strict";
 
@@ -249,7 +251,35 @@ sap.ui.define(
       },
 
       updateCDSView: function(){
-        var oFileUploadJSON = this.getView().getModel("CodeEditorModel");
+        this.handleTransport();
+        return;
+      },
+
+      getValuesByTagName: function (sResponseRaw, sTagName) {
+        var sResponseProperties = jQuery.parseXML(sResponseRaw).getElementsByTagName(sTagName);
+        sResponseProperties = sResponseProperties[0].innerHTML;
+        return sResponseProperties;
+    },
+
+    handleTransport : function(){
+      if (!this.TransportRequest) {
+        Fragment.load({
+          name: "gs.fin.bangalore.Fragment.Transport",
+          controller: this,
+        }).then(
+          function (oDialog) {
+            this.TransportRequest = oDialog;
+            this.getView().addDependent(this.TransportRequest);
+            oDialog.open();
+          }.bind(this)
+        );
+      } else {
+        this.TransportRequest.open();
+      }
+    },
+
+    handleTransportConfirm: function(){
+      var oFileUploadJSON = this.getView().getModel("CodeEditorModel");
         var sFileName = oFileUploadJSON.getProperty("/UploadDetails/FileName");
         var sFileVersion = oFileUploadJSON.getProperty("/UploadDetails/FileVersion");
         var sCDSViewName = oFileUploadJSON.getProperty("/UploadDetails/CDSViewName");
@@ -264,6 +294,7 @@ sap.ui.define(
             success: function(oResponse){
                 MessageToast.show("CDS view created successfully!");
                 oFileUploadJSON.setProperty("/Editable", false);
+                this.TransportRequest.close()
                 BusyIndicator.hide();
             }.bind(this),
             error: function(oError){
@@ -271,12 +302,6 @@ sap.ui.define(
                 BusyIndicator.hide();
             }.bind(this)
         });
-      },
-
-      getValuesByTagName: function (sResponseRaw, sTagName) {
-        var sResponseProperties = jQuery.parseXML(sResponseRaw).getElementsByTagName(sTagName);
-        sResponseProperties = sResponseProperties[0].innerHTML;
-        return sResponseProperties;
     },
 
     getUploadRules :function(){

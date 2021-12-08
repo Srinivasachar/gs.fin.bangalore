@@ -83,6 +83,14 @@
         "type": "sap.ui.model.json.JSONModel",
         "uri": "model/data/QuickRDCreation.json"
       },
+      "Package": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/data/Packagedetails.json"
+      },
+      "Transport": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/data/Transport.json"
+      },
       "": {
 				"dataSource": "mainService",
 				"preload": true,

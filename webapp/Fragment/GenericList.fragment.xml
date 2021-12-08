@@ -1,0 +1,21 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+		class="sapUiSizeCompact"
+		id="mySelectDialog"
+		noDataText="No CDS View Found"
+		title="Select CDS View"
+		confirm=".onPackageTransportConfirm"
+		cancel=".onPackageTransportConfirm"
+		items="{
+			path: 'CDSViewsCollection>/'
+		}">
+		<StandardListItem
+			title="{CDSViewsCollection>Cdsviewname}"
+			description=""
+			iconDensityAware="false"
+			iconInset="false"
+			type="Active" />
+	</SelectDialog>
+</core:FragmentDefinition>

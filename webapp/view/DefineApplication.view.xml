@@ -5,15 +5,15 @@
 				<steps>
 					<!-- ************************** STEP-1 : GENERAL PROPERTIES ************************** -->
 					<WizardStep height="auto" id="reportDefinitionPropertiesWizard" title="General Properties">
-						<SimpleForm id="DisplayRDForm" class="editableForm" editable="false" hAlign="Center" layout="ResponsiveGridLayout" maxContainerCols="1" minWidth="1024">
-							<content>
+						<form:SimpleForm id="DisplayRDForm" class="editableForm" editable="false" hAlign="Center" layout="ResponsiveGridLayout" maxContainerCols="1" minWidth="1024">
+							<form:content>
 								<Title id="DisplayRDTitle" />
 								<Label id="DisplayRDRepDefLabel" tooltip="{i18n>reportDefinition}" labelFor="reportDefinitionId" text="Report Definition" />
 								<Text id="DisplayRDRepDefText" text="ZINNOV_VAT_ZA" tooltip="Description" />
 								<Label tooltip="{i18n>reportDescription}" labelFor="reportDefinitionName" id="Reportun1" text="{i18n>reportDescription}" />
 								<Text id="DisplayRDNameText" text="South Africa VAT Report" />
-							</content>
-						</SimpleForm>
+							</form:content>
+						</form:SimpleForm>
 					</WizardStep>
 					<!-- ************************** STEP-2 : PARAMETERS ************************** -->
 					<WizardStep height="auto" id="parametersWizard" title="Parameter">
