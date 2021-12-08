@@ -133,22 +133,26 @@
             {
                 "Name":"PDF",
                 "Key": "",
-                "Recommendation": "95%"
+                "Recommendation": "95%",
+                "Information":""
             },
             {
                 "Name":"XML",
                 "Key": "",
-                "Recommendation": "95%"
+                "Recommendation": "95%",
+                "Information":""
             },
             {
                 "Name":"JSON",
                 "Key": "",
-                "Recommendation": "95%"
+                "Recommendation": "55%",
+                "Information":""
             },
             {
                 "Name":"ALV",
                 "Key": "",
-                "Recommendation": "55%"
+                "Recommendation": "55%",
+                "Information":""
             }
         ]
     },

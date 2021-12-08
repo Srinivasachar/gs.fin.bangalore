@@ -5,7 +5,7 @@
 		id="myPopover"
 		title="Information"
 		class="sapUiResponsivePadding--header sapUiResponsivePadding--footer"
-		placement="Bottom">
+		placement="Right">
 		<Text text="{PopoverInfo>/Information}" class="sapUiTinyMargin"/>
 	</Popover>
 </core:FragmentDefinition>

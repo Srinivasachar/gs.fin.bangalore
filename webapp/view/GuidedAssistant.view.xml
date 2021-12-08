@@ -37,10 +37,12 @@
 							</StandardListItem>
 							-->
 							<CustomListItem>
-									<HBox>
-										<ObjectIdentifier class="sapUiTinyMarginEnd sapUiTinyMargin" title="{Suggesstion>Name}" text="{Suggesstion>Key}" titleActive="true" titlePress="handlePanelInfo"/>
-										<core:Icon visible="{= ${Suggesstion>Information}.length > 0}" src="sap-icon://information" press="handlePanelInfo" />
+									<HBox >
+										<ObjectIdentifier width="100px%" class="sapUiTinyMarginEnd sapUiTinyMargin" title="{Suggesstion>Name}" text="{Suggesstion>Key}" titleActive="true" />
+										<core:Icon class="sapUiTinyMarginEnd sapUiTinyMargin" visible="{= ${Suggesstion>Information}.length > 0}" src="sap-icon://information" press="handlePanelInfo" />
 									</HBox>
+									<ObjectStatus class="sapUiTinyMarginEnd sapUiTinyMargin" inverted="true" text="Recommendation - {Suggesstion>Recommendation}" state="{= ${Suggesstion>Recommendation} > '70%' ? 'Success' : (${Suggesstion>Recommendation} > '50%' ? 'Warning' : 'Error')}"/>
+									
 							</CustomListItem>
 						</List>
 					</content>
