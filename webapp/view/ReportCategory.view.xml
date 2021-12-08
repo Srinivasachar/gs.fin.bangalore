@@ -5,7 +5,7 @@
 	xmlns="sap.m"
 	xmlns:uxap="sap.uxap"
 	xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Page navButtonPress="discardCategory" showNavButton="true" title="{i18n>appTitle1}" id="ReportCategory" class="sapUiSizeCompact"
+	<Page navButtonPress="onNavBack" showNavButton="true" title="{i18n>appTitle1}" id="ReportCategory" class="sapUiSizeCompact"
 		showFooter="true">
 		<content>
 			<uxap:ObjectPageLayout upperCaseAnchorBar="false" alwaysShowContentHeader="true" class="sapUiResponsiveContentPadding" id="newCategory"
