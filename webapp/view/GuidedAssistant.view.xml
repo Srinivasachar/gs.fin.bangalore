@@ -7,9 +7,11 @@
 						<NumericContent size="L" scale="{Suggesstion>Subtitle}" value="{Suggesstion>Seq}" press="handleGuideNavigation" />
 					</HeaderContainer>
 				</headerContainer>
+				<!--
 				<attributes>
-					<ObjectAttribute title="" text="" />
+				<ObjectAttribute title="Testing" text="Demo" />
 				</attributes>
+				-->
 				<statuses>
 					<ObjectStatus title="Status" class="sapMObjectStatusMedium" text="New" state="Information" />
 				</statuses>
@@ -30,8 +32,16 @@
 					</headerToolbar>
 					<content>
 						<List mode="{= ${Suggesstion>SingleSelectMode} ? 'SingleSelectLeft' : 'MultiSelect'}" items="{Suggesstion>Childrens}" selectionChange="onSuggesstionClick">
+							<!--
 							<StandardListItem title="{Suggesstion>Name} - {Suggesstion>Key}" description="" icon="{icon}" iconInset="false" highlight="None" info="Recommendation - {Suggesstion>Recommendation}" infoState="{= ${Suggesstion>Recommendation} > '70%' ? 'Success' : (${Suggesstion>Recommendation} > '50%' ? 'Warning' : 'Error')}" infoStateInverted="true">
 							</StandardListItem>
+							-->
+							<CustomListItem>
+									<HBox>
+										<ObjectIdentifier class="sapUiTinyMarginEnd sapUiTinyMarginBottom" title="{Suggesstion>Name}" text="{Suggesstion>Key}" titleActive="true" titlePress="handlePanelInfo"/>
+										<core:Icon visible="{= ${Suggesstion>Information}.length > 0}" src="sap-icon://information" press="handlePanelInfo" />
+									</HBox>
+							</CustomListItem>
 						</List>
 					</content>
 				</Panel>

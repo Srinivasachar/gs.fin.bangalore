@@ -24,7 +24,7 @@
             "ToCategoryAuthorization": {}
         }
     ],
-    "Activites": [
+    "Activities": [
         {
             "ApplicationId": "MANAGE_TAX_ITEMS",
             "IsClassicReport": false,

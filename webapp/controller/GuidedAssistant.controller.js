@@ -182,6 +182,27 @@ sap.ui.define(
           }
           return this._pMessagePopover;
         },
+
+        handlePanelInfo: function(oEvent){
+          var oSource = oEvent.getSource();
+          var sInformation = oSource.getBindingContext("Suggesstion").getObject("Information");
+          var oView = this.getView();
+          if (!this._pPopover) {
+            this._pPopover = Fragment.load({
+              id: oView.getId(),
+              name: "gs.fin.bangalore.Fragment.InfoPopover",
+              controller: this
+            }).then(function(oPopover) {
+              oView.addDependent(oPopover);
+              return oPopover;
+            });
+          }
+          
+          this._pPopover.then(function(oPopover) {
+            oPopover.setModel(new JSONModel({"Information": sInformation}), "PopoverInfo");
+            oPopover.openBy(oSource);
+          });
+        }
       }
     );
   }

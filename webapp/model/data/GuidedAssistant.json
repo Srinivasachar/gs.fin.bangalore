@@ -11,17 +11,20 @@
             {
                 "Name":"Australia",
                 "Key": "AU",
-                "Recommendation": "85%"
+                "Recommendation": "85%",
+                "Information":""
             },
             {
                 "Name":"South Africa",
                 "Key": "ZA",
-                "Recommendation": "65%"
+                "Recommendation": "65%",
+                "Information":""
             },
             {
                 "Name": "Germany",
                 "Key": "DE",
-                "Recommendation": "25%"
+                "Recommendation": "25%",
+                "Information":""
             }
         ]
     },
@@ -36,17 +39,20 @@
             {
                 "Name":"Value Added Tax",
                 "Key": "VAT",
-                "Recommendation": "65%"
+                "Recommendation": "65%",
+                "Information":"Value Added Tax – VAT: \nIs a type of tax that is assessed incrementally. \nIt is levied on the price of a product or service at each stage of production, distribution, or sale to the end consumer. \nIf the ultimate consumer is a business that collects and pays to the government VAT on its products or services, it can reclaim the tax paid. \nIt is similar to, and is often compared with, a sales tax. \nVAT is an indirect tax because the person who ultimately pays the tax isn't necessarily the same person as the one who pays the tax to the tax authorities."
             },
             {
                 "Name":"Witholding",
                 "Key": "WHT",
-                "Recommendation": "55%"
+                "Recommendation": "55%",
+                "Information":"Witholding Tax: \nA withholding tax is the amount an employer withholds from an employee’s wages and pays directly to the government. \nThe amount withheld is a credit against the income taxes the employee must pay during the year. \nIt also is a tax levied on income (interest and dividends) from securities owned by a non-resident alien, as well as other income paid to non-residents of a country.\n1 Withholding tax is levied on the vast majority of people who earn income from a trade or business in the United States"
             },
             {
                 "Name": "GST",
                 "Key": "GST",
-                "Recommendation": "55%"
+                "Recommendation": "55%",
+                "Information": "GST: \nThe goods and services tax (GST) is a value-added tax levied on most goods and services sold for domestic consumption. \nThe GST is paid by consumers, but it is remitted to the government by the businesses selling the goods and services."
             }
         ]
     },
@@ -61,12 +67,14 @@
             {
                 "Name":"Line Item",
                 "Key": "LINE",
-                "Recommendation": "55%"
+                "Recommendation": "55%",
+                "Information": "Line-item reporting where each document information is shown. \nThe reporting is done at a  granular level."
             },
             {
                 "Name":"Box Level",
                 "Key": "BOX",
-                "Recommendation": "95%"
+                "Recommendation": "95%",
+                "Information": "Box level reporting where the aggregation of data is done baed on tax code, transaction keys, tax type etc. \nThe configurations are mostly maintained in OBCH, OBCG or VG_CUST, or FOT_ATR_SIMPLE  transactions. \nBased on the configuration the data is aggregated for reporting."
             }
         ]
     },
@@ -81,12 +89,14 @@
             {
                 "Key":"TDT",
                 "Name": "Time dependant taxes",
-                "Recommendation": "95%"
+                "Recommendation": "95%",
+                "Information": "In countries/regions where time-dependent tax calculation (TDT) is active, certain tax rates are effective within user-specified timeframes to allow you to adapt to current or planned changes to tax rates. \nTypically, changes to tax rates have meant creating new tax codes and maintaining dozens of tables. \nIn countries/regions where time-dependent tax calculation (TDT) is active, you can simply maintain existing tax rates. \nWhen you’re informed about rate changes, you can add a new validity period to your existing tax codes. \nWhen the new tax rate becomes valid, all of your line-item calculations automatically use the correct rate. \nTDT reduces your tax rate maintenance and also reduces the risk of inconsistencies between your sales and finance documents."
             },
             {
                 "Key":"RITA",
                 "Name": "Registration of indirect taxes",
-                "Recommendation": "88%"
+                "Recommendation": "88%",
+                "Information": "Legal entities operating in multiple countries/regions must satisfy the tax and reporting regulations of the countries/regions in which they do business. \nUnder some circumstances, you’re permitted to register legal entities for indirect taxation abroad without having to create a company code for that county/region. \nRegistration for Indirect Taxation Abroad (RITA) allows you to maintain a tax registration county/region that is different from the company code county/region. \nThis registration helps you link taxable transactions in foreign countries/regions for indirect tax reporting and tax payments."
             }
         ]
     },
@@ -101,12 +111,14 @@
             {
                 "Name":"Full Submission",
                 "Key": "FS",
-                "Recommendation": "75%"
+                "Recommendation": "75%",
+                "Information": "In case of full submission all the documents are reported in case of correction or clarification run. \nIf document d1 was reported in standard run and now in correction or clarification phase document d1 along with new documents would be reported."
             },
             {
                 "Name":"Delta Submission",
                 "Key": "DS",
-                "Recommendation": "45%"
+                "Recommendation": "45%",
+                "Information": "In case of delta submission only new documents are reported in case of correction or clarification run. \nIf document d1 was reported in standard run and now in correction or clarification phase document d1 would not be reported and only new documents would be reported"
             }
         ]
     },
@@ -151,17 +163,20 @@
             {
                 "Name":"Declaration",
                 "Key": "DECL",
-                "Recommendation": "95%"
+                "Recommendation": "95%",
+                "Information": "This is the first phase of the reporting. It is also called as the standard run "
             },
             {
                 "Name":"Correction",
                 "Key": "CORR",
-                "Recommendation": "65%"
+                "Recommendation": "65%",
+                "Information": "After submitting the response to tax authorities businesses realise that they have missed certain parts and need to correct the fie they open correction phase. In this the businesses usually generates the corrected file"
             },
             {
                 "Name":"Clarification",
                 "Key": "CLAR",
-                "Recommendation": "35%"
+                "Recommendation": "35%",
+                "Information": "After submitting the response to tax authorities if the tax authorities asks for clarification from the businesses the businesses would open the clarification phase of reporting."
             }
         ]
     },
@@ -176,12 +191,14 @@
             {
                 "Name":"Pre Activities",
                 "Key": "Manage Tax Item",
-                "Recommendation": "95%"
+                "Recommendation": "95%",
+                "Information": "The Manage Tax Items reporting activity allows a G/L accountant to move one or more tax items between reporting periods by changing the tax reporting date. \nThe system retrieves the documents based on the parameters from the reporting task of advanced compliance reporting, or based on the filter values provided in the Manage Tax Items For Legal Reporting activity screen. \nThe selection of the tax items is based on the tax reporting date field. \nHowever, if the tax reporting date is not available, the system considers the posting date.Please note that, the Manage Tax Items For Legal Reporting activity is optional, and you can use it based on your country/region-specific use cases."
             },
             {
                 "Name":"Post Activities",
                 "Key": "TPP",
-                "Recommendation": "45%"
+                "Recommendation": "45%",
+                "Information": "You use this app to pay tax amounts by posting the balances of input and output tax accounts to a tax payable account. The app does not require entry of a tax code, enabling you to make manual adjustments to tax accounts directly. Postings can be made in all relevant ledgers for the accounts for which you are responsible."
             }
         ]
     }
