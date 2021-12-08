@@ -38,7 +38,7 @@
 							-->
 							<CustomListItem>
 									<HBox>
-										<ObjectIdentifier class="sapUiTinyMarginEnd sapUiTinyMarginBottom" title="{Suggesstion>Name}" text="{Suggesstion>Key}" titleActive="true" titlePress="handlePanelInfo"/>
+										<ObjectIdentifier class="sapUiTinyMarginEnd sapUiTinyMargin" title="{Suggesstion>Name}" text="{Suggesstion>Key}" titleActive="true" titlePress="handlePanelInfo"/>
 										<core:Icon visible="{= ${Suggesstion>Information}.length > 0}" src="sap-icon://information" press="handlePanelInfo" />
 									</HBox>
 							</CustomListItem>
