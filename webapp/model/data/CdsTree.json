@@ -74,19 +74,19 @@
 		},
         {
 			"id": "1",
-			"icon": "sap-icon://add-folder",
+			"icon": "sap-icon://combine",
 			"label": "Left Outer Join",
 			"position": 1
 		},
         {
 			"id": "2",
-			"icon": "sap-icon://add-folder",
+			"icon": "sap-icon://combine",
 			"label": "Inner Join",
 			"position": 2
 		},
         {
 			"id": "3",
-			"icon": "sap-icon://add-folder",
+			"icon": "sap-icon://combine",
 			"label": "Association",
 			"position": 3
 		}

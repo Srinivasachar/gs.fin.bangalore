@@ -29,16 +29,25 @@ xmlns:layout="sap.ui.layout" xmlns:custom="http://schemas.sap.com/sapui5/extensi
 						<TileContent footer="December 09, 2021">
 							<NewsContent
 								contentText="GS Innovation - IntelliDev 2021"
-								subheader="Today, SAP News" />
+								subheader="Guided assistance for DRC" />
 						</TileContent>
 					</GenericTile>
 					<GenericTile
 						backgroundImage="test-resources/sap/m/demokit/sample/SlideTile/images/NewsImage2.png"
-						frameType="TwoByOne" state="Failed">
+						frameType="TwoByOne">
 						<TileContent footer="December 09, 2021">
 							<NewsContent
-								contentText="NLP "
-								subheader="Today, SAP News" />
+								contentText="GS Innovation - IntelliDev 2021"
+								subheader="NLP infused artefacts creation" />
+						</TileContent>
+					</GenericTile>
+					<GenericTile
+						backgroundImage="test-resources/sap/m/demokit/sample/SlideTile/images/NewsImage1.png"
+						frameType="TwoByOne">
+						<TileContent footer="December 09, 2021">
+							<NewsContent
+								contentText="GS Innovation - IntelliDev 2021"
+								subheader="Supports both CDS View and CDS Entity" />
 						</TileContent>
 					</GenericTile>
 		</SlideTile>
