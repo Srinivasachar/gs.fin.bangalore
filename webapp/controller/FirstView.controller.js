@@ -292,7 +292,7 @@ sap.ui.define(
             Filecontent: window.btoa(oFileUploadJSON.getProperty("/Code"))
         },{
             success: function(oResponse){
-                MessageToast.show("CDS view created successfully!");
+                MessageToast.show("CDS View/Entity created successfully!");
                 oFileUploadJSON.setProperty("/Editable", false);
                 this.TransportRequest.close()
                 BusyIndicator.hide();
