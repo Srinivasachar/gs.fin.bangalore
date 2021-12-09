@@ -11,19 +11,19 @@
             {
                 "Name":"Australia",
                 "Key": "AU",
-                "Recommendation": "85%",
+                "Recommendation": "",
                 "Information":""
             },
             {
                 "Name":"South Africa",
                 "Key": "ZA",
-                "Recommendation": "65%",
+                "Recommendation": "",
                 "Information":""
             },
             {
                 "Name": "Germany",
                 "Key": "DE",
-                "Recommendation": "25%",
+                "Recommendation": "",
                 "Information":""
             }
         ]
@@ -40,7 +40,7 @@
                 "Name":"Value Added Tax",
                 "Key": "VAT",
                 "Recommendation": "65%",
-                "Information":"Value Added Tax – VAT: \nIs a type of tax that is assessed incrementally. \nIt is levied on the price of a product or service at each stage of production, distribution, or sale to the end consumer. \nIf the ultimate consumer is a business that collects and pays to the government VAT on its products or services, it can reclaim the tax paid. \nIt is similar to, and is often compared with, a sales tax. \nVAT is an indirect tax because the person who ultimately pays the tax isn't necessarily the same person as the one who pays the tax to the tax authorities."
+                "Information":"Value Added Tax – VAT: \nIs a type of tax that is assessed incrementally. It is levied on the price of a product or service at each stage of production, distribution, or sale to the end consumer. \nIf the ultimate consumer is a business that collects and pays to the government VAT on its products or services, it can reclaim the tax paid. It is similar to, and is often compared with, a sales tax. VAT is an indirect tax because the person who ultimately pays the tax isn't necessarily the same person as the one who pays the tax to the tax authorities."
             },
             {
                 "Name":"Witholding",
@@ -90,13 +90,13 @@
                 "Key":"TDT",
                 "Name": "Time dependant taxes",
                 "Recommendation": "95%",
-                "Information": "In countries/regions where time-dependent tax calculation (TDT) is active, certain tax rates are effective within user-specified timeframes to allow you to adapt to current or planned changes to tax rates. \nTypically, changes to tax rates have meant creating new tax codes and maintaining dozens of tables. \nIn countries/regions where time-dependent tax calculation (TDT) is active, you can simply maintain existing tax rates. \nWhen you’re informed about rate changes, you can add a new validity period to your existing tax codes. \nWhen the new tax rate becomes valid, all of your line-item calculations automatically use the correct rate. \nTDT reduces your tax rate maintenance and also reduces the risk of inconsistencies between your sales and finance documents."
+                "Information": "In countries/regions where time-dependent tax calculation (TDT) is active, certain tax rates are effective within user-specified timeframes to allow you to adapt to current or planned changes to tax rates. Typically, changes to tax rates have meant creating new tax codes and maintaining dozens of tables. In countries/regions where time-dependent tax calculation (TDT) is active, you can simply maintain existing tax rates. When you’re informed about rate changes, you can add a new validity period to your existing tax codes. \n\nWhen the new tax rate becomes valid, all of your line-item calculations automatically use the correct rate. \nTDT reduces your tax rate maintenance and also reduces the risk of inconsistencies between your sales and finance documents."
             },
             {
                 "Key":"RITA",
                 "Name": "Registration of indirect taxes",
                 "Recommendation": "88%",
-                "Information": "Legal entities operating in multiple countries/regions must satisfy the tax and reporting regulations of the countries/regions in which they do business. \nUnder some circumstances, you’re permitted to register legal entities for indirect taxation abroad without having to create a company code for that county/region. \nRegistration for Indirect Taxation Abroad (RITA) allows you to maintain a tax registration county/region that is different from the company code county/region. \nThis registration helps you link taxable transactions in foreign countries/regions for indirect tax reporting and tax payments."
+                "Information": "Legal entities operating in multiple countries/regions must satisfy the tax and reporting regulations of the countries/regions in which they do business. \nUnder some circumstances, you’re permitted to register legal entities for indirect taxation abroad without having to create a company code for that county/region. \n\nRegistration for Indirect Taxation Abroad (RITA) allows you to maintain a tax registration county/region that is different from the company code county/region. \nThis registration helps you link taxable transactions in foreign countries/regions for indirect tax reporting and tax payments."
             }
         ]
     },
@@ -196,7 +196,7 @@
                 "Name":"Pre Activities",
                 "Key": "Manage Tax Item",
                 "Recommendation": "95%",
-                "Information": "The Manage Tax Items reporting activity allows a G/L accountant to move one or more tax items between reporting periods by changing the tax reporting date. \nThe system retrieves the documents based on the parameters from the reporting task of advanced compliance reporting, or based on the filter values provided in the Manage Tax Items For Legal Reporting activity screen. \nThe selection of the tax items is based on the tax reporting date field. \nHowever, if the tax reporting date is not available, the system considers the posting date.Please note that, the Manage Tax Items For Legal Reporting activity is optional, and you can use it based on your country/region-specific use cases."
+                "Information": "The Manage Tax Items reporting activity allows a G/L accountant to move one or more tax items between reporting periods by changing the tax reporting date. The system retrieves the documents based on the parameters from the reporting task of advanced compliance reporting, or based on the filter values provided in the Manage Tax Items For Legal Reporting activity screen. The selection of the tax items is based on the tax reporting date field. \nHowever, if the tax reporting date is not available, the system considers the posting date.Please note that, the Manage Tax Items For Legal Reporting activity is optional, and you can use it based on your country/region-specific use cases."
             },
             {
                 "Name":"Post Activities",
