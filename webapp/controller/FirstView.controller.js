@@ -294,7 +294,7 @@ sap.ui.define(
             success: function(oResponse){
                 MessageToast.show("CDS View/Entity created successfully!");
                 oFileUploadJSON.setProperty("/Editable", false);
-                this.TransportRequest.close()
+                this.TransportRequest.close();
                 BusyIndicator.hide();
             }.bind(this),
             error: function(oError){
@@ -302,6 +302,10 @@ sap.ui.define(
                 BusyIndicator.hide();
             }.bind(this)
         });
+    },
+
+    handleTransportCancel: function(){
+      this.TransportRequest.close()
     },
 
     getUploadRules :function(){
