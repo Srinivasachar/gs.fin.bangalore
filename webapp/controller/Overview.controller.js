@@ -19,7 +19,7 @@ sap.ui.define(
                 Count: 27
               },
               {
-                Header: "Intelligent artifacts creation",
+                Header: "Intelligent artefacts creation",
                 Subheader: "Creation",
                 Key: 1,
                 Count: 65

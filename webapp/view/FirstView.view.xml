@@ -1,6 +1,6 @@
 <mvc:View controllerName="gs.fin.bangalore.controller.FirstView" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m"
 	xmlns:ce="sap.ui.codeeditor">
-	<Page id="page" class="sapUiSizeCompact" title="Intelligent artifacts creation" showNavButton="true" navButtonPress="onNavBack">
+	<Page id="page" class="sapUiSizeCompact" title="Intelligent artefacts creation" showNavButton="true" navButtonPress="onNavBack">
 		<content>
 			<IconTabHeader visible="{CodeEditorModel>/UploadDetails/FileUploaded}" id="iconTabHeader" selectedKey="I_TAXITEM" select=".onSelectTab">
 				<items>
