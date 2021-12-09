@@ -7,7 +7,7 @@
 				<f:content>
 					<Label tooltip="{i18n>Description}" text="Package" required="true"
 						labelFor="conditionDescriptionInput"/>
-                    <Input showValueHelp="true" width="60%" value="GS_INNOVATION"/>
+                    <Input showValueHelp="true" width="60%" value="$TMP"/>
 					 <Label tooltip="{i18n>Description}" text="Transport Request" required="true"
 						labelFor="conditionDescriptionInput"/>
                     <Input showValueHelp="true" width="60%" value="ER9UI7801"/>
