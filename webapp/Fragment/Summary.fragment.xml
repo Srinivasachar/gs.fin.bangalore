@@ -13,9 +13,10 @@
 				/>
 		</buttons>
 		<Panel headerText="">
+        <FlexBox width="1000px" height="1000px" renderType="Bare">
             <common:ProcessFlow
                 id="processflow1"
-                scrollable="false"
+                scrollable="true"
                 nodes="{process>/Nodes}"
                 lanes="{process>/Lanes}"
                 nodePress=".onNodePressed">
@@ -41,6 +42,7 @@
                         position="{process>position}" />
                 </common:lanes>
             </common:ProcessFlow>
+            </FlexBox>
         </Panel>
 	</Dialog>
 </core:FragmentDefinition>

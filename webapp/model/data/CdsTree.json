@@ -2,9 +2,10 @@
     "Nodes":[{
         "id": "1",
         "lane": "0",
-        "title": "ZINNOV_CDS_VIEW_TEST",
+        "title": "ZINNOV_CDS_VIEW",
+        "text": "Dmo",
         "titleAbbreviation": "",
-        "children": [],
+        "children": [2,3,5,6,7],
         "isTitleClickable": true,
         "state": "Positive",
         "stateText": "Created",
@@ -13,19 +14,81 @@
         "id": "2",
         "lane": "0",
         "title": "P_BSET",
+        "text": "Dmo",
         "titleAbbreviation": "P_BSET",
         "children": [],
         "isTitleClickable": true,
         "state": "Positive",
         "stateText": "Already Existing",
-        "texts": ["Package: FINS_FIS_APAR" ]
-    }],
+        "texts": ["Package: FINS_FIS_FICO" ]
+    },{
+        "id": "3",
+        "lane": "1",
+        "title": "I_AccountingDocument",
+        "titleAbbreviation": "I_AccountingDocument",
+        "children": [],
+        "isTitleClickable": true,
+        "state": "Positive",
+        "stateText": "Already Existing",
+        "texts": ["Package: FINS_FIS_FICO" ]
+    },{
+        "id": "5",
+        "lane": "2",
+        "title": "I_GLAccount",
+        "titleAbbreviation": "I_GLAccount",
+        "children": [],
+        "isTitleClickable": true,
+        "state": "Positive",
+        "stateText": "Already Existing",
+        "texts": ["Package: FINS_FIS_FICO" ]
+    },{
+
+        "id": "6",
+        "lane": "3",
+        "title": "I_CompanyCode",
+        "titleAbbreviation": "I_CompanyCode",
+        "children": [],
+        "isTitleClickable": true,
+        "state": "Positive",
+        "stateText": "Already Existing",
+        "texts": ["Package: FINS_FIS_FICO" ]
+    },{
+
+        "id": "7",
+        "lane": "3",
+        "title": "I_JournalEntry",
+        "titleAbbreviation": "I_JournalEntry",
+        "children": [],
+        "isTitleClickable": true,
+        "state": "Positive",
+        "stateText": "Already Existing",
+        "texts": ["Package: FINS_FIS_FICO" ]
+    }
+    ],
     "Lanes":[
         {
 			"id": "0",
 			"icon": "sap-icon://add-folder",
 			"label": "Tax Items",
 			"position": 0
+		},
+        {
+			"id": "1",
+			"icon": "sap-icon://add-folder",
+			"label": "Left Outer Join",
+			"position": 1
+		},
+        {
+			"id": "2",
+			"icon": "sap-icon://add-folder",
+			"label": "Inner Join",
+			"position": 2
+		},
+        {
+			"id": "3",
+			"icon": "sap-icon://add-folder",
+			"label": "Association",
+			"position": 3
 		}
     ]
 }
